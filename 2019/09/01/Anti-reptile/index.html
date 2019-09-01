@@ -669,11 +669,12 @@ if ($request_method !~ ^(GET|HEAD|POST)$) {
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/09/01/LB相关服务器信息列表/">
+                <a href="/2019/09/01/Anti-reptile/">
                     <div class="card-image">
                         
                         
@@ -685,36 +686,14 @@ if ($request_method !~ ^(GET|HEAD|POST)$) {
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            服务器信息
-机房
-
-
-机房
-主机名
-IP地址
-端口
-用途
-机器所属物理机
-
-
-
-
-sh1-arch-Lb1M-1
-10.1.1.140
-10022
-外网LB-主1
-本身是物理机
-
-
-外网LB
-sh1-arch-Lb1S-1
-10.1.1.1
+                            案例：LB配置防百度爬虫
+发现此item.tuhu.cn一直被下面这个ua爬取:Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.ht
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-01
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-01
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-user fa-fw"></i>
@@ -723,6 +702,7 @@ sh1-arch-Lb1S-1
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>

@@ -5,32 +5,6 @@
     
     <entry>
       <title></title>
-      <link href="/2019/09/01/modify_upstream/"/>
-      <url>/2019/09/01/modify_upstream/</url>
-      
-        <content type="html"><![CDATA[<h1 id="修改-Upstream-name"><a href="#修改-Upstream-name" class="headerlink" title="修改 Upstream name"></a>修改 Upstream name</h1><p><code>如果你发现模板用错了，比如Windows的用成linux的了，或者想修改upstream name对应的后端服务器，不要慌，按照下面的方法进行操作</code></p><h2 id="修改后端服务器"><a href="#修改后端服务器" class="headerlink" title="修改后端服务器"></a>修改后端服务器</h2><ul><li>wmssorting-api.tuhu.cn</li><li>目标：删除后端一台服务器：10.1.134.10</li></ul><h3 id="1-登陆后端管理系统：-https-sre-tuhu-cn-admin"><a href="#1-登陆后端管理系统：-https-sre-tuhu-cn-admin" class="headerlink" title="1.登陆后端管理系统：  https://sre.tuhu.cn/admin/"></a>1.登陆后端管理系统：  <a href="https://sre.tuhu.cn/admin/" target="_blank" rel="noopener">https://sre.tuhu.cn/admin/</a></h3><ul><li><p>在左侧列表中找到 <code>tengine</code>—-<code>upstreams</code>，接着点击进去<br><img src="picture/sre-6.png" alt="-w1416"></p></li><li><p>在搜索框中直接输入你要修改的upstream name对象，然后点击进去<br><img src="picture/sre-7.png" alt="-w1416"></p></li><li><p>如果只是删除一台后端服务器，请在页面中找到你要删除的对象，然后勾选右侧的<code>删除</code>之后保存退出<br><img src="picture/sre-8.png" alt="-w1416"></p></li><li><p>再次登陆Sre系统：<a href="https://sre.tuhu.cn" target="_blank" rel="noopener">https://sre.tuhu.cn</a>  ，找到<code>tengine</code>—-<code>upstreams</code>模块搜索刚刚修改的upstream name<br><img src="picture/sre-9.png" alt="-w1416"></p></li><li><p>最后一步，检查你刚刚更改的是否已经生效，然后点击<code>更新</code> 操作结束<br><img src="picture/sre-10.png" alt="-w1416"></p></li></ul><p><code>修改其它upstrem name的其它参数，方法都一样，大同小异</code><br>待完善。。。</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/2019/09/01/LB%E7%9B%B8%E5%85%B3%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%A1%E6%81%AF%E5%88%97%E8%A1%A8/"/>
-      <url>/2019/09/01/LB%E7%9B%B8%E5%85%B3%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%A1%E6%81%AF%E5%88%97%E8%A1%A8/</url>
-      
-        <content type="html"><![CDATA[<h1 id="服务器信息"><a href="#服务器信息" class="headerlink" title="服务器信息"></a>服务器信息</h1><p><br><br><br></p><h3 id="机房"><a href="#机房" class="headerlink" title="机房"></a>机房</h3><table><thead><tr><th>机房</th><th>主机名</th><th>IP地址</th><th>端口</th><th>用途</th><th>机器所属物理机</th></tr></thead><tbody><tr><td></td><td>sh1-arch-Lb1M-1</td><td>10.1.1.140</td><td>10022</td><td>外网LB-主1</td><td>本身是物理机</td></tr><tr><td>外网LB</td><td>sh1-arch-Lb1S-1</td><td>10.1.1.154</td><td>10022</td><td>外网LB-从1</td><td>本身是物理机</td></tr><tr><td></td><td>sh1-arch-Lb2M-1</td><td>10.1.1.131</td><td>10022</td><td>外网LB-主2</td><td>本身是物理机</td></tr><tr><td></td><td>sh1-arch-Lb2S-1</td><td>10.1.1.155</td><td>10022</td><td>外网LB-从2</td><td>本身是物理机</td></tr><tr><td>—</td><td>—</td><td></td><td></td><td></td><td></td></tr><tr><td></td><td>lb-lan-1</td><td>10.1.75.4</td><td>22</td><td>内网LB-1</td><td>KVM-LB-A</td></tr><tr><td></td><td>lb-lan-2</td><td>10.1.75.5</td><td>22</td><td>内网LB-2</td><td>KVM-LB-A</td></tr><tr><td></td><td>lb-lan-3</td><td>10.1.76.4</td><td>22</td><td>内网LB-3</td><td>KVM-LB-B</td></tr><tr><td>内网LB</td><td>lb-lan-4</td><td>10.1.76.5</td><td>22</td><td>内网LB-4</td><td>KVM-LB-B</td></tr><tr><td></td><td>lb-lan-5</td><td>10.1.39.4</td><td>22</td><td>内网LB-5</td><td>KVM-LB-C</td></tr><tr><td></td><td>lb-lan-6</td><td>10.1.39.5</td><td>22</td><td>内网LB-6</td><td>KVM-LB-C</td></tr><tr><td>—</td><td>—</td><td></td><td></td><td></td><td></td></tr><tr><td></td><td>lvs-lan-a</td><td>10.1.75.3</td><td>22</td><td>内网LVS-A</td><td>KVM-LB-A</td></tr><tr><td>LVS</td><td>lvs-lan-b</td><td>10.1.76.3</td><td>22</td><td>内网LVS-B</td><td>KVM-LB-B</td></tr><tr><td></td><td>lvs-lan-c</td><td>10.1.1.200</td><td>22</td><td>内网LVS-C</td><td>本身是物理机</td></tr></tbody></table><p><br><br><br></p><h3 id="腾讯云"><a href="#腾讯云" class="headerlink" title="腾讯云"></a>腾讯云</h3><ul><li>内网LB</li></ul><table><thead><tr><th>腾讯云</th><th>主机名</th><th>监听端口</th><th>用 途</th><th>机器内网IP</th><th>虚IP</th></tr></thead><tbody><tr><td></td><td>tx1-arch-lan-lb-db1-1</td><td>3306</td><td>数据库</td><td>172.17.37.156（主）</td><td>172.17.39.2~16</td></tr><tr><td></td><td>tx1-arch-lan-lb-db1-2</td><td>3306</td><td>数据库</td><td>172.17.36.62(备)</td><td></td></tr><tr><td></td><td>tx1-arch-lan-lb-db1-3</td><td>3306</td><td>数据库</td><td>172.17.36.145（主）</td><td>172.17.39.17~31</td></tr><tr><td></td><td>tx1-arch-lan-lb-db1-4</td><td>3306</td><td>数据库</td><td>172.17.36.229（备）</td><td></td></tr><tr><td>Haproxy</td><td>tx1-arch-lan-lb-db1-5</td><td>3306</td><td>数据库</td><td>172.17.36.240（主）</td><td>172.17.39.32~35</td></tr><tr><td></td><td>tx1-arch-lan-lb-db1-6</td><td>3306</td><td>数据库</td><td>172.17.36.159（备）</td><td></td></tr><tr><td></td><td>tx1-arch-lan-lb-db2-1</td><td>1433</td><td>数据库</td><td>172.17.37.191(主)</td><td>172.17.39.61~65</td></tr><tr><td></td><td>tx1-arch-lan-lb-db2-2</td><td>1433</td><td>数据库</td><td>172.17.36.38（备）</td><td></td></tr><tr><td></td><td>tx1-arch-lan-lb-db5-1</td><td>1433</td><td>数据库</td><td>172.17.36.152（主）</td><td>172.17.39.66~73</td></tr><tr><td></td><td>tx1-arch-lan-lb-db5-2</td><td>1433</td><td>数据库</td><td>172.17.36.93（备）</td><td></td></tr><tr><td></td><td>tx1-arch-Lb-lan1-1</td><td></td><td>基础服务、业务应用</td><td>172.17.36.5（主）</td><td>172.17.39.200</td></tr><tr><td></td><td>tx1-arch-Lb-lan1-2</td><td></td><td></td><td>172.17.36.7（备）</td><td></td></tr><tr><td>—</td><td>—</td><td></td><td></td><td></td><td></td></tr><tr><td>tengine</td><td>tx1-arch-Lb-lan1-3</td><td></td><td>基础服务、业务应用</td><td>172.17.36.40（主）</td><td>172.17.39.201</td></tr><tr><td></td><td>tx1-arch-Lb-lan1-4</td><td></td><td></td><td>172.17.36.42（备）</td><td></td></tr></tbody></table><ul><li>外网LB</li></ul><table><thead><tr><th>腾讯云</th><th>公网IP</th><th>主机名</th><th>端口</th><th>用 途</th><th>机器内网IP</th><th>虚IP</th></tr></thead><tbody><tr><td></td><td>212.64.116.226(公网)</td><td>tx-idc-sync-lbwan-1</td><td>10022</td><td>外网LB-主1</td><td>172.17.36.15 (主)</td><td>172.17.37.153</td></tr><tr><td>外网LB</td><td></td><td>tx-idc-sync-lbwan-2</td><td>10022</td><td>外网LB-从1</td><td>172.17.36.56(备)</td><td></td></tr><tr><td></td><td>49.234.56.36（公网）</td><td>tx1-arch-lb-wan1-2</td><td>10022</td><td>外网LB-主2</td><td>172.17.36.14(主)</td><td>172.17.36.246</td></tr><tr><td></td><td></td><td>tx1-arch-lb-wan1-3</td><td>10022</td><td>外网LB-从2</td><td>172.17.36.4(备)</td><td></td></tr></tbody></table><p><br><br><br></p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
       <link href="/2019/09/01/Anti-reptile/"/>
       <url>/2019/09/01/Anti-reptile/</url>
       
@@ -48,84 +22,6 @@
       <url>/2019/09/01/add_JF-LB-whitelist/</url>
       
         <content type="html"><![CDATA[<h1 id="添加白名单-内-外LB"><a href="#添加白名单-内-外LB" class="headerlink" title="添加白名单 内/外LB"></a>添加白名单 内/外LB</h1><ul><li><p>登陆LB服务器</p><pre><code>ssh  lb-lan-1 (内)ssh  sh1-arch-Lb2S-1(外)</code></pre></li><li><p>配置目录</p><pre><code>cd /usr/local/nginx/conf/vhost/CodeBlock/</code></pre></li><li><p>添加白名单</p><pre><code>vim WhiteList.cnfallow  xxx.xxx.xxx.xxx;</code></pre></li><li><p>Nginx 服务</p><pre><code>nginx -tnginx -s reload</code></pre></li><li><p>Git 提交</p></li><li><p>同步脚本(SyncConf.py)</p></li></ul><br><p><code>后续继续完善</code> …</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/2019/09/01/add_JF-LB-wan-lan-Sop/"/>
-      <url>/2019/09/01/add_JF-LB-wan-lan-Sop/</url>
-      
-        <content type="html"><![CDATA[<h1 id="LB操作流程图"><a href="#LB操作流程图" class="headerlink" title="LB操作流程图"></a>LB操作流程图</h1><p><code>看不清的话，请先放大，后期会完善</code></p><p><img src="picture/LB-SOP.png" alt="-w1416"></p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/2019/09/01/add_JF-LB-WAN_domain/"/>
-      <url>/2019/09/01/add_JF-LB-WAN_domain/</url>
-      
-        <content type="html"><![CDATA[<h1 id="机房外网LB—新增域名"><a href="#机房外网LB—新增域名" class="headerlink" title="机房外网LB—新增域名"></a>机房外网LB—新增域名</h1><h2 id="案例分享：-某项目新申请域名"><a href="#案例分享：-某项目新申请域名" class="headerlink" title="案例分享： 某项目新申请域名"></a>案例分享： 某项目新申请域名</h2><ul><li>UT环境申请域名：wmssorting-api.tuhu.cn</li><li>Upstream name : wmssorting-api_tuhu_cn</li><li>后台服务器: ywWmsApi1、ywWmsApi2、ywWmsApi3</li><li>后端端口: 80</li></ul><h3 id="1-登陆ser系统：https-sre-tuhu-cn"><a href="#1-登陆ser系统：https-sre-tuhu-cn" class="headerlink" title="1.登陆ser系统：https://sre.tuhu.cn/"></a>1.登陆ser系统：<a href="https://sre.tuhu.cn/" target="_blank" rel="noopener">https://sre.tuhu.cn/</a></h3><ul><li>在左侧列表中找到 <code>tengine</code>—-<code>upstreams</code>中搜索 <code>wmssorting-api_tuhu_cn</code> 是否存在</li></ul><p><img src="picture/sre-1.png" alt="-w1416"></p><p><img src="picture/sre-4.png" alt="-w1416"></p><ul><li>ping后端服务器获取对应ip地址：10.1.132.10、10.1.133.10、10.1.134.10</li></ul><p><img src="picture/ping-2.png" alt="-w1416"></p><ul><li>点击<code>tengine</code>—-<code>解析</code>,因后台是<code>Windows</code>服务器，则使用下面模板</li></ul><pre><code>upstream wmssorting-api_tuhu_cn {     least_conn;     keepalive 32;     keepalive_timeout 30s;     check interval=1000 rise=2 fall=3 timeout=1000 type=http;     check_http_send &quot;GET /_stats/build.txt HTTP/1.1\r\nHost: wmssorting-api.tuhu.cn\r\nConnection: keep-alive\r\n\r\n&quot;;     check_keepalive_requests 10000;     server 10.1.132.10:80;     server 10.1.133.10:80;     server 10.1.134.10:80; }</code></pre><p>把模板内容粘贴到<code>conf</code>框框里,选择<code>LAN</code>,确认没有问题后点击<code>提交</code></p><p><img src="picture/sre-5.png" alt="-w1416"></p><br><h3 id="2-登录外网LB服务器："><a href="#2-登录外网LB服务器：" class="headerlink" title="2.登录外网LB服务器："></a>2.登录外网LB服务器：</h3><pre><code>sh1-arch-Lb2S-1</code></pre><br><h3 id="3-进入nginx配置目录"><a href="#3-进入nginx配置目录" class="headerlink" title="3.进入nginx配置目录"></a>3.进入nginx配置目录</h3><pre><code>cd /usr/local/nginx/conf/</code></pre><ul><li><p>检查<code>upstream.conf</code>文件，确认新增<code>upsteam name</code>是否已推送到文件中</p><pre><code>grep -iw  wmssorting-api upstream.conf</code></pre></li><li><p>然后进入 <code>vhost</code> 目录，查询新申请的域名是否已存在，没有则找个模板复制更改为：wmssorting-api.tuhu.cn.conf，复制的时候要小心，千万别把你复制的那个域名搞挂了，比如 mv 命令</p><pre><code>cd  vhost/cp access_tuhu_cn.conf   wmssorting-api.tuhu.cn.confvim  qiye-gatewayut.ad.tuhu.cn.conf替换更改配置文件中的域名和upstream name</code></pre></li></ul><br><h3 id="4-Nginx-服务"><a href="#4-Nginx-服务" class="headerlink" title="4.Nginx 服务"></a>4.Nginx 服务</h3><pre><code>nginx -tnginx -s reload</code></pre><br><h3 id="5-Git提交"><a href="#5-Git提交" class="headerlink" title="5.Git提交"></a>5.Git提交</h3><pre><code>cd /usr/local/nginx/conf/git statusgit add  vhost/wmssorting-api.tuhu.cn.confgit commit -m &quot;添加域名wmssorting-api.tuhu.cn&quot; --author=&quot;jianglei &lt;jianglei@tuhu.cn&gt;&quot;git push</code></pre><br><h3 id="6-同步脚本-同步到另外5台LB上"><a href="#6-同步脚本-同步到另外5台LB上" class="headerlink" title="6.同步脚本(同步到另外5台LB上)"></a>6.同步脚本(同步到另外5台LB上)</h3><pre><code>cd /usr/local/nginx/conf/./SyncConf.py</code></pre><br><h3 id="7-DNS解析"><a href="#7-DNS解析" class="headerlink" title="7.DNS解析"></a>7.DNS解析</h3><p><code>外网就不需要做解析了，上面操作完成了就可以了</code></p><br>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/2019/09/01/add_JF-LB-LVS/"/>
-      <url>/2019/09/01/add_JF-LB-LVS/</url>
-      
-        <content type="html"><![CDATA[<h1 id="LVS-添加虚拟IP"><a href="#LVS-添加虚拟IP" class="headerlink" title="LVS 添加虚拟IP"></a>LVS 添加虚拟IP</h1><p><img src="picture/LVS-1.jpg" alt="-w1416"></p><h2 id="案例：-财哥申请新增两个DB"><a href="#案例：-财哥申请新增两个DB" class="headerlink" title="案例： 财哥申请新增两个DB"></a>案例： 财哥申请新增两个DB</h2><pre><code>新建两个LBDB-MYSQL-DKH-RW --10.1.11.45 3316DB-MYSQL-DKH-RO  --10.1.1.100 3316</code></pre><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ul><li><p>为两个DB分配两个虚IP,确定分配的ip是没在使用的</p><pre><code>DB-MYSQL-DKH-RW  10.1.12.160DB-MYSQL-DKH-RO  10.1.12.161</code></pre></li><li><p>后端服务器 10.1.11.45 、10.1.11.45 端口：3316</p></li></ul><h2 id="开始操作"><a href="#开始操作" class="headerlink" title="开始操作"></a>开始操作</h2><p>1.登陆LVS-lan-C</p><pre><code> ssh  lvs-lan-c</code></pre><br><p>2.配置keepalived</p><pre><code>vi /etc/keepalived/keepalived.conf# 在virtual_ipaddress下方添加virtual_ipaddress {        10.1.12.160/16        10.1.12.161/16       }</code></pre><br><p>3.配置后端lvs分发</p><ul><li>已知新增两个为Mysql DB,则修改3306.conf</li></ul><pre><code>vi  /etc/keepalived/conf.d/3306.conf#新增两个虚ipvirtual_server_group mysql {        10.1.12.160/16        10.1.12.161/16       }</code></pre><br><p>4.Reload keepalived服务</p><pre><code>systemctl    reload  keepalived</code></pre><br><p>5.上述步骤1~4操作请在Lvs-lan几台备用机上同样配置</p><br><p>6.登陆内网LB</p><pre><code> ssh  lvs-lan-1</code></pre><br><p>7.配置虚拟网卡</p><ul><li>下列操作请手动执行，操作好一台以后，请分别登陆另外5台操作，完成后使用<code>ip a</code>和<code>route -n</code>检测</li></ul><pre><code>/sbin/ifconfig lo:62 10.1.12.160  broadcast 10.1.12.160 netmask 255.255.255.255 up/sbin/route add -host 10.1.12.160 dev lo:60/sbin/ifconfig lo:63 10.1.12.161  broadcast 10.1.12.161 netmask 255.255.255.255 up/sbin/route add -host 10.1.12.161 dev lo:61</code></pre><br><p>8.配置haproxy</p><pre><code>cd /usr/local/haproxy/vi  haproxy.cfg#新增以下配置    acl ACL_DB-MYSQL-DKH-RW dst 10.1.12.160    use_backend DB-MYSQL-DKH-RW  if ACL_DB-MYSQL-DKH-RW    acl ACL_DB-MYSQL-DKH-RO dst 10.1.12.161    use_backend DB-MYSQL-DKH-RO if ACL_DB-MYSQL-DKH-RO    backend DB-MYSQL-DKH-RW    server 10.1.11.45 10.1.11.45:3316 check inter 1000 rise 3 fall 3    backend DB-MYSQL-DKH-RO    server 10.1.1.100 10.1.1.100:3316 check inter 1000 rise 3 fall 3  </code></pre><br><p>9.测试配置</p><pre><code>/usr/local/haproxy/sbin/haproxy -c -f /usr/local/haproxy/haproxy.cfg</code></pre><br><p>10.Reload haproxy服务</p><pre><code>systemctl  reload  haproxy</code></pre><br><p>11.同步脚本</p><pre><code>cd /usr/local/haproxy/./sync_haproxy.sh</code></pre><br>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/2019/09/01/add_JF-LB-lan_domain/"/>
-      <url>/2019/09/01/add_JF-LB-lan_domain/</url>
-      
-        <content type="html"><![CDATA[<h1 id="机房内网LB—新增域名"><a href="#机房内网LB—新增域名" class="headerlink" title="机房内网LB—新增域名"></a>机房内网LB—新增域名</h1><h2 id="案例：-某项目新申请域名"><a href="#案例：-某项目新申请域名" class="headerlink" title="案例： 某项目新申请域名"></a>案例： 某项目新申请域名</h2><ul><li>UT环境申请域名：qiye-gatewayut.ad.tuhu.cn</li><li>Upstream name : qiye-gatewayut_ad_tuhu_cn</li><li>后台服务器: sh1-wh-dkh-gateway-ut-1</li><li>后端端口: 80</li></ul><h3 id="1-登陆ser系统：https-sre-tuhu-cn"><a href="#1-登陆ser系统：https-sre-tuhu-cn" class="headerlink" title="1.登陆ser系统：https://sre.tuhu.cn/"></a>1.登陆ser系统：<a href="https://sre.tuhu.cn/" target="_blank" rel="noopener">https://sre.tuhu.cn/</a></h3><ul><li>在左侧列表中找到 <code>tengine</code>—-<code>upstreams</code>中搜索 <code>qiye-gatewayut_ad_tuhu_cn</code> 是否存在</li></ul><p><img src="picture/sre-1.png" alt="-w1416"></p><p><img src="picture/sre-2.png" alt="-w1416"></p><ul><li>ping后端服务器获取对应ip地址：10.1.205.34</li></ul><p><img src="picture/ping-1.png" alt="-w1416"></p><ul><li>点击<code>tengine</code>—-<code>解析</code>,因后台是<code>linux</code>服务器，则使用下面模板</li></ul><pre><code>upstream qiye-gatewayut_ad_tuhu_cn {   least_conn;   keepalive 32;   keepalive_timeout 30s;   check interval=1000 rise=2 fall=3 timeout=1000 type=tcp;   check_keepalive_requests 10000;   server 10.1.205.34:80;}</code></pre><p>把模板内容粘贴到<code>conf</code>框框里,选择<code>LAN</code>,确认没有问题后点击<code>提交</code></p><p><img src="picture/sre-3.png" alt="-w1416"></p><br><h3 id="2-登录内网LB服务器："><a href="#2-登录内网LB服务器：" class="headerlink" title="2.登录内网LB服务器："></a>2.登录内网LB服务器：</h3><pre><code>ssh lan-lb-1</code></pre><br><h3 id="3-进入nginx配置目录"><a href="#3-进入nginx配置目录" class="headerlink" title="3.进入nginx配置目录"></a>3.进入nginx配置目录</h3><pre><code>cd /usr/local/nginx/conf/</code></pre><ul><li><p>检查<code>upstream.conf</code>文件，确认新增<code>upsteam name</code>是否已推送到文件中</p><pre><code>grep -iw  qiye-gatewayut upstream.conf</code></pre></li><li><p>然后进入 <code>vhost</code> 目录，查询新申请的域名是否已存在，没有则找个模板复制更改为：qiye-gatewayut.ad.tuhu.cn.conf</p><pre><code>cd  vhost/cp  account-engine.ad.tuhu.cn.conf   qiye-gatewayut.ad.tuhu.cn.confvim  qiye-gatewayut.ad.tuhu.cn.conf替换更改配置文件中的域名和upstream name</code></pre></li></ul><br><h3 id="4-Nginx-服务"><a href="#4-Nginx-服务" class="headerlink" title="4.Nginx 服务"></a>4.Nginx 服务</h3><pre><code>nginx -tnginx -s reload</code></pre><br><p><code>先Git再同步脚本</code></p><h3 id="5-Git提交"><a href="#5-Git提交" class="headerlink" title="5. Git提交"></a>5. Git提交</h3><pre><code>cd /usr/local/nginx/conf/git statusgit add  vhost/qiye-gatewayut.tuhu.cn.confgit commit -m &quot;添加域名qiye-gatewayut.tuhu.cn&quot; --author=&quot;jianglei &lt;jianglei@tuhu.cn&gt;&quot;git push</code></pre><br><h3 id="6-同步脚本-同步到另外5台LB上"><a href="#6-同步脚本-同步到另外5台LB上" class="headerlink" title="6.同步脚本(同步到另外5台LB上)"></a>6.同步脚本(同步到另外5台LB上)</h3><pre><code>cd /usr/local/nginx/conf/./SyncConf.py</code></pre><br><h3 id="7-添加DNS解析"><a href="#7-添加DNS解析" class="headerlink" title="7.添加DNS解析"></a>7.添加DNS解析</h3><pre><code>使用域账户登陆AD域服务器：172.17.36.3，添加dns解析记录（此处略）</code></pre><br>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/2019/09/01/add_JF_LB_wan-tuoputu/"/>
-      <url>/2019/09/01/add_JF_LB_wan-tuoputu/</url>
-      
-        <content type="html"><![CDATA[<h1 id="机房外网LB规划图"><a href="#机房外网LB规划图" class="headerlink" title="机房外网LB规划图"></a>机房外网LB规划图</h1><p><code>看不清的话，请先放大，后期会完善</code></p><p><img src="picture/wan-tuoputu-1.jpg" alt="-w1416"></p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/2019/09/01/add_JF_LB_lan-tuoputu/"/>
-      <url>/2019/09/01/add_JF_LB_lan-tuoputu/</url>
-      
-        <content type="html"><![CDATA[<h1 id="机房内网LB规划图"><a href="#机房内网LB规划图" class="headerlink" title="机房内网LB规划图"></a>机房内网LB规划图</h1><p><code>看不清的话，请先放大，后期会完善</code></p><p><img src="picture/lan-tuoputu-1.jpg" alt="-w1416"></p>]]></content>
       
       
       
