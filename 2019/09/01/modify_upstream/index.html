@@ -4,8 +4,10 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, Hexo">
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex">
+    <meta name="keywords" content="Hexo">
+    <meta name="description" content="修改 Upstream name如果你发现模板用错了，比如Windows的用成linux的了，或者想修改upstream name对应的后端服务器，不要慌，按照下面的方法进行操作
+修改后端服务器
+wmssorting-api.tuhu.cn">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Hello World | Hexo</title>
+    <title>Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -260,13 +262,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Hello World
+                        
                     </div>
                 </div>
             </div>
@@ -404,15 +406,24 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+                <h1 id="修改-Upstream-name"><a href="#修改-Upstream-name" class="headerlink" title="修改 Upstream name"></a>修改 Upstream name</h1><p><code>如果你发现模板用错了，比如Windows的用成linux的了，或者想修改upstream name对应的后端服务器，不要慌，按照下面的方法进行操作</code></p>
+<h2 id="修改后端服务器"><a href="#修改后端服务器" class="headerlink" title="修改后端服务器"></a>修改后端服务器</h2><ul>
+<li>wmssorting-api.tuhu.cn</li>
+<li>目标：删除后端一台服务器：10.1.134.10</li>
+</ul>
+<h3 id="1-登陆后端管理系统：-https-sre-tuhu-cn-admin"><a href="#1-登陆后端管理系统：-https-sre-tuhu-cn-admin" class="headerlink" title="1.登陆后端管理系统：  https://sre.tuhu.cn/admin/"></a>1.登陆后端管理系统：  <a href="https://sre.tuhu.cn/admin/" target="_blank" rel="noopener">https://sre.tuhu.cn/admin/</a></h3><ul>
+<li><p>在左侧列表中找到 <code>tengine</code>—-<code>upstreams</code>，接着点击进去<br><img src="picture/sre-6.png" alt="-w1416"></p>
+</li>
+<li><p>在搜索框中直接输入你要修改的upstream name对象，然后点击进去<br><img src="picture/sre-7.png" alt="-w1416"></p>
+</li>
+<li><p>如果只是删除一台后端服务器，请在页面中找到你要删除的对象，然后勾选右侧的<code>删除</code>之后保存退出<br><img src="picture/sre-8.png" alt="-w1416"></p>
+</li>
+<li><p>再次登陆Sre系统：<a href="https://sre.tuhu.cn" target="_blank" rel="noopener">https://sre.tuhu.cn</a>  ，找到<code>tengine</code>—-<code>upstreams</code>模块搜索刚刚修改的upstream name<br><img src="picture/sre-9.png" alt="-w1416"></p>
+</li>
+<li><p>最后一步，检查你刚刚更改的是否已经生效，然后点击<code>更新</code> 操作结束<br><img src="picture/sre-10.png" alt="-w1416"></p>
+</li>
+</ul>
+<p><code>修改其它upstrem name的其它参数，方法都一样，大同小异</code><br>待完善。。。</p>
 
             </div>
             <hr/>
@@ -571,9 +582,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《Hello World》
+                    《》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/01/hello-world/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/01/modify_upstream/" property="cc:attributionName"
                rel="cc:attributionURL">
                 John Doe
             </a> 采用
@@ -613,11 +624,12 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/09/01/README/">
+                <a href="/2019/09/01/modify_upstream/">
                     <div class="card-image">
                         
                         
@@ -629,15 +641,15 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            LB相关文档及操作
-禅道申请LB域名配置模板地址：
-https://chandao.tuhu.work/index.php?m=task&amp;f=create&amp;project=630&amp;storyID=17205&amp;
+                            修改 Upstream name如果你发现模板用错了，比如Windows的用成linux的了，或者想修改upstream name对应的后端服务器，不要慌，按照下面的方法进行操作
+修改后端服务器
+wmssorting-api.tuhu.cn
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-01
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-01
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-user fa-fw"></i>
@@ -646,6 +658,7 @@ https://chandao.tuhu.work/index.php?m=task&amp;f=create&amp;project=630&amp;stor
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -656,24 +669,47 @@ https://chandao.tuhu.work/index.php?m=task&amp;f=create&amp;project=630&amp;stor
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/08/22/test/">
+                <a href="/2019/09/01/LB相关服务器信息列表/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="test">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
                         
-                        <span class="card-title">test</span>
+                        <span class="card-title"></span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            this is test page.
+                            服务器信息
+机房
+
+
+机房
+主机名
+IP地址
+端口
+用途
+机器所属物理机
+
+
+
+
+sh1-arch-Lb1M-1
+10.1.1.140
+10022
+外网LB-主1
+本身是物理机
+
+
+外网LB
+sh1-arch-Lb1S-1
+10.1.1.1
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-22
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-01
                             </span>
                         <span class="publish-author">
                             

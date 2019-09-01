@@ -4,8 +4,15 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, Hexo">
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex">
+    <meta name="keywords" content="Hexo">
+    <meta name="description" content="规范要求： 操作LB前,请认真阅读一下
+1.新增域名申请中包含: 域名链接地址、upstream name(部署系统 host)、后端服务器及端口(由申请人填写清楚)
+
+
+
+2.区别内网LB和外网LB域名,这个要分别清楚
+
+内网LB格式:x">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +20,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Hello World | Hexo</title>
+    <title>Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -260,13 +267,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Hello World
+                        
                     </div>
                 </div>
             </div>
@@ -404,15 +411,62 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+                <h2 id="规范要求："><a href="#规范要求：" class="headerlink" title="规范要求："></a>规范要求：</h2><p> <code>操作LB前,请认真阅读一下</code></p>
+<p>1.新增域名申请中包含: 域名链接地址、upstream name(部署系统 host)、后端服务器及端口(由申请人填写清楚)</p>
+<p><img src="picture/sre-11.png" alt="-w1416"></p>
+<br>
+
+<p>2.区别<code>内网LB</code>和<code>外网LB</code>域名,这个要分别清楚</p>
+<ul>
+<li>内网LB格式:xxx.ad.tuhu.cn </li>
+<li>外网LB格式:xxx.tuhu.cn</li>
+</ul>
+<br>
+
+<p>3.这里和小伙伴约定一下，登陆固定服务器更改，避免冲突</p>
+<ul>
+<li>内网LB修改登陆：<code>lb-lan-1</code>   </li>
+<li>外网LB修改登陆：<code>sh1-arch-Lb2S-1</code></li>
+</ul>
+<br>
+
+<p>4.upstream name 申请人给出后，要核实下这个<code>Name</code>是否在使用，是一定要核实*3遍</p>
+<ul>
+<li>有权限的请登陆：<code>https://sre.tuhu.cn/</code>  在左侧列表中找到 <code>tengine</code>—-<code>upstreams</code>中搜索</li>
+<li>或者登陆服务器：<code>/usr/local/nginx/conf/upstream.conf</code> 文件中找一下<code>upstream name</code>是否存在</li>
+</ul>
+<br>
+
+<p>5.upstream name请使用如下模板：</p>
+<ul>
+<li>后端机器是Windows机器或者IIS服务的机器：<pre><code>upstream xxxxxx_tuhu_cn {
+   least_conn;
+   keepalive 32;
+   keepalive_timeout 30s;
+   check interval=1000 rise=2 fall=3 timeout=1000 type=http;
+   check_http_send &quot;GET /_stats/build.txt HTTP/1.1\r\nHost:xxxxxx.tuhu.cn\r\nConnection: keep-alive\r\n\r\n&quot;;
+   check_keepalive_requests 10000;
+   server xx.xx.xx.xx:80;
+}</code></pre></li>
+<li>后端服务器是Linux机器：<pre><code>upstream xxxxxx_tuhu_cn {
+   least_conn;
+   keepalive 32;
+   keepalive_timeout 30s;
+   check interval=1000 rise=2 fall=3 timeout=1000 type=tcp;
+   check_keepalive_requests 10000;
+  server xx.xx.xx.xx:80;
+}</code></pre></li>
+</ul>
+<br>
+
+<p>6.域名.conf 在服务器上新增配置好之后，要先<code>nginx -t</code> 测试ok之后再进行下一步操作</p>
+<br>
+
+<p>7.一定要先<code>git</code>提交,再使用同步脚本,顺序不要变,不然你没提交之前同步脚本,在另外几台机器上也是修改状态,容易发生冲突,切记</p>
+<br>
+
+<p>8.后续继续完善…有不足之处，请各位大佬补充，感谢！！！</p>
+<br>
 
             </div>
             <hr/>
@@ -571,9 +625,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《Hello World》
+                    《》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/01/hello-world/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/01/requirements/" property="cc:attributionName"
                rel="cc:attributionURL">
                 John Doe
             </a> 采用
@@ -617,7 +671,7 @@
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/09/01/README/">
+                <a href="/2019/09/01/add_JF_LB_lan-tuoputu/">
                     <div class="card-image">
                         
                         
@@ -629,9 +683,9 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            LB相关文档及操作
-禅道申请LB域名配置模板地址：
-https://chandao.tuhu.work/index.php?m=task&amp;f=create&amp;project=630&amp;storyID=17205&amp;
+                            机房内网LB规划图看不清的话，请先放大，后期会完善
+
+
                         
                     </div>
                     <div class="publish-info">
@@ -656,24 +710,26 @@ https://chandao.tuhu.work/index.php?m=task&amp;f=create&amp;project=630&amp;stor
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/08/22/test/">
+                <a href="/2019/09/01/README/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="test">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
                         
-                        <span class="card-title">test</span>
+                        <span class="card-title"></span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            this is test page.
+                            LB相关文档及操作
+禅道申请LB域名配置模板地址：
+https://chandao.tuhu.work/index.php?m=task&amp;f=create&amp;project=630&amp;storyID=17205&amp;
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-22
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-01
                             </span>
                         <span class="publish-author">
                             

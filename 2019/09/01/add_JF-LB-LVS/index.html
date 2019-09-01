@@ -4,8 +4,12 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, Hexo">
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex">
+    <meta name="keywords" content="Hexo">
+    <meta name="description" content="LVS 添加虚拟IP
+案例： 财哥申请新增两个DB新建两个LB
+DB-MYSQL-DKH-RW --10.1.11.45 3316
+DB-MYSQL-DKH-RO  --10.1.1.100 3316准备
+为两个DB分配两个虚IP,确定分配">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +17,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Hello World | Hexo</title>
+    <title>Hexo</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -260,13 +264,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Hello World
+                        
                     </div>
                 </div>
             </div>
@@ -404,15 +408,81 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+                <h1 id="LVS-添加虚拟IP"><a href="#LVS-添加虚拟IP" class="headerlink" title="LVS 添加虚拟IP"></a>LVS 添加虚拟IP</h1><p><img src="picture/LVS-1.jpg" alt="-w1416"></p>
+<h2 id="案例：-财哥申请新增两个DB"><a href="#案例：-财哥申请新增两个DB" class="headerlink" title="案例： 财哥申请新增两个DB"></a>案例： 财哥申请新增两个DB</h2><pre><code>新建两个LB
+DB-MYSQL-DKH-RW --10.1.11.45 3316
+DB-MYSQL-DKH-RO  --10.1.1.100 3316</code></pre><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ul>
+<li><p>为两个DB分配两个虚IP,确定分配的ip是没在使用的</p>
+<pre><code>DB-MYSQL-DKH-RW  10.1.12.160
+DB-MYSQL-DKH-RO  10.1.12.161</code></pre></li>
+<li><p>后端服务器 10.1.11.45 、10.1.11.45 端口：3316</p>
+</li>
+</ul>
+<h2 id="开始操作"><a href="#开始操作" class="headerlink" title="开始操作"></a>开始操作</h2><p>1.登陆LVS-lan-C</p>
+<pre><code> ssh  lvs-lan-c</code></pre><br>
+
+<p>2.配置keepalived</p>
+<pre><code>vi /etc/keepalived/keepalived.conf
+# 在virtual_ipaddress下方添加
+virtual_ipaddress {
+        10.1.12.160/16
+        10.1.12.161/16
+       }</code></pre><br>
+
+<p>3.配置后端lvs分发</p>
+<ul>
+<li>已知新增两个为Mysql DB,则修改3306.conf</li>
+</ul>
+<pre><code>vi  /etc/keepalived/conf.d/3306.conf
+#新增两个虚ip
+virtual_server_group mysql {
+        10.1.12.160/16
+        10.1.12.161/16
+       }</code></pre><br>
+
+<p>4.Reload keepalived服务</p>
+<pre><code>systemctl    reload  keepalived</code></pre><br>
+
+<p>5.上述步骤1~4操作请在Lvs-lan几台备用机上同样配置</p>
+<br>
+
+<p>6.登陆内网LB</p>
+<pre><code> ssh  lvs-lan-1</code></pre><br>
+
+<p>7.配置虚拟网卡</p>
+<ul>
+<li>下列操作请手动执行，操作好一台以后，请分别登陆另外5台操作，完成后使用<code>ip a</code>和<code>route -n</code>检测</li>
+</ul>
+<pre><code>/sbin/ifconfig lo:62 10.1.12.160  broadcast 10.1.12.160 netmask 255.255.255.255 up
+/sbin/route add -host 10.1.12.160 dev lo:60
+/sbin/ifconfig lo:63 10.1.12.161  broadcast 10.1.12.161 netmask 255.255.255.255 up
+/sbin/route add -host 10.1.12.161 dev lo:61</code></pre><br>
+
+<p>8.配置haproxy</p>
+<pre><code>cd /usr/local/haproxy/
+vi  haproxy.cfg
+#新增以下配置
+    acl ACL_DB-MYSQL-DKH-RW dst 10.1.12.160
+    use_backend DB-MYSQL-DKH-RW  if ACL_DB-MYSQL-DKH-RW
+
+    acl ACL_DB-MYSQL-DKH-RO dst 10.1.12.161
+    use_backend DB-MYSQL-DKH-RO if ACL_DB-MYSQL-DKH-RO
+
+    backend DB-MYSQL-DKH-RW
+    server 10.1.11.45 10.1.11.45:3316 check inter 1000 rise 3 fall 3
+
+    backend DB-MYSQL-DKH-RO
+    server 10.1.1.100 10.1.1.100:3316 check inter 1000 rise 3 fall 3  </code></pre><br>
+
+<p>9.测试配置</p>
+<pre><code>/usr/local/haproxy/sbin/haproxy -c -f /usr/local/haproxy/haproxy.cfg</code></pre><br>
+
+<p>10.Reload haproxy服务</p>
+<pre><code>systemctl  reload  haproxy</code></pre><br>
+
+<p>11.同步脚本</p>
+<pre><code>cd /usr/local/haproxy/
+./sync_haproxy.sh</code></pre><br>
 
             </div>
             <hr/>
@@ -571,9 +641,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《Hello World》
+                    《》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/01/hello-world/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/01/add_JF-LB-LVS/" property="cc:attributionName"
                rel="cc:attributionURL">
                 John Doe
             </a> 采用
@@ -617,7 +687,7 @@
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/09/01/README/">
+                <a href="/2019/09/01/add_JF-LB-WAN_domain/">
                     <div class="card-image">
                         
                         
@@ -629,9 +699,10 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            LB相关文档及操作
-禅道申请LB域名配置模板地址：
-https://chandao.tuhu.work/index.php?m=task&amp;f=create&amp;project=630&amp;storyID=17205&amp;
+                            机房外网LB—新增域名案例分享： 某项目新申请域名
+UT环境申请域名：wmssorting-api.tuhu.cn
+Upstream name : wmssorting-api_tuhu_cn
+后台服务器: ywWmsApi1、ywWmsA
                         
                     </div>
                     <div class="publish-info">
@@ -656,24 +727,27 @@ https://chandao.tuhu.work/index.php?m=task&amp;f=create&amp;project=630&amp;stor
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/08/22/test/">
+                <a href="/2019/09/01/add_JF-LB-lan_domain/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="test">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
                         
-                        <span class="card-title">test</span>
+                        <span class="card-title"></span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            this is test page.
+                            机房内网LB—新增域名案例： 某项目新申请域名
+UT环境申请域名：qiye-gatewayut.ad.tuhu.cn
+Upstream name : qiye-gatewayut_ad_tuhu_cn
+后台服务器: sh1-wh-dkh-g
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-22
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-01
                             </span>
                         <span class="publish-author">
                             
