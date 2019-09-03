@@ -8,33 +8,7 @@
       <link href="/2019/09/01/Anti-reptile/"/>
       <url>/2019/09/01/Anti-reptile/</url>
       
-        <content type="html"><![CDATA[<h2 id="案例：LB配置防百度爬虫"><a href="#案例：LB配置防百度爬虫" class="headerlink" title="案例：LB配置防百度爬虫"></a>案例：LB配置防百度爬虫</h2><ul><li>发现此item.tuhu.cn一直被下面这个ua爬取:<pre><code>Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)</code></pre></li><li>tengine配置if判断ua，挡掉这个爬虫</li></ul><br><p>1.通过jumpserver登陆外网LB</p><pre><code>sh1-arch-Lb2S-1</code></pre><br><p>2.配置conf</p><pre><code>vim  item.tuhu.cn.conf#添加以下配置 if ($http_user_agent ~ &quot;Mozilla/5.0\ \(compatible;\ Baiduspider/2.0;\ \+http://www.baidu.com/search/spider.html&quot;)        {        return 403;        } if ($http_user_agent ~* ^Baiduspider)         {        return 403;        }</code></pre><br><p>3.测试<code>nginx  -t</code> 和 <code>nginx -s  reload</code></p><br><p>4.git提交</p><br><p>5.同步脚本</p><br><p>6.ELK上看访问日志，是否出现403</p><br><h3 id="额外补充方法："><a href="#额外补充方法：" class="headerlink" title="额外补充方法："></a>额外补充方法：</h3><p> 方法 1.新建<code>user-agent_deny.conf</code>配置文件</p><pre><code>#禁止Scrapy等工具的抓取if ($http_user_agent ~* (Scrapy|Curl|HttpClient)) {    return 403;}#禁止指定UA及UA为空的访问if ($http_user_agent ~* &quot;FeedDemon|Indy Library|YandexBot|Alexa Toolbar|AskTbFXTV|AhrefsBot|CrawlDaddy|CoolpadWebkit|Java|Feedly|UniversalFeedParser|ApacheBench|Microsoft URL Control|Swiftbot|ZmEu|oBot|jaunty|Python-urllib|lightDeckReports Bot|YYSpider|DigExt|HttpClient|MJ12bot|heritrix|EasouSpider|Ezooms|^$&quot; ) {    return 403;}#禁止非GET|HEAD|POST方式的抓取if ($request_method !~ ^(GET|HEAD|POST)$) {    return 403;}#然后直接reload即可</code></pre><br><p>方法 2. 添加default_server;</p><pre><code> server {            listen       81  default_server;            server_name  _;            return       403;        }</code></pre><ul><li>default_server：nginx的虚拟主机是通过HTTP请求中的Host值来找到对应的虚拟主机配置</li><li>对于未绑定的域名指向你的服务器时，匹配不到你配置的虚拟主机域名后，会默认使用这个虚拟主机，然后直接返回403（状态码，可以自己定义，且返回内容可以通过error_page、echo或是lua等等）<br></li></ul>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/2019/09/01/add_JF-LB-whitelist/"/>
-      <url>/2019/09/01/add_JF-LB-whitelist/</url>
-      
-        <content type="html"><![CDATA[<h1 id="添加白名单-内-外LB"><a href="#添加白名单-内-外LB" class="headerlink" title="添加白名单 内/外LB"></a>添加白名单 内/外LB</h1><ul><li><p>登陆LB服务器</p><pre><code>ssh  lb-lan-1 (内)ssh  sh1-arch-Lb2S-1(外)</code></pre></li><li><p>配置目录</p><pre><code>cd /usr/local/nginx/conf/vhost/CodeBlock/</code></pre></li><li><p>添加白名单</p><pre><code>vim WhiteList.cnfallow  xxx.xxx.xxx.xxx;</code></pre></li><li><p>Nginx 服务</p><pre><code>nginx -tnginx -s reload</code></pre></li><li><p>Git 提交</p></li><li><p>同步脚本(SyncConf.py)</p></li></ul><br><p><code>后续继续完善</code> …</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title></title>
-      <link href="/2019/09/01/requirements/"/>
-      <url>/2019/09/01/requirements/</url>
-      
-        <content type="html"><![CDATA[<h2 id="规范要求："><a href="#规范要求：" class="headerlink" title="规范要求："></a>规范要求：</h2><p> <code>操作LB前,请认真阅读一下</code></p><p>1.新增域名申请中包含: 域名链接地址、upstream name(部署系统 host)、后端服务器及端口(由申请人填写清楚)</p><p><img src="picture/sre-11.png" alt="-w1416"></p><br><p>2.区别<code>内网LB</code>和<code>外网LB</code>域名,这个要分别清楚</p><ul><li>内网LB格式:xxx.ad.tuhu.cn </li><li>外网LB格式:xxx.tuhu.cn</li></ul><br><p>3.这里和小伙伴约定一下，登陆固定服务器更改，避免冲突</p><ul><li>内网LB修改登陆：<code>lb-lan-1</code>   </li><li>外网LB修改登陆：<code>sh1-arch-Lb2S-1</code></li></ul><br><p>4.upstream name 申请人给出后，要核实下这个<code>Name</code>是否在使用，是一定要核实*3遍</p><ul><li>有权限的请登陆：<code>https://sre.tuhu.cn/</code>  在左侧列表中找到 <code>tengine</code>—-<code>upstreams</code>中搜索</li><li>或者登陆服务器：<code>/usr/local/nginx/conf/upstream.conf</code> 文件中找一下<code>upstream name</code>是否存在</li></ul><br><p>5.upstream name请使用如下模板：</p><ul><li>后端机器是Windows机器或者IIS服务的机器：<pre><code>upstream xxxxxx_tuhu_cn {   least_conn;   keepalive 32;   keepalive_timeout 30s;   check interval=1000 rise=2 fall=3 timeout=1000 type=http;   check_http_send &quot;GET /_stats/build.txt HTTP/1.1\r\nHost:xxxxxx.tuhu.cn\r\nConnection: keep-alive\r\n\r\n&quot;;   check_keepalive_requests 10000;   server xx.xx.xx.xx:80;}</code></pre></li><li>后端服务器是Linux机器：<pre><code>upstream xxxxxx_tuhu_cn {   least_conn;   keepalive 32;   keepalive_timeout 30s;   check interval=1000 rise=2 fall=3 timeout=1000 type=tcp;   check_keepalive_requests 10000;  server xx.xx.xx.xx:80;}</code></pre></li></ul><br><p>6.域名.conf 在服务器上新增配置好之后，要先<code>nginx -t</code> 测试ok之后再进行下一步操作</p><br><p>7.一定要先<code>git</code>提交,再使用同步脚本,顺序不要变,不然你没提交之前同步脚本,在另外几台机器上也是修改状态,容易发生冲突,切记</p><br><p>8.后续继续完善…有不足之处，请各位大佬补充，感谢！！！</p><br>]]></content>
+        <content type="html"><![CDATA[<h2 id="案例：LB配置防百度爬虫"><a href="#案例：LB配置防百度爬虫" class="headerlink" title="案例：LB配置防百度爬虫"></a>案例：LB配置防百度爬虫</h2><ul><li>发现此xxx.xxxx.cn一直被下面这个ua爬取:<pre><code>Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)</code></pre></li><li>tengine配置if判断ua，挡掉这个爬虫</li></ul><br><p>1.通过jumpserver登陆外网LB</p><br><p>2.配置conf</p><pre><code>vim xxx.xxxx.cn #添加以下配置 if ($http_user_agent ~ &quot;Mozilla/5.0\ \(compatible;\ Baiduspider/2.0;\ \+http://www.baidu.com/search/spider.html&quot;)        {        return 403;        } if ($http_user_agent ~* ^Baiduspider)         {        return 403;        }</code></pre><br><p>3.测试<code>nginx  -t</code> 和 <code>nginx -s  reload</code></p><br><h3 id="额外补充方法："><a href="#额外补充方法：" class="headerlink" title="额外补充方法："></a>额外补充方法：</h3><p> 方法 1.新建<code>user-agent_deny.conf</code>配置文件</p><pre><code>#禁止Scrapy等工具的抓取if ($http_user_agent ~* (Scrapy|Curl|HttpClient)) {    return 403;}#禁止指定UA及UA为空的访问if ($http_user_agent ~* &quot;FeedDemon|Indy Library|YandexBot|Alexa Toolbar|AskTbFXTV|AhrefsBot|CrawlDaddy|CoolpadWebkit|Java|Feedly|UniversalFeedParser|ApacheBench|Microsoft URL Control|Swiftbot|ZmEu|oBot|jaunty|Python-urllib|lightDeckReports Bot|YYSpider|DigExt|HttpClient|MJ12bot|heritrix|EasouSpider|Ezooms|^$&quot; ) {    return 403;}#禁止非GET|HEAD|POST方式的抓取if ($request_method !~ ^(GET|HEAD|POST)$) {    return 403;}#然后直接reload即可</code></pre><br><p>方法 2. 添加default_server;</p><pre><code> server {            listen       81  default_server;            server_name  _;            return       403;        }</code></pre><ul><li>default_server：nginx的虚拟主机是通过HTTP请求中的Host值来找到对应的虚拟主机配置</li><li>对于未绑定的域名指向你的服务器时，匹配不到你配置的虚拟主机域名后，会默认使用这个虚拟主机，然后直接返回403（状态码，可以自己定义，且返回内容可以通过error_page、echo或是lua等等）<br></li></ul>]]></content>
       
       
       

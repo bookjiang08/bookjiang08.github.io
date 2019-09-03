@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://loverbook.cn">
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="案例：LB配置防百度爬虫 发现此item.tuhu.cn一直被下面这个ua爬取:Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html) tengine配置if判断ua，挡掉这个爬虫    1.通过jumpserver登陆外网LB sh1-arch-Lb2S-1  2.配置conf vim">
+  <meta name="description" content="案例：LB配置防百度爬虫 发现此xxx.xxxx.cn一直被下面这个ua爬取:Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html) tengine配置if判断ua，挡掉这个爬虫    1.通过jumpserver登陆外网LB   2.配置conf vim xxx.xxxx.cn  #添">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://loverbook.cn/2019/09/01/Anti-reptile/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="案例：LB配置防百度爬虫 发现此item.tuhu.cn一直被下面这个ua爬取:Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html) tengine配置if判断ua，挡掉这个爬虫    1.通过jumpserver登陆外网LB sh1-arch-Lb2S-1  2.配置conf vim">
+<meta property="og:description" content="案例：LB配置防百度爬虫 发现此xxx.xxxx.cn一直被下面这个ua爬取:Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html) tengine配置if判断ua，挡掉这个爬虫    1.通过jumpserver登陆外网LB   2.配置conf vim xxx.xxxx.cn  #添">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-31T06:11:58.007Z">
+<meta property="og:updated_time" content="2019-09-03T14:30:29.226Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="案例：LB配置防百度爬虫 发现此item.tuhu.cn一直被下面这个ua爬取:Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html) tengine配置if判断ua，挡掉这个爬虫    1.通过jumpserver登陆外网LB sh1-arch-Lb2S-1  2.配置conf vim">
+<meta name="twitter:description" content="案例：LB配置防百度爬虫 发现此xxx.xxxx.cn一直被下面这个ua爬取:Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html) tengine配置if判断ua，挡掉这个爬虫    1.通过jumpserver登陆外网LB   2.配置conf vim xxx.xxxx.cn  #添">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -160,16 +160,16 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="案例：LB配置防百度爬虫"><a href="#案例：LB配置防百度爬虫" class="headerlink" title="案例：LB配置防百度爬虫"></a>案例：LB配置防百度爬虫</h2><ul>
-<li>发现此item.tuhu.cn一直被下面这个ua爬取:<pre><code>Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)</code></pre></li>
+<li>发现此xxx.xxxx.cn一直被下面这个ua爬取:<pre><code>Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)</code></pre></li>
 <li>tengine配置if判断ua，挡掉这个爬虫</li>
 </ul>
 <br>
 
 <p>1.通过jumpserver登陆外网LB</p>
-<pre><code>sh1-arch-Lb2S-1</code></pre><br>
+<br>
 
 <p>2.配置conf</p>
-<pre><code>vim  item.tuhu.cn.conf
+<pre><code>vim xxx.xxxx.cn 
 #添加以下配置
  if ($http_user_agent ~ &quot;Mozilla/5.0\ \(compatible;\ Baiduspider/2.0;\ \+http://www.baidu.com/search/spider.html&quot;)
         {
@@ -184,17 +184,6 @@
 
 <p>3.测试<code>nginx  -t</code> 和 <code>nginx -s  reload</code></p>
 <br>
-
-<p>4.git提交</p>
-<br>
-
-<p>5.同步脚本</p>
-<br>
-
-
-<p>6.ELK上看访问日志，是否出现403</p>
-<br>
-
 
 <h3 id="额外补充方法："><a href="#额外补充方法：" class="headerlink" title="额外补充方法："></a>额外补充方法：</h3><p> 方法 1.新建<code>user-agent_deny.conf</code>配置文件</p>
 <pre><code>#禁止Scrapy等工具的抓取
@@ -317,7 +306,7 @@ if ($request_method !~ ^(GET|HEAD|POST)$) {
 <nav id="article-nav">
   
   
-    <a href="/2019/09/01/add_JF-LB-whitelist/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/09/01/README/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title"></div>
       <i class="icon-circle-right"></i>
     </a>
