@@ -11,6 +11,12 @@
         <content type="html"><![CDATA[<a id="more"></a><ul><li>发现此xxx.xxxx.cn一直被下面这个ua爬取:<pre><code>Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)</code></pre></li><li>tengine配置if判断ua，挡掉这个爬虫</li></ul><br><p>1.通过jumpserver登陆外网LB</p><br><p>2.配置conf</p><pre><code>vim xxx.xxxx.cn #添加以下配置 if ($http_user_agent ~ &quot;Mozilla/5.0\ \(compatible;\ Baiduspider/2.0;\ \+http://www.baidu.com/search/spider.html&quot;)        {        return 403;        } if ($http_user_agent ~* ^Baiduspider)         {        return 403;        }</code></pre><br><p>3.测试<code>nginx  -t</code> 和 <code>nginx -s  reload</code></p><br><h3 id="额外补充方法："><a href="#额外补充方法：" class="headerlink" title="额外补充方法："></a>额外补充方法：</h3><p> 方法 1.新建<code>user-agent_deny.conf</code>配置文件</p><pre><code>#禁止Scrapy等工具的抓取if ($http_user_agent ~* (Scrapy|Curl|HttpClient)) {    return 403;}#禁止指定UA及UA为空的访问if ($http_user_agent ~* &quot;FeedDemon|Indy Library|YandexBot|Alexa Toolbar|AskTbFXTV|AhrefsBot|CrawlDaddy|CoolpadWebkit|Java|Feedly|UniversalFeedParser|ApacheBench|Microsoft URL Control|Swiftbot|ZmEu|oBot|jaunty|Python-urllib|lightDeckReports Bot|YYSpider|DigExt|HttpClient|MJ12bot|heritrix|EasouSpider|Ezooms|^$&quot; ) {    return 403;}#禁止非GET|HEAD|POST方式的抓取if ($request_method !~ ^(GET|HEAD|POST)$) {    return 403;}#然后直接reload即可</code></pre><br><p>方法 2. 添加default_server;</p><pre><code> server {            listen       81  default_server;            server_name  _;            return       403;        }</code></pre><ul><li>default_server：nginx的虚拟主机是通过HTTP请求中的Host值来找到对应的虚拟主机配置</li><li>对于未绑定的域名指向你的服务器时，匹配不到你配置的虚拟主机域名后，会默认使用这个虚拟主机，然后直接返回403（状态码，可以自己定义，且返回内容可以通过error_page、echo或是lua等等）<br></li></ul>]]></content>
       
       
+      <categories>
+          
+          <category> Hexo </category>
+          
+      </categories>
+      
       
     </entry>
     
