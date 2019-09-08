@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="发现此xxx.xxxx.cn一直被下面这个ua爬取:Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html) tengine配置if判断ua，挡掉这个爬虫">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-08T08:35:19.631Z">
+<meta property="og:updated_time" content="2019-09-08T17:25:53.150Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LB配置防百度爬虫">
 <meta name="twitter:description" content="发现此xxx.xxxx.cn一直被下面这个ua爬取:Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html) tengine配置if判断ua，挡掉这个爬虫">
@@ -186,8 +186,7 @@
 
 <a id="more"></a>
 
-<p>1.配置conf</p>
-<pre><code>vim xxx.xxxx.cn 
+<h2 id="1-配置conf"><a href="#1-配置conf" class="headerlink" title="1.配置conf"></a>1.配置conf</h2><pre><code>vim xxx.xxxx.cn 
 #添加以下配置
  if ($http_user_agent ~ &quot;Mozilla/5.0\ \(compatible;\ Baiduspider/2.0;\ \+http://www.baidu.com/search/spider.html&quot;)
         {
@@ -200,12 +199,9 @@
         }</code></pre><br>
 
 
-<p>2.测试<code>nginx  -t</code> 和 <code>nginx -s  reload</code></p>
-<br>
+<h2 id="2-测试nginx-t-和-nginx-s-reload"><a href="#2-测试nginx-t-和-nginx-s-reload" class="headerlink" title="2.测试nginx  -t 和 nginx -s  reload"></a>2.测试<code>nginx  -t</code> 和 <code>nginx -s  reload</code></h2><br>
 
-<p>3.额外补充方法：</p>
-<p>3.1 新建<code>user-agent_deny.conf</code>配置文件</p>
-<pre><code>#禁止Scrapy等工具的抓取
+<h2 id="3-额外补充方法："><a href="#3-额外补充方法：" class="headerlink" title="3.额外补充方法："></a>3.额外补充方法：</h2><h3 id="3-1-新建user-agent-deny-conf配置文件"><a href="#3-1-新建user-agent-deny-conf配置文件" class="headerlink" title="3.1 新建user-agent_deny.conf配置文件"></a>3.1 新建<code>user-agent_deny.conf</code>配置文件</h3><pre><code>#禁止Scrapy等工具的抓取
 if ($http_user_agent ~* (Scrapy|Curl|HttpClient)) {
     return 403;
 }
@@ -221,8 +217,7 @@ if ($request_method !~ ^(GET|HEAD|POST)$) {
 }
 #然后直接reload即可</code></pre><br>
 
-<p>3.2 添加default_server;</p>
-<pre><code> server {
+<h3 id="3-2-添加default-server"><a href="#3-2-添加default-server" class="headerlink" title="3.2 添加default_server;"></a>3.2 添加default_server;</h3><pre><code> server {
             listen       81  default_server;
             server_name  _;
             return       403;
@@ -266,7 +261,7 @@ if ($request_method !~ ^(GET|HEAD|POST)$) {
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/hexo//" class="article-tag-list-link color5">hexo</a>
+        			<a href="/categories/tengine//" class="article-tag-list-link color3">tengine</a>
         		</li>
       		
 		</ul>
@@ -364,7 +359,7 @@ if ($request_method !~ ^(GET|HEAD|POST)$) {
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-配置conf"><span class="toc-number">1.</span> <span class="toc-text">1.配置conf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-测试nginx-t-和-nginx-s-reload"><span class="toc-number">2.</span> <span class="toc-text">2.测试nginx  -t 和 nginx -s  reload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-额外补充方法："><span class="toc-number">3.</span> <span class="toc-text">3.额外补充方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-新建user-agent-deny-conf配置文件"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 新建user-agent_deny.conf配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-添加default-server"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 添加default_server;</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
