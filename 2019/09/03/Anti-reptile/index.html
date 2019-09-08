@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://loverbook.cn">
   <title>LB配置防百度爬虫 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="发现此xxx.xxxx.cn一直被下面这个ua爬取:Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html) tengine配置if判断ua，挡掉这个爬虫       1.通过jumpserver登陆外网LB   2.配置conf vim xxx.xxxx.cn  #添加以下配置  i">
+  <meta name="description" content="发现此xxx.xxxx.cn一直被下面这个ua爬取:Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html) tengine配置if判断ua，挡掉这个爬虫">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LB配置防百度爬虫">
 <meta property="og:url" content="http://loverbook.cn/2019/09/03/Anti-reptile/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="发现此xxx.xxxx.cn一直被下面这个ua爬取:Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html) tengine配置if判断ua，挡掉这个爬虫       1.通过jumpserver登陆外网LB   2.配置conf vim xxx.xxxx.cn  #添加以下配置  i">
+<meta property="og:description" content="发现此xxx.xxxx.cn一直被下面这个ua爬取:Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html) tengine配置if判断ua，挡掉这个爬虫">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-08T06:28:56.877Z">
+<meta property="og:updated_time" content="2019-09-08T06:48:34.079Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LB配置防百度爬虫">
-<meta name="twitter:description" content="发现此xxx.xxxx.cn一直被下面这个ua爬取:Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html) tengine配置if判断ua，挡掉这个爬虫       1.通过jumpserver登陆外网LB   2.配置conf vim xxx.xxxx.cn  #添加以下配置  i">
+<meta name="twitter:description" content="发现此xxx.xxxx.cn一直被下面这个ua爬取:Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html) tengine配置if判断ua，挡掉这个爬虫">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -181,7 +181,7 @@
     <div id="toc-article" class="toc-article">
         <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
         <strong class="toc-title">文章目录</strong>
-           <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#额外补充方法："><span class="toc-number">1.</span> <span class="toc-text">额外补充方法：</span></a></li></ol>
+           <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置conf"><span class="toc-number">1.</span> <span class="toc-text">配置conf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试nginx-t-和-nginx-s-reload"><span class="toc-number">2.</span> <span class="toc-text">测试nginx  -t 和 nginx -s  reload</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#额外补充方法："><span class="toc-number">2.1.</span> <span class="toc-text">额外补充方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#方法-1-新建user-agent-deny-conf配置文件"><span class="toc-number">2.1.1.</span> <span class="toc-text">方法 1.新建user-agent_deny.conf配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-添加default-server"><span class="toc-number">2.1.2.</span> <span class="toc-text">2. 添加default_server;</span></a></li></ol></li></ol></li></ol>
          </div>
    <script type="text/javascript">
     function showToc(){
@@ -202,21 +202,16 @@
 	
     <div class="article-entry" itemprop="articleBody">
       
-        <a id="more"></a>
-<ul>
+        <ul>
 <li>发现此xxx.xxxx.cn一直被下面这个ua爬取:<pre><code>Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)</code></pre></li>
 <li>tengine配置if判断ua，挡掉这个爬虫</li>
 </ul>
 <br>
 
 
-<!--more-->
+<a id="more"></a>
 
-<p>1.通过jumpserver登陆外网LB</p>
-<br>
-
-<p>2.配置conf</p>
-<pre><code>vim xxx.xxxx.cn 
+<h2 id="配置conf"><a href="#配置conf" class="headerlink" title="配置conf"></a>配置conf</h2><pre><code>vim xxx.xxxx.cn 
 #添加以下配置
  if ($http_user_agent ~ &quot;Mozilla/5.0\ \(compatible;\ Baiduspider/2.0;\ \+http://www.baidu.com/search/spider.html&quot;)
         {
@@ -229,11 +224,9 @@
         }</code></pre><br>
 
 
-<p>3.测试<code>nginx  -t</code> 和 <code>nginx -s  reload</code></p>
-<br>
+<h2 id="测试nginx-t-和-nginx-s-reload"><a href="#测试nginx-t-和-nginx-s-reload" class="headerlink" title="测试nginx  -t 和 nginx -s  reload"></a>测试<code>nginx  -t</code> 和 <code>nginx -s  reload</code></h2><br>
 
-<h3 id="额外补充方法："><a href="#额外补充方法：" class="headerlink" title="额外补充方法："></a>额外补充方法：</h3><p> 方法 1.新建<code>user-agent_deny.conf</code>配置文件</p>
-<pre><code>#禁止Scrapy等工具的抓取
+<h3 id="额外补充方法："><a href="#额外补充方法：" class="headerlink" title="额外补充方法："></a>额外补充方法：</h3><h4 id="方法-1-新建user-agent-deny-conf配置文件"><a href="#方法-1-新建user-agent-deny-conf配置文件" class="headerlink" title="方法 1.新建user-agent_deny.conf配置文件"></a>方法 1.新建<code>user-agent_deny.conf</code>配置文件</h4><pre><code>#禁止Scrapy等工具的抓取
 if ($http_user_agent ~* (Scrapy|Curl|HttpClient)) {
     return 403;
 }
@@ -249,8 +242,7 @@ if ($request_method !~ ^(GET|HEAD|POST)$) {
 }
 #然后直接reload即可</code></pre><br>
 
-<p>方法 2. 添加default_server;</p>
-<pre><code> server {
+<h4 id="2-添加default-server"><a href="#2-添加default-server" class="headerlink" title="2. 添加default_server;"></a>2. 添加default_server;</h4><pre><code> server {
             listen       81  default_server;
             server_name  _;
             return       403;
@@ -364,8 +356,8 @@ if ($request_method !~ ^(GET|HEAD|POST)$) {
 <nav id="article-nav">
   
   
-    <a href="/2019/09/01/README/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title"></div>
+    <a href="/2019/09/02/README/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Read me</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -392,7 +384,7 @@ if ($request_method !~ ^(GET|HEAD|POST)$) {
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#额外补充方法："><span class="toc-number">1.</span> <span class="toc-text">额外补充方法：</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置conf"><span class="toc-number">1.</span> <span class="toc-text">配置conf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试nginx-t-和-nginx-s-reload"><span class="toc-number">2.</span> <span class="toc-text">测试nginx  -t 和 nginx -s  reload</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#额外补充方法："><span class="toc-number">2.1.</span> <span class="toc-text">额外补充方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#方法-1-新建user-agent-deny-conf配置文件"><span class="toc-number">2.1.1.</span> <span class="toc-text">方法 1.新建user-agent_deny.conf配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-添加default-server"><span class="toc-number">2.1.2.</span> <span class="toc-text">2. 添加default_server;</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -502,6 +494,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
