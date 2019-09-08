@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="发现此xxx.xxxx.cn一直被下面这个ua爬取:Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html) tengine配置if判断ua，挡掉这个爬虫">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-08T06:53:48.738Z">
+<meta property="og:updated_time" content="2019-09-08T07:02:54.581Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LB配置防百度爬虫">
 <meta name="twitter:description" content="发现此xxx.xxxx.cn一直被下面这个ua爬取:Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html) tengine配置if判断ua，挡掉这个爬虫">
@@ -181,7 +181,7 @@
     <div id="toc-article" class="toc-article">
         <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
         <strong class="toc-title">文章目录</strong>
-           <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置conf"><span class="toc-number">1.</span> <span class="toc-text">配置conf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试nginx-t-和-nginx-s-reload"><span class="toc-number">2.</span> <span class="toc-text">测试nginx  -t 和 nginx -s  reload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#额外补充方法："><span class="toc-number">3.</span> <span class="toc-text">额外补充方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#新建user-agent-deny-conf配置文件"><span class="toc-number">3.1.</span> <span class="toc-text">新建user-agent_deny.conf配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加default-server"><span class="toc-number">3.2.</span> <span class="toc-text">添加default_server;</span></a></li></ol></li></ol>
+           
          </div>
    <script type="text/javascript">
     function showToc(){
@@ -211,7 +211,8 @@
 
 <a id="more"></a>
 
-<h2 id="配置conf"><a href="#配置conf" class="headerlink" title="配置conf"></a>配置conf</h2><pre><code>vim xxx.xxxx.cn 
+<p>1.配置conf</p>
+<pre><code>vim xxx.xxxx.cn 
 #添加以下配置
  if ($http_user_agent ~ &quot;Mozilla/5.0\ \(compatible;\ Baiduspider/2.0;\ \+http://www.baidu.com/search/spider.html&quot;)
         {
@@ -224,9 +225,12 @@
         }</code></pre><br>
 
 
-<h2 id="测试nginx-t-和-nginx-s-reload"><a href="#测试nginx-t-和-nginx-s-reload" class="headerlink" title="测试nginx  -t 和 nginx -s  reload"></a>测试<code>nginx  -t</code> 和 <code>nginx -s  reload</code></h2><br>
+<p>2.测试<code>nginx  -t</code> 和 <code>nginx -s  reload</code></p>
+<br>
 
-<h2 id="额外补充方法："><a href="#额外补充方法：" class="headerlink" title="额外补充方法："></a>额外补充方法：</h2><h3 id="新建user-agent-deny-conf配置文件"><a href="#新建user-agent-deny-conf配置文件" class="headerlink" title="新建user-agent_deny.conf配置文件"></a>新建<code>user-agent_deny.conf</code>配置文件</h3><pre><code>#禁止Scrapy等工具的抓取
+<p>3.额外补充方法：</p>
+<p>3.1 新建<code>user-agent_deny.conf</code>配置文件</p>
+<pre><code>#禁止Scrapy等工具的抓取
 if ($http_user_agent ~* (Scrapy|Curl|HttpClient)) {
     return 403;
 }
@@ -242,7 +246,8 @@ if ($request_method !~ ^(GET|HEAD|POST)$) {
 }
 #然后直接reload即可</code></pre><br>
 
-<h3 id="添加default-server"><a href="#添加default-server" class="headerlink" title="添加default_server;"></a>添加default_server;</h3><pre><code> server {
+<p>3.2 添加default_server;</p>
+<pre><code> server {
             listen       81  default_server;
             server_name  _;
             return       403;
@@ -384,7 +389,7 @@ if ($request_method !~ ^(GET|HEAD|POST)$) {
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置conf"><span class="toc-number">1.</span> <span class="toc-text">配置conf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试nginx-t-和-nginx-s-reload"><span class="toc-number">2.</span> <span class="toc-text">测试nginx  -t 和 nginx -s  reload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#额外补充方法："><span class="toc-number">3.</span> <span class="toc-text">额外补充方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#新建user-agent-deny-conf配置文件"><span class="toc-number">3.1.</span> <span class="toc-text">新建user-agent_deny.conf配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加default-server"><span class="toc-number">3.2.</span> <span class="toc-text">添加default_server;</span></a></li></ol></li></ol>
+                    目录，不存在的…
                     </div>
                 </span>
             </div>
