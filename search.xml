@@ -1,83 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-  
-    
-    <entry>
-      <title>LB配置防百度爬虫</title>
-      <link href="/2019/09/03/Anti-reptile/"/>
-      <url>/2019/09/03/Anti-reptile/</url>
-      
-        <content type="html"><![CDATA[<ul><li>发现此xxx.xxxx.cn一直被下面这个ua爬取:<pre><code>Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)</code></pre></li><li>tengine配置if判断ua，挡掉这个爬虫</li></ul><br><a id="more"></a><h2 id="1-配置conf"><a href="#1-配置conf" class="headerlink" title="1.配置conf"></a>1.配置conf</h2><pre><code>vim xxx.xxxx.cn #添加以下配置 if ($http_user_agent ~ &quot;Mozilla/5.0\ \(compatible;\ Baiduspider/2.0;\ \+http://www.baidu.com/search/spider.html&quot;)        {        return 403;        } if ($http_user_agent ~* ^Baiduspider)         {        return 403;        }</code></pre><br><h2 id="2-测试nginx-t-和-nginx-s-reload"><a href="#2-测试nginx-t-和-nginx-s-reload" class="headerlink" title="2.测试nginx  -t 和 nginx -s  reload"></a>2.测试<code>nginx  -t</code> 和 <code>nginx -s  reload</code></h2><br><h2 id="3-额外补充方法："><a href="#3-额外补充方法：" class="headerlink" title="3.额外补充方法："></a>3.额外补充方法：</h2><h3 id="3-1-新建user-agent-deny-conf配置文件"><a href="#3-1-新建user-agent-deny-conf配置文件" class="headerlink" title="3.1 新建user-agent_deny.conf配置文件"></a>3.1 新建<code>user-agent_deny.conf</code>配置文件</h3><pre><code>#禁止Scrapy等工具的抓取if ($http_user_agent ~* (Scrapy|Curl|HttpClient)) {    return 403;}#禁止指定UA及UA为空的访问if ($http_user_agent ~* &quot;FeedDemon|Indy Library|YandexBot|Alexa Toolbar|AskTbFXTV|AhrefsBot|CrawlDaddy|CoolpadWebkit|Java|Feedly|UniversalFeedParser|ApacheBench|Microsoft URL Control|Swiftbot|ZmEu|oBot|jaunty|Python-urllib|lightDeckReports Bot|YYSpider|DigExt|HttpClient|MJ12bot|heritrix|EasouSpider|Ezooms|^$&quot; ) {    return 403;}#禁止非GET|HEAD|POST方式的抓取if ($request_method !~ ^(GET|HEAD|POST)$) {    return 403;}#然后直接reload即可</code></pre><br><h3 id="3-2-添加default-server"><a href="#3-2-添加default-server" class="headerlink" title="3.2 添加default_server;"></a>3.2 添加default_server;</h3><pre><code> server {            listen       81  default_server;            server_name  _;            return       403;        }</code></pre><ul><li>default_server：nginx的虚拟主机是通过HTTP请求中的Host值来找到对应的虚拟主机配置</li><li>对于未绑定的域名指向你的服务器时，匹配不到你配置的虚拟主机域名后，会默认使用这个虚拟主机，然后直接返回403（状态码，可以自己定义，且返回内容可以通过error_page、echo或是lua等等）<br></li></ul>]]></content>
-      
-      
+<search>
+  <entry>
+    <title><![CDATA[LB配置防百度爬虫]]></title>
+    <url>%2F2019%2F09%2F03%2FAnti-reptile%2F</url>
+    <content type="text"><![CDATA[发现此xxx.xxxx.cn一直被下面这个ua爬取:Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html) tengine配置if判断ua，挡掉这个爬虫 1.配置confvim xxx.xxxx.cn #添加以下配置 if ($http_user_agent ~ &quot;Mozilla/5.0\ \(compatible;\ Baiduspider/2.0;\ \+http://www.baidu.com/search/spider.html&quot;) { return 403; } if ($http_user_agent ~* ^Baiduspider) { return 403; } 2.测试nginx -t 和 nginx -s reload 3.额外补充方法：3.1 新建user-agent_deny.conf配置文件#禁止Scrapy等工具的抓取 if ($http_user_agent ~* (Scrapy|Curl|HttpClient)) { return 403; } #禁止指定UA及UA为空的访问 if ($http_user_agent ~* &quot;FeedDemon|Indy Library|YandexBot|Alexa Toolbar|AskTbFXTV|AhrefsBot|CrawlDaddy|CoolpadWebkit|Java|Feedly|UniversalFeedParser|ApacheBench|Microsoft URL Control|Swiftbot|ZmEu|oBot|jaunty|Python-urllib|lightDeckReports Bot|YYSpider|DigExt|HttpClient|MJ12bot|heritrix|EasouSpider|Ezooms|^$&quot; ) { return 403; } #禁止非GET|HEAD|POST方式的抓取 if ($request_method !~ ^(GET|HEAD|POST)$) { return 403; } #然后直接reload即可 3.2 添加default_server; server { listen 81 default_server; server_name _; return 403; } default_server：nginx的虚拟主机是通过HTTP请求中的Host值来找到对应的虚拟主机配置 对于未绑定的域名指向你的服务器时，匹配不到你配置的虚拟主机域名后，会默认使用这个虚拟主机，然后直接返回403（状态码，可以自己定义，且返回内容可以通过error_page、echo或是lua等等）]]></content>
       <categories>
-          
-          <category> tengine </category>
-          
+        <category>tengine</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> tengine </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Read me</title>
-      <link href="/2019/09/02/README/"/>
-      <url>/2019/09/02/README/</url>
-      
-        <content type="html"><![CDATA[<h1 id="LB相关文档及操作"><a href="#LB相关文档及操作" class="headerlink" title="LB相关文档及操作"></a>LB相关文档及操作</h1><a id="more"></a><br><ul><li>禅道申请LB域名配置模板地址：<pre><code>https://chandao.tuhu.work/index.php?m=task&amp;f=create&amp;project=630&amp;storyID=17205&amp;moduleID=4131</code></pre><br></li></ul>]]></content>
-      
-      
+      <tags>
+        <tag>tengine</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Read me]]></title>
+    <url>%2F2019%2F09%2F02%2FREADME%2F</url>
+    <content type="text"><![CDATA[LB相关文档及操作 禅道申请LB域名配置模板地址：https://chandao.tuhu.work/index.php?m=task&amp;f=create&amp;project=630&amp;storyID=17205&amp;moduleID=4131]]></content>
       <categories>
-          
-          <category> book </category>
-          
+        <category>book</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Hello World</title>
-      <link href="/2019/09/01/hello-world/"/>
-      <url>/2019/09/01/hello-world/</url>
-      
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>test</title>
-      <link href="/2019/08/22/test/"/>
-      <url>/2019/08/22/test/</url>
-      
-        <content type="html"><![CDATA[<h4 id="this-is-test-page"><a href="#this-is-test-page" class="headerlink" title="this is test page."></a>this is test page.</h4>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> book </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-  
-  
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2019%2F09%2F01%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post$ hexo new "My New Post" More info: Writing Run server$ hexo server More info: Server Generate static files$ hexo generate More info: Generating Deploy to remote sites$ hexo deploy More info: Deployment]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[test]]></title>
+    <url>%2F2019%2F08%2F22%2Ftest%2F</url>
+    <content type="text"><![CDATA[this is test page.]]></content>
+      <tags>
+        <tag>book</tag>
+      </tags>
+  </entry>
 </search>
