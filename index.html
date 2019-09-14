@@ -242,138 +242,6 @@
   
   
   <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="http://loverbook.cn/2019/09/12/Openvpnserver/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Book Jiang">
-      <meta itemprop="description" content="每天进步一点点">
-      <meta itemprop="image" content="/images/book.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Book's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/12/Openvpnserver/" class="post-title-link" itemprop="url">Openvpn服务器搭建</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-12 09:50:28" itemprop="dateCreated datePublished" datetime="2019-09-12T09:50:28+08:00">2019-09-12</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-13 22:54:16" itemprop="dateModified" datetime="2019-09-13T22:54:16+08:00">2019-09-13</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">本文字数：</span>
-              
-              <span>9.8k</span>
-            </span>
-          
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              
-              <span>9 分钟</span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>一、前期准备<br>1.1 概述<br>OpenVPN 是一个基于 OpenSSL 库的应用层 VPN 实现，和传统 VPN 相比，它的优点是简单易用、安全稳定。此次基于centos7.3系统编译安装，使用udp协议自定义端口，搭建的目的是为了能实现通过证书+账户密码双重认证的方法，登录到阿里云VPC内部，对服务器进行配置管理。<br>1.2 准备工具文件<br>Easy-rsa.zip  //秘钥制作工具<br>Lzo-2.0.6.tar.gz  //依赖包<br>Openvpn-2.3.3.tar.gz  //安装包<br>二、安装Openvpn<br>2.1 安装依赖包<br>     #pam-devel是安装openvpn必要的依赖包<br>[root@test ~]# yum  -y  install  unzip ntpdate  pam-devel  openssl  openssl-devel<br>2.2 上传包文件<br>通过ssh连接上openvpn服务器，把3个文件拷贝到/usr/local/目录下，并分别解压<br>[root@test local]# unzip  easy-rsa.zip           #asy-rsa证书制作工具<br>[root@test local]# tar  -zxvf   lzo-2.06.tar.gz    #lzo-2.0.6.tar.gz依赖包<br>[root@test local]# tar  -zxvf   openvpn-2.3.3.tar.gz  </p>
-<p>2.3 创建安装目录<br>[root@test local]# mkdir  -p  /usr/local/openvpn/conf   #于存放配置文件<br>[root@test local]# mkdir  –p  /usr/local/openvpn/log    #于存放日志文件<br>[root@test local]# mkdir  -p  /usr/local/openvpn/easy-rsa  #密钥生成工具及密钥<br>2.4 开始安装openvpn<br>进入/usr/local/目录下:<br>[root@test local]# cd   lzo-2.06<br>[root@test lzo-2.06]# ./configure –prefix=/usr   #装依赖库<br>[root@test lzo-2.06]#make  &amp;&amp;  make  install<br>[root@test lzo-2.06]#  /sbin/ldconfig         #置运行时动态链接库<br>[root@test local]# cd  openvpn-2.3.3<br>[root@test openvpn-2.3.3]# ./configure –prefix=/usr/local/openvpn/<br>[root@test openvpn-2.3.3]# make  &amp;&amp;  make  install<br>[<a href="mailto:root@testopenvpn-2.3.3" target="_blank" rel="noopener">root@testopenvpn-2.3.3</a>]#cd  sample/sample-config-files/<br>[root@test sample-config-files]# cp server.conf  /usr/local/openvpn/conf/ #贝配置文件<br>[root@test local]# cd  easy-rsa/2.0/<br>[root@test 2.0]# cp  -rf  *  /usr/local/openvpn/easy-rsa/<br>[root@test 2.0]# cd  /usr/local/openvpn/easy-rsa/<br>[root@test easy-rsa]# chmod  +x  *  </p>
-<p>三、配置openvpn<br>3.1 配置Vars文件及生成服务端证书<br>[root@test ~]# cd  /usr/local/openvpn/easy-rsa/<br>[root@test easy-rsa]# vim   vars    #配置vars文件（证书的默认配置）<br>export KEY_SIZE=2048                   #加密位数，太大增加CPU负载<br>export CA_EXPIRE=3650                  #证书有效期，这里是10年<br>export KEY_EXPIRE=365                  #秘钥有效期<br>export KEY_COUNTRY=”CN”              #国家<br>export KEY_PROVINCE=”SH”              #省份<br>export KEY_CITY=”Shanghai”             #所在城市<br>export KEY_ORG=”JiaFu”                # 组织单位<br>export KEY_EMAIL=”<a href="mailto:support@jia-fu.cn" target="_blank" rel="noopener">support@jia-fu.cn</a>“    #邮箱地址<br>export KEY_OU=”Yunwei”                #组织容器可以随便填写<br>export KEY_NAME=”VPNServer”          #名称可以随便填写<br>[root@test easy-rsa]# source  vars         #使配置生效<br>下面开始制作根证书CA:<br>[root@test easy-rsa]# ./clean-all           #初始化<br>[root@test easy-rsa]# ./build-ca           #创建根证书，一路回车<br>Generating a 2048 bit RSA private key<br>…………………………….+++<br>………………………….+++<br>writing new private key to ‘ca.key’</p>
-<hr>
-<p>You are about to be asked to enter information that will be incorporated<br>into your certificate request.<br>What you are about to enter is what is called a Distinguished Name or a DN.<br>There are quite a few fields but you can leave some blank<br>For some fields there will be a default value,<br>If you enter ‘.’, the field will be left blank.</p>
-<hr>
-<p>Country Name (2 letter code) [CN]:<br>State or Province Name (full name) [SH]:<br>Locality Name (eg, city) [Shanghai]:<br>Organization Name (eg, company) [JiaFu]:<br>Organizational Unit Name (eg, section) [Yunwei]:<br>Common Name (eg, your name or your server’s hostname) [JiaFu CA]:<br>Name [EasyServer]:<br>Email Address [<a href="mailto:support@jia-fu.cn" target="_blank" rel="noopener">support@jia-fu.cn</a>]:<br>创建服务器端证书server和秘钥:<br>[root@test easy-rsa]# ./build-key-server server   #一路回车默认，最后输入y确认<br>Generating a 2048 bit RSA private key<br>………..+++<br>….+++<br>writing new private key to ‘server.key’</p>
-<hr>
-<p>You are about to be asked to enter information that will be incorporated<br>into your certificate request.<br>What you are about to enter is what is called a Distinguished Name or a DN.<br>There are quite a few fields but you can leave some blank<br>For some fields there will be a default value,<br>If you enter ‘.’, the field will be left blank.</p>
-<hr>
-<p>Country Name (2 letter code) [CN]:<br>State or Province Name (full name) [SH]:<br>Locality Name (eg, city) [Shanghai]:<br>Organization Name (eg, company) [JiaFu]:<br>Organizational Unit Name (eg, section) [Yunwei]:<br>Common Name (eg, your name or your server’s hostname) [server]:<br>Name [EasyServer]:<br>Email Address [<a href="mailto:support@jia-fu.cn" target="_blank" rel="noopener">support@jia-fu.cn</a>]:</p>
-<p>Please enter the following ‘extra’ attributes<br>to be sent with your certificate request<br>A challenge password []:<br>An optional company name []:<br>Using configuration from /usr/local/openvpn/easy-rsa/openssl-1.0.0.cnf<br>Check that the request matches the signature<br>Signature ok<br>The Subject’s Distinguished Name is as follows<br>countryName           :PRINTABLE:’CN’<br>stateOrProvinceName   :PRINTABLE:’SH’<br>localityName          :PRINTABLE:’Shanghai’<br>organizationName      :PRINTABLE:’JiaFu’<br>organizationalUnitName:PRINTABLE:’Yunwei’<br>commonName            :PRINTABLE:’server’<br>name                  :PRINTABLE:’EasyServer’<br>emailAddress          :IA5STRING:‘support@jia-fu.cn’<br>Certificate is to be certified until Apr 15 15:35:32 2019 GMT (365 days)<br>Sign the certificate? [y/n]:y         #输入y<br>1 out of 1 certificate requests certified, commit? [y/n] y   #输入y<br>Write out database with 1 new entries<br>[root@test easy-rsa]# ./build-dh  #创建dh2048加密协商文件<br>[root@test easy-rsa]#<br>[root@testeasy-rsa]#../sbin/openvpn  –genkey  –secret /usr/local/openvpn/easy-rsa/keys/ta.key   #生成防Dos攻击的文件</p>
-<p>3.2 配置openvpn server文件<br>[root@test ~]# vim  /usr/local/openvpn/conf/server.conf<br>Local  172.16.10.12    #本机监听地址<br>port  2294           #自定义端口号<br>proto udp            #使用udp协议<br>dev tun              #tun是ip层的点对点协议,建议使用tun<br>#证书若没放在conf下，需要指定路径<br>ca  /usr/local/openvpn/easy-rsa/keys/ca.crt<br>cert  /usr/local/openvpn/easy-rsa/keys/server.crt<br>key /usr/local/openvpn/easy-rsa/keys/server.key  # This file should be kept secret<br>dh  /usr/local/openvpn/easy-rsa/keys/dh2048.pem<br>server  20.8.8.0 255.255.255.0    #服务器vpn网段地址<br>#防止openvpn重新启动后“忘记”Client曾经使用过的IP地址<br>ifconfig-pool-persist /usr/local/openvpn/log/ipp.txt<br>#通过VPN Server往Client push路由，client通过pull指令获得<br>push “route 20.8.8.0  255.255.255.0”<br>push “route 172.16.10.0 255.255.255.0”<br>push “dhcp-option DNS 223.5.5.5”    #指定DNS地址<br>push “dhcp-option DNS 8.8.8.8”<br>client-to-client<br>#和keys连接VPN，一定要打开这个选项，否则只允许一个人连接VPN<br>duplicate-cn<br>keepalive 10 120<br>comp-lzo          #对数据进行压缩<br>max-clients 10      #支持客户端数<br>通过keepalive检测超时后，重新启动VPN，不重新读取keys，保留第一次使用的keys<br>persist-key<br>#通过keepalive检测超时后，重新启动VPN，一直保持tun或者tap设备是linkup的，否则网络连接会先linkdown然后linkup<br>persist-tun<br>status  /usr/local/openvpn/log/openvpn-status.log  #日志路径<br>log-append  /usr/local/openvpn/log/openvpn.log<br>verb 3</p>
-<p>四、用户密码+证书验证配置<br>4.1 创建客户端用户<br>[root@test ~]# cd  /usr/local/openvpn/easy-rsa/<br>[root@test easy-rsa]# ./build-key  jianglei   #创建用户jianglei，方法同server端<br>#备注：执行后会在keys文件夹下，生成3个文件，jianglei.crt、jianglei.csr（mac电脑不需要这个文件）、jianglei.key，另外加上同目录下的ca.crt、ca.key、ta.key和dh2048.pem这7个文件一起打包，即是客户端所需要的所有文件，添加其它用户也是同样的方法<br>4.2 配置账户密码验证<br>[root@test ~]# vi /usr/local/openvpn/conf/server.conf  #配置文件中加上以下几行<br>tls-auth  /usr/local/openvpn/easy-rsa/keys/ta.key 0  #server端是0 ,客户端为1<br>auth-user-pass-verify   /usr/local/openvpn/easy-rsa/checkpsw.sh  via-env<br>#密码验证的脚本文件放在此目录下，稍后创建脚本<br>script-security 3<br>username-as-common-name<br>;client-cert-not-required  #如果只想账户密码验证，就开启这句<br>创建脚本文件：checkpsw.sh<br>#!/bin/sh<br>###########################################################</p>
-<h1 id="checkpsw-sh-C-2004-Mathias-Sundman-109-x61-116-x68-105-97-x73-64-111-112-x65-x6e-x76-112-110-x2e-x73-x65"><a href="#checkpsw-sh-C-2004-Mathias-Sundman-109-x61-116-x68-105-97-x73-64-111-112-x65-x6e-x76-112-110-x2e-x73-x65" class="headerlink" title="checkpsw.sh (C) 2004 Mathias Sundman &#109;&#x61;&#116;&#x68;&#105;&#97;&#x73;&#64;&#111;&#112;&#x65;&#x6e;&#x76;&#112;&#110;&#x2e;&#x73;&#x65;"></a>checkpsw.sh (C) 2004 Mathias Sundman <a href="mailto:&#109;&#x61;&#116;&#x68;&#105;&#97;&#x73;&#64;&#111;&#112;&#x65;&#x6e;&#x76;&#112;&#110;&#x2e;&#x73;&#x65;" target="_blank" rel="noopener">&#109;&#x61;&#116;&#x68;&#105;&#97;&#x73;&#64;&#111;&#112;&#x65;&#x6e;&#x76;&#112;&#110;&#x2e;&#x73;&#x65;</a></h1><p>#</p>
-<h1 id="This-script-will-authenticate-OpenVPN-users-against"><a href="#This-script-will-authenticate-OpenVPN-users-against" class="headerlink" title="This script will authenticate OpenVPN users against"></a>This script will authenticate OpenVPN users against</h1><h1 id="a-plain-text-file-The-passfile-should-simply-contain"><a href="#a-plain-text-file-The-passfile-should-simply-contain" class="headerlink" title="a plain text file. The passfile should simply contain"></a>a plain text file. The passfile should simply contain</h1><h1 id="one-row-per-user-with-the-username-first-followed-by"><a href="#one-row-per-user-with-the-username-first-followed-by" class="headerlink" title="one row per user with the username first followed by"></a>one row per user with the username first followed by</h1><h1 id="one-or-more-space-s-or-tab-s-and-then-the-password"><a href="#one-or-more-space-s-or-tab-s-and-then-the-password" class="headerlink" title="one or more space(s) or tab(s) and then the password."></a>one or more space(s) or tab(s) and then the password.</h1><p>PASSFILE=”/usr/local/openvpn/easy-rsa/psw-file” //指定保存账户和密码的文件<br>LOG_FILE=”/usr/local/openvpn/log/openvpn-password.log”//保存日志文件<br>TIME_STAMP=<code>date &quot;+%Y-%m-%d %T&quot;</code><br>###########################################################<br>if [ ! -r “${PASSFILE}” ]; then<br>echo “${TIME_STAMP}: Could not open password file &quot;${PASSFILE}&quot; for reading.” &gt;&gt; ${LOG_FILE}<br>exit 1<br>fi<br>CORRECT_PASSWORD=<code>awk &#39;!/^;/&amp;&amp;!/^#/&amp;&amp;$1==&quot;&#39;${username}&#39;&quot;{print $2;exit}&#39; ${PASSFILE}</code><br>if [ “${CORRECT_PASSWORD}” = “” ]; then<br>echo “${TIME_STAMP}: User does not exist: username=&quot;${username}&quot;, password=&quot;${password}&quot;.” &gt;&gt; ${LOG_FILE}<br>exit 1<br>fi<br>if [ “${password}” = “${CORRECT_PASSWORD}” ]; then<br>echo “${TIME_STAMP}: Successful authentication: username=&quot;${username}&quot;.” &gt;&gt; ${LOG_FILE}<br>exit 0<br>fi<br>echo “${TIME_STAMP}: Incorrect password: username=&quot;${username}&quot;, password=&quot;${password}&quot;.” &gt;&gt; ${LOG_FILE}<br>exit 1<br>创建保存账户密码的文件： psw-file<br>[root@test easy-rsa]#vi  psw-file<br>Jianglei    Jianglei123  //账户+空格+密码格式保存</p>
-<p>4.3  注销用户客户端<br>      如果同事离职了，需要注销证书<br>[root@test easy-rsa]# ./revoke-full jianglei   //注销用户jianglei<br>这个时候还是可以利用此证书登录服务器的，在server.conf下增加一行<br>crl-verify  /usr/local/openvpn/easy-rsa/keys/crl.pem<br>再重启下openvpn服务即可<br>4.4  启动openvpn<br>[root@test<del>]# /usr/local/openvpn/sbin/openvpn   –config  /usr/local/openvpn/conf/server.conf   &amp;<br>[root@test</del>]#ps –ef |grep openvpn<br>root      1013     1  0 Apr13 ?   00:00:04 /usr/local/openvpn/sbin/openvpn –config /usr/local/openvpn/conf/server.conf<br>[root@test~]# netstat  -ntlup  //由此可见端口已在监听<br>Udp 0 0 172.16.10.12:2294    0.0.0.0:*        1013/openvpn<br>五、配置防火墙<br>5.1  开启路由转发<br>[root@test ~]# vim /etc/sysctl.conf<br>net.ipv4.ip_forward = 1  #将值改为1保存<br>[root@test ~]# sysctl   -p  #执行生效</p>
-<p>5.2  配置iptables NAT转发<br>[root@test ~]# systemctl  stop  firewalld.service<br>[root@test ~]# systemctl  disable  firewalld.service<br>[root@test ~]# yum install -y iptables-services<br>[root@test ~]# systemctl enable iptables<br>[root@test ~]# iptables  -F   #清空iptables配置规则<br>[root@test ~]# iptables  -X<br>[root@test ~]# iptables  -P OUTPUT  ACCEPT<br>[root@test ~]# iptables  -P  FORWARD  ACCEPT<br>[root@test ~]# iptables  -A INPUT  -i  lo  -j  ACCEPT<br>[root@test ~]# iptables  -A OUTPUT  -o  lo  -j  ACCEPT<br>[root@test ~]#iptables -A INPUT -m state –state RELATED,ESTABLISHED -j ACCEPT<br>[root@test ~]# iptables -A INPUT -p tcp –dport 22 -j ACCEPT<br>[root@test ~]# iptables -A INPUT -p udp –dport 2294 -j ACCEPT<br>#对vpn网段进行转发<br>[root@test ~]# iptables -t nat -A POSTROUTING -o eth0 -s 20.8.8.0/24 -j MASQUERADE<br>#把内部主机端口的流量指定到出口ip<br>[root@test ~]# iptables -t nat  -A PREROUTING -s 100.100.100.100 -p udp -m udp –dport 2294 -j DNAT –to-destination 172.16.10.12:2294<br>[root@test ~]#service  iptables  save<br>[root@test ~]#service  iptables  restart</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="http://loverbook.cn/2019/09/03/Anti-reptile/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -414,7 +282,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-09 01:47:07" itemprop="dateModified" datetime="2019-09-09T01:47:07+08:00">2019-09-09</time>
+                <time title="修改时间：2019-09-14 10:44:15" itemprop="dateModified" datetime="2019-09-14T10:44:15+08:00">2019-09-14</time>
               </span>
             
           
@@ -720,6 +588,131 @@
   </article>
 
     
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://loverbook.cn/2019/05/20/Openvpnserver/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Book Jiang">
+      <meta itemprop="description" content="每天进步一点点">
+      <meta itemprop="image" content="/images/book.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Book's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/05/20/Openvpnserver/" class="post-title-link" itemprop="url">Openvpn服务器搭建</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-20 02:15:28" itemprop="dateCreated datePublished" datetime="2019-05-20T02:15:28+08:00">2019-05-20</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-14 10:44:08" itemprop="dateModified" datetime="2019-09-14T10:44:08+08:00">2019-09-14</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>10k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>9 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="一、前期准备"><a href="#一、前期准备" class="headerlink" title="一、前期准备"></a>一、前期准备</h2><h3 id="1-1-概述"><a href="#1-1-概述" class="headerlink" title="1.1 概述"></a>1.1 概述</h3><pre><code>OpenVPN 是一个基于 OpenSSL 库的应用层 VPN 实现，和传统 VPN 相比，它的优点是简单易用、安全稳定。此次基于centos7.3系统编译安装，使用udp协议自定义端口，搭建的目的是为了能实现通过证书+账户密码双重认证的方法，登录到阿里云VPC内部，对服务器进行配置管理。</code></pre><br>
+
+<h3 id="1-2-准备工具文件"><a href="#1-2-准备工具文件" class="headerlink" title="1.2 准备工具文件"></a>1.2 准备工具文件</h3>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/05/20/Openvpnserver/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
   </div>
 
   
@@ -825,12 +818,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">11k</span>
+    <span title="站点总字数">12k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10 分钟</span>
+    <span title="站点阅读时长">11 分钟</span>
 </div>
 
 

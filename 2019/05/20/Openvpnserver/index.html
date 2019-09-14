@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="一、前期准备1.1 概述OpenVPN 是一个基于 OpenSSL 库的应用层 VPN 实现，和传统 VPN 相比，它的优点是简单易用、安全稳定。此次基于centos7.3系统编译安装，使用udp协议自定义端口，搭建的目的是为了能实现通过证书+账户密码双重认证的方法，登录到阿里云VPC内部，对服务器进行配置管理。  1.2 准备工具文件">
+<meta name="keywords" content="网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Openvpn服务器搭建">
+<meta property="og:url" content="http://loverbook.cn/2019/05/20/Openvpnserver/index.html">
+<meta property="og:site_name" content="Book&#39;s blog">
+<meta property="og:description" content="一、前期准备1.1 概述OpenVPN 是一个基于 OpenSSL 库的应用层 VPN 实现，和传统 VPN 相比，它的优点是简单易用、安全稳定。此次基于centos7.3系统编译安装，使用udp协议自定义端口，搭建的目的是为了能实现通过证书+账户密码双重认证的方法，登录到阿里云VPC内部，对服务器进行配置管理。  1.2 准备工具文件">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-14T02:44:08.524Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Openvpn服务器搭建">
+<meta name="twitter:description" content="一、前期准备1.1 概述OpenVPN 是一个基于 OpenSSL 库的应用层 VPN 实现，和传统 VPN 相比，它的优点是简单易用、安全稳定。此次基于centos7.3系统编译安装，使用udp协议自定义端口，搭建的目的是为了能实现通过证书+账户密码双重认证的方法，登录到阿里云VPC内部，对服务器进行配置管理。  1.2 准备工具文件">
+  <link rel="canonical" href="http://loverbook.cn/2019/05/20/Openvpnserver/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Openvpn服务器搭建 | Book's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Book's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+    
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://loverbook.cn/2019/05/20/Openvpnserver/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Book Jiang">
+      <meta itemprop="description" content="每天进步一点点">
+      <meta itemprop="image" content="/images/book.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Book's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Openvpn服务器搭建
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-20 02:15:28" itemprop="dateCreated datePublished" datetime="2019-05-20T02:15:28+08:00">2019-05-20</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-14 10:44:08" itemprop="dateModified" datetime="2019-09-14T10:44:08+08:00">2019-09-14</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>10k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>9 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="一、前期准备"><a href="#一、前期准备" class="headerlink" title="一、前期准备"></a>一、前期准备</h2><h3 id="1-1-概述"><a href="#1-1-概述" class="headerlink" title="1.1 概述"></a>1.1 概述</h3><pre><code>OpenVPN 是一个基于 OpenSSL 库的应用层 VPN 实现，和传统 VPN 相比，它的优点是简单易用、安全稳定。此次基于centos7.3系统编译安装，使用udp协议自定义端口，搭建的目的是为了能实现通过证书+账户密码双重认证的方法，登录到阿里云VPC内部，对服务器进行配置管理。</code></pre><br>
+
+<h3 id="1-2-准备工具文件"><a href="#1-2-准备工具文件" class="headerlink" title="1.2 准备工具文件"></a>1.2 准备工具文件</h3><a id="more"></a>
+<pre><code>Easy-rsa.zip  //秘钥制作工具
+Lzo-2.0.6.tar.gz  //依赖包
+Openvpn-2.3.3.tar.gz  //安装包 </code></pre><br>
+
+<h3 id="二、安装Openvpn"><a href="#二、安装Openvpn" class="headerlink" title="二、安装Openvpn"></a>二、安装Openvpn</h3><h4 id="2-1-安装依赖包"><a href="#2-1-安装依赖包" class="headerlink" title="2.1 安装依赖包"></a>2.1 安装依赖包</h4><p><code>pam-devel是安装openvpn必要的依赖包</code></p>
+<pre><code>[root@test ~]# yum  -y  install  unzip ntpdate  pam-devel  openssl  openssl-devel</code></pre><br>
+
+<h4 id="2-2-上传包文件"><a href="#2-2-上传包文件" class="headerlink" title="2.2 上传包文件"></a>2.2 上传包文件</h4><pre><code>通过ssh连接上openvpn服务器，把3个文件拷贝到/usr/local/目录下，并分别解压
+[root@test local]# unzip  easy-rsa.zip           #asy-rsa证书制作工具
+[root@test local]# tar  -zxvf   lzo-2.06.tar.gz    #lzo-2.0.6.tar.gz依赖包
+[root@test local]# tar  -zxvf   openvpn-2.3.3.tar.gz  </code></pre><br>
+
+<h4 id="2-3-创建安装目录"><a href="#2-3-创建安装目录" class="headerlink" title="2.3 创建安装目录"></a>2.3 创建安装目录</h4><pre><code>[root@test local]# mkdir  -p  /usr/local/openvpn/conf   #于存放配置文件
+[root@test local]# mkdir  –p  /usr/local/openvpn/log    #于存放日志文件
+[root@test local]# mkdir  -p  /usr/local/openvpn/easy-rsa  #密钥生成工具及密钥</code></pre><br>
+
+<h4 id="2-4-开始安装openvpn"><a href="#2-4-开始安装openvpn" class="headerlink" title="2.4 开始安装openvpn"></a>2.4 开始安装openvpn</h4><p><code>进入/usr/local/目录下:</code></p>
+<pre><code>[root@test local]# cd   lzo-2.06
+[root@test lzo-2.06]# ./configure --prefix=/usr   #装依赖库
+[root@test lzo-2.06]#make  &amp;&amp;  make  install
+[root@test lzo-2.06]#  /sbin/ldconfig         #置运行时动态链接库
+[root@test local]# cd  openvpn-2.3.3
+[root@test openvpn-2.3.3]# ./configure --prefix=/usr/local/openvpn/
+[root@test openvpn-2.3.3]# make  &amp;&amp;  make  install
+[root@testopenvpn-2.3.3]#cd  sample/sample-config-files/
+[root@test sample-config-files]# cp server.conf  /usr/local/openvpn/conf/ #贝配置文件
+[root@test local]# cd  easy-rsa/2.0/
+[root@test 2.0]# cp  -rf  *  /usr/local/openvpn/easy-rsa/
+[root@test 2.0]# cd  /usr/local/openvpn/easy-rsa/
+[root@test easy-rsa]# chmod  +x  *  </code></pre><br>
+
+<h3 id="三、配置openvpn"><a href="#三、配置openvpn" class="headerlink" title="三、配置openvpn"></a>三、配置openvpn</h3><h4 id="3-1-配置Vars文件及生成服务端证书"><a href="#3-1-配置Vars文件及生成服务端证书" class="headerlink" title="3.1 配置Vars文件及生成服务端证书"></a>3.1 配置Vars文件及生成服务端证书</h4><pre><code>[root@test ~]# cd  /usr/local/openvpn/easy-rsa/
+[root@test easy-rsa]# vim   vars    #配置vars文件（证书的默认配置）
+export KEY_SIZE=2048                   #加密位数，太大增加CPU负载
+export CA_EXPIRE=3650                  #证书有效期，这里是10年
+export KEY_EXPIRE=365                  #秘钥有效期
+export KEY_COUNTRY=&quot;CN&quot;              #国家
+export KEY_PROVINCE=&quot;SH&quot;              #省份
+export KEY_CITY=&quot;Shanghai&quot;             #所在城市
+export KEY_ORG=&quot;JiaFu&quot;                # 组织单位
+export KEY_EMAIL=&quot;support@jia-fu.cn&quot;    #邮箱地址
+export KEY_OU=&quot;Yunwei&quot;                #组织容器可以随便填写
+export KEY_NAME=&quot;VPNServer&quot;          #名称可以随便填写
+[root@test easy-rsa]# source  vars         #使配置生效
+下面开始制作根证书CA:
+[root@test easy-rsa]# ./clean-all           #初始化
+[root@test easy-rsa]# ./build-ca           #创建根证书，一路回车
+Generating a 2048 bit RSA private key
+..................................+++
+...............................+++
+writing new private key to &#39;ca.key&#39;
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter &#39;.&#39;, the field will be left blank.
+-----
+Country Name (2 letter code) [CN]:  
+State or Province Name (full name) [SH]: 
+Locality Name (eg, city) [Shanghai]: 
+Organization Name (eg, company) [JiaFu]: 
+Organizational Unit Name (eg, section) [Yunwei]: 
+Common Name (eg, your name or your server&#39;s hostname) [JiaFu CA]: 
+Name [EasyServer]: 
+Email Address [support@jia-fu.cn]: 
+创建服务器端证书server和秘钥:
+[root@test easy-rsa]# ./build-key-server server   #一路回车默认，最后输入y确认
+Generating a 2048 bit RSA private key
+...........+++
+....+++
+writing new private key to &#39;server.key&#39;
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter &#39;.&#39;, the field will be left blank.
+-----
+Country Name (2 letter code) [CN]:
+State or Province Name (full name) [SH]:
+Locality Name (eg, city) [Shanghai]:
+Organization Name (eg, company) [JiaFu]:
+Organizational Unit Name (eg, section) [Yunwei]:
+Common Name (eg, your name or your server&#39;s hostname) [server]:
+Name [EasyServer]:
+Email Address [support@jia-fu.cn]:
+
+Please enter the following &#39;extra&#39; attributes
+to be sent with your certificate request
+A challenge password []:
+An optional company name []:
+Using configuration from /usr/local/openvpn/easy-rsa/openssl-1.0.0.cnf
+Check that the request matches the signature
+Signature ok
+The Subject&#39;s Distinguished Name is as follows
+countryName           :PRINTABLE:&#39;CN&#39;
+stateOrProvinceName   :PRINTABLE:&#39;SH&#39;
+localityName          :PRINTABLE:&#39;Shanghai&#39;
+organizationName      :PRINTABLE:&#39;JiaFu&#39;
+organizationalUnitName:PRINTABLE:&#39;Yunwei&#39;
+commonName            :PRINTABLE:&#39;server&#39;
+name                  :PRINTABLE:&#39;EasyServer&#39;
+emailAddress          :IA5STRING:&#39;support@jia-fu.cn&#39;
+Certificate is to be certified until Apr 15 15:35:32 2019 GMT (365 days)
+Sign the certificate? [y/n]:y         #输入y
+1 out of 1 certificate requests certified, commit? [y/n] y   #输入y
+Write out database with 1 new entries
+[root@test easy-rsa]# ./build-dh  #创建dh2048加密协商文件
+[root@test easy-rsa]# 
+[root@testeasy-rsa]#../sbin/openvpn  --genkey  --secret /usr/local/openvpn/easy-rsa/keys/ta.key   #生成防Dos攻击的文件</code></pre><br>
+
+<h4 id="3-2-配置openvpn-server文件"><a href="#3-2-配置openvpn-server文件" class="headerlink" title="3.2 配置openvpn server文件"></a>3.2 配置openvpn server文件</h4><pre><code>[root@test ~]# vim  /usr/local/openvpn/conf/server.conf
+Local  172.16.10.12    #本机监听地址
+port  2294           #自定义端口号
+proto udp            #使用udp协议
+dev tun              #tun是ip层的点对点协议,建议使用tun
+#证书若没放在conf下，需要指定路径
+ca  /usr/local/openvpn/easy-rsa/keys/ca.crt 
+cert  /usr/local/openvpn/easy-rsa/keys/server.crt
+key /usr/local/openvpn/easy-rsa/keys/server.key  # This file should be kept secret
+dh  /usr/local/openvpn/easy-rsa/keys/dh2048.pem
+server  20.8.8.0 255.255.255.0    #服务器vpn网段地址
+#防止openvpn重新启动后“忘记”Client曾经使用过的IP地址
+ifconfig-pool-persist /usr/local/openvpn/log/ipp.txt 
+#通过VPN Server往Client push路由，client通过pull指令获得 
+push &quot;route 20.8.8.0  255.255.255.0&quot;
+push &quot;route 172.16.10.0 255.255.255.0&quot;
+push &quot;dhcp-option DNS 223.5.5.5&quot;    #指定DNS地址
+push &quot;dhcp-option DNS 8.8.8.8&quot;
+client-to-client
+#和keys连接VPN，一定要打开这个选项，否则只允许一个人连接VPN
+duplicate-cn
+keepalive 10 120         
+comp-lzo          #对数据进行压缩
+max-clients 10      #支持客户端数
+通过keepalive检测超时后，重新启动VPN，不重新读取keys，保留第一次使用的keys
+persist-key
+#通过keepalive检测超时后，重新启动VPN，一直保持tun或者tap设备是linkup的，否则网络连接会先linkdown然后linkup
+persist-tun   
+status  /usr/local/openvpn/log/openvpn-status.log  #日志路径
+log-append  /usr/local/openvpn/log/openvpn.log
+verb 3</code></pre><br>
+### 四、用户密码+证书验证配置
+#### 4.1 创建客户端用户
+```
+[root@test ~]# cd  /usr/local/openvpn/easy-rsa/
+[root@test easy-rsa]# ./build-key  jianglei   #创建用户jianglei，方法同server端
+```
+
+<pre><code>备注：执行后会在keys文件夹下，生成3个文件，jianglei.crt、jianglei.csr（mac电脑不需要这个文件）、jianglei.key，另外加上同目录下的ca.crt、ca.key、ta.key和dh2048.pem这7个文件一起打包，即是客户端所需要的所有文件，添加其它用户也是同样的方法</code></pre><br>
+
+<h4 id="4-2-配置账户密码验证"><a href="#4-2-配置账户密码验证" class="headerlink" title="4.2 配置账户密码验证"></a>4.2 配置账户密码验证</h4><pre><code>[root@test ~]# vi /usr/local/openvpn/conf/server.conf  #配置文件中加上以下几行
+tls-auth  /usr/local/openvpn/easy-rsa/keys/ta.key 0  #server端是0 ,客户端为1
+auth-user-pass-verify   /usr/local/openvpn/easy-rsa/checkpsw.sh  via-env 
+#密码验证的脚本文件放在此目录下，稍后创建脚本
+script-security 3
+username-as-common-name 
+;client-cert-not-required  #如果只想账户密码验证，就开启这句
+创建脚本文件：checkpsw.sh</code></pre><pre><code>#!/bin/sh
+###########################################################
+# checkpsw.sh (C) 2004 Mathias Sundman &lt;mathias@openvpn.se&gt;
+#
+# This script will authenticate OpenVPN users against
+# a plain text file. The passfile should simply contain
+# one row per user with the username first followed by
+# one or more space(s) or tab(s) and then the password.
+PASSFILE=&quot;/usr/local/openvpn/easy-rsa/psw-file&quot; //指定保存账户和密码的文件
+LOG_FILE=&quot;/usr/local/openvpn/log/openvpn-password.log&quot;//保存日志文件
+TIME_STAMP=`date &quot;+%Y-%m-%d %T&quot;`
+###########################################################
+if [ ! -r &quot;${PASSFILE}&quot; ]; then
+echo &quot;${TIME_STAMP}: Could not open password file \&quot;${PASSFILE}\&quot; for reading.&quot; &gt;&gt; ${LOG_FILE}
+exit 1
+fi
+CORRECT_PASSWORD=`awk &#39;!/^;/&amp;&amp;!/^#/&amp;&amp;$1==&quot;&#39;${username}&#39;&quot;{print $2;exit}&#39; ${PASSFILE}`
+if [ &quot;${CORRECT_PASSWORD}&quot; = &quot;&quot; ]; then
+echo &quot;${TIME_STAMP}: User does not exist: username=\&quot;${username}\&quot;, password=\&quot;${password}\&quot;.&quot; &gt;&gt; ${LOG_FILE}
+exit 1
+fi
+if [ &quot;${password}&quot; = &quot;${CORRECT_PASSWORD}&quot; ]; then
+echo &quot;${TIME_STAMP}: Successful authentication: username=\&quot;${username}\&quot;.&quot; &gt;&gt; ${LOG_FILE}
+exit 0
+fi
+echo &quot;${TIME_STAMP}: Incorrect password: username=\&quot;${username}\&quot;, password=\&quot;${password}\&quot;.&quot; &gt;&gt; ${LOG_FILE}
+exit 1</code></pre><pre><code>创建保存账户密码的文件： psw-file
+[root@test easy-rsa]#vi  psw-file
+Jianglei    Jianglei123  //账户+空格+密码格式保存</code></pre><br>
+
+<h4 id="4-3-注销用户客户端"><a href="#4-3-注销用户客户端" class="headerlink" title="4.3  注销用户客户端"></a>4.3  注销用户客户端</h4><p><code>如果同事离职了，需要注销证书</code></p>
+<pre><code>[root@test easy-rsa]# ./revoke-full jianglei   //注销用户jianglei
+这个时候还是可以利用此证书登录服务器的，在server.conf下增加一行
+crl-verify  /usr/local/openvpn/easy-rsa/keys/crl.pem
+再重启下openvpn服务即可</code></pre><br>
+
+<h4 id="4-4-启动openvpn"><a href="#4-4-启动openvpn" class="headerlink" title="4.4  启动openvpn"></a>4.4  启动openvpn</h4><pre><code>[root@test~]# /usr/local/openvpn/sbin/openvpn   --config  /usr/local/openvpn/conf/server.conf   &amp;
+[root@test~]#ps –ef |grep openvpn
+root      1013     1  0 Apr13 ?   00:00:04 /usr/local/openvpn/sbin/openvpn --config /usr/local/openvpn/conf/server.conf  
+[root@test~]# netstat  -ntlup  //由此可见端口已在监听
+Udp 0 0 172.16.10.12:2294    0.0.0.0:*        1013/openvpn</code></pre><br>
+
+<h3 id="五、配置防火墙"><a href="#五、配置防火墙" class="headerlink" title="五、配置防火墙"></a>五、配置防火墙</h3><h4 id="5-1-开启路由转发"><a href="#5-1-开启路由转发" class="headerlink" title="5.1  开启路由转发"></a>5.1  开启路由转发</h4><pre><code>[root@test ~]# vim /etc/sysctl.conf
+net.ipv4.ip_forward = 1  #将值改为1保存
+[root@test ~]# sysctl   -p  #执行生效</code></pre><br>
+
+<h4 id="5-2-配置iptables-NAT转发"><a href="#5-2-配置iptables-NAT转发" class="headerlink" title="5.2  配置iptables NAT转发"></a>5.2  配置iptables NAT转发</h4><pre><code>[root@test ~]# systemctl  stop  firewalld.service
+[root@test ~]# systemctl  disable  firewalld.service
+[root@test ~]# yum install -y iptables-services
+[root@test ~]# systemctl enable iptables
+[root@test ~]# iptables  -F   #清空iptables配置规则
+[root@test ~]# iptables  -X
+[root@test ~]# iptables  -P OUTPUT  ACCEPT 
+[root@test ~]# iptables  -P  FORWARD  ACCEPT
+[root@test ~]# iptables  -A INPUT  -i  lo  -j  ACCEPT 
+[root@test ~]# iptables  -A OUTPUT  -o  lo  -j  ACCEPT
+[root@test ~]#iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+[root@test ~]# iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+[root@test ~]# iptables -A INPUT -p udp --dport 2294 -j ACCEPT 
+#对vpn网段进行转发
+[root@test ~]# iptables -t nat -A POSTROUTING -o eth0 -s 20.8.8.0/24 -j MASQUERADE
+#把内部主机端口的流量指定到出口ip
+[root@test ~]# iptables -t nat  -A PREROUTING -s 100.100.100.100 -p udp -m udp --dport 2294 -j DNAT --to-destination 172.16.10.12:2294  
+[root@test ~]#service  iptables  save
+[root@test ~]#service  iptables  restart</code></pre><br>
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/网络/" rel="tag"># 网络</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/08/22/test/" rel="prev" title="test">
+                  test <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、前期准备"><span class="nav-number">1.</span> <span class="nav-text">一、前期准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-概述"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-准备工具文件"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 准备工具文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、安装Openvpn"><span class="nav-number">1.3.</span> <span class="nav-text">二、安装Openvpn</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-安装依赖包"><span class="nav-number">1.3.1.</span> <span class="nav-text">2.1 安装依赖包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-上传包文件"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.2 上传包文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-创建安装目录"><span class="nav-number">1.3.3.</span> <span class="nav-text">2.3 创建安装目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-开始安装openvpn"><span class="nav-number">1.3.4.</span> <span class="nav-text">2.4 开始安装openvpn</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、配置openvpn"><span class="nav-number">1.4.</span> <span class="nav-text">三、配置openvpn</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-配置Vars文件及生成服务端证书"><span class="nav-number">1.4.1.</span> <span class="nav-text">3.1 配置Vars文件及生成服务端证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-配置openvpn-server文件"><span class="nav-number">1.4.2.</span> <span class="nav-text">3.2 配置openvpn server文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-配置账户密码验证"><span class="nav-number">1.4.3.</span> <span class="nav-text">4.2 配置账户密码验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-注销用户客户端"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.3  注销用户客户端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4-启动openvpn"><span class="nav-number">1.4.5.</span> <span class="nav-text">4.4  启动openvpn</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、配置防火墙"><span class="nav-number">1.5.</span> <span class="nav-text">五、配置防火墙</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-开启路由转发"><span class="nav-number">1.5.1.</span> <span class="nav-text">5.1  开启路由转发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-配置iptables-NAT转发"><span class="nav-number">1.5.2.</span> <span class="nav-text">5.2  配置iptables NAT转发</span></a></li></ol></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/book.jpg"
+      alt="Book Jiang">
+  <p class="site-author-name" itemprop="name">Book Jiang</p>
+  <div class="site-description" itemprop="description">每天进步一点点</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Book Jiang</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">12k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">11 分钟</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/muse.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
