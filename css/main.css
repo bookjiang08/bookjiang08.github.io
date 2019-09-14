@@ -1753,7 +1753,7 @@ article:last-child .post-eof {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff59c4;
+  background: #57b3b1;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2693,17 +2693,36 @@ margin-left
   z-index: 9999;
   border-radius: 0.5em;
 }
-.btn {
-  margin-top: 2em;
+.post {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  padding: 25px;
+  -webkit-box-shadow: 0 0 5px rgba(202,203,203,0.5);
+  -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
 }
-.back-to-top {
-  line-height: 1.5;
-  right: 10px;
-  padding-right: 0.5em;
-  padding-left: 0.5em;
-  padding-top: 0.25em;
-  padding-bottom: 0.25em;
-  background-color: rgba(34,34,34,0.75);
-  border-radius: 0.5em;
-  box-shadow: 0px 0px 0.1em 0px rgba(0,0,0,0.35);
+.post-body p a {
+  color: #1c86ee;
+  border-bottom: none;
+  border-bottom: 1px solid #1c86ee;
+}
+.post-body p a:hover {
+  color: #fc6423;
+  border-bottom: none;
+  border-bottom: 1px solid #fc6423;
+}
+::selection {
+  background: #00c4b6;
+  color: #f7f7f7;
+}
+::-moz-selection {
+  background: #00c4b6;
+  color: #f7f7f7;
+}
+.post-nav-item a {
+  position: relative;
+  display: block;
+  line-height: 2em;
+  font-size: 1em;
+  color: #008000;
+  border-bottom: none;
 }
