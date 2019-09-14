@@ -1661,6 +1661,13 @@ article:last-child .post-eof {
 #qr p {
   text-align: center;
 }
+.post-copyright {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff1700;
+  list-style: none;
+  margin: 2em 0 0;
+  padding: 0.5em 1em;
+}
 .sidebar {
   background: #222;
   bottom: 0;
@@ -1746,7 +1753,7 @@ article:last-child .post-eof {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #175de2;
+  background: #ff59c4;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2672,4 +2679,31 @@ hr {
     text-align: center;
     width: auto;
   }
+}
+.local-search-popup {
+  display: none;
+  position: fixed;
+  top: 10%;
+left
+margin-left
+  height: 80%;
+  padding: 0;
+  background: rgba(0,0,0,0.671);
+  color: #000;
+  z-index: 9999;
+  border-radius: 0.5em;
+}
+.btn {
+  margin-top: 2em;
+}
+.back-to-top {
+  line-height: 1.5;
+  right: 10px;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  background-color: rgba(34,34,34,0.75);
+  border-radius: 0.5em;
+  box-shadow: 0px 0px 0.1em 0px rgba(0,0,0,0.35);
 }
