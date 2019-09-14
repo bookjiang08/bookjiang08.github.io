@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="Book&#39;s blog">
 <meta property="og:description" content="一、前期准备1.1 概述OpenVPN 是一个基于 OpenSSL 库的应用层 VPN 实现，和传统 VPN 相比，它的优点是简单易用、安全稳定。此次基于centos7.3系统编译安装，使用udp协议自定义端口，搭建的目的是为了能实现通过证书+账户密码双重认证的方法，登录到阿里云VPC内部，对服务器进行配置管理。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-14T03:42:51.363Z">
+<meta property="og:updated_time" content="2019-09-14T03:48:11.868Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Openvpn服务器搭建">
 <meta name="twitter:description" content="一、前期准备1.1 概述OpenVPN 是一个基于 OpenSSL 库的应用层 VPN 实现，和传统 VPN 相比，它的优点是简单易用、安全稳定。此次基于centos7.3系统编译安装，使用udp协议自定义端口，搭建的目的是为了能实现通过证书+账户密码双重认证的方法，登录到阿里云VPC内部，对服务器进行配置管理。">
@@ -284,7 +284,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-14 11:42:51" itemprop="dateModified" datetime="2019-09-14T11:42:51+08:00">2019-09-14</time>
+                <time title="修改时间：2019-09-14 11:48:11" itemprop="dateModified" datetime="2019-09-14T11:48:11+08:00">2019-09-14</time>
               </span>
             
           
@@ -342,11 +342,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="一、前期准备"><a href="#一、前期准备" class="headerlink" title="一、前期准备"></a>一、前期准备</h3><h3 id="1-1-概述"><a href="#1-1-概述" class="headerlink" title="1.1 概述"></a>1.1 概述</h3><pre><code>OpenVPN 是一个基于 OpenSSL 库的应用层 VPN 实现，和传统 VPN 相比，它的优点是简单易用、安全稳定。此次基于centos7.3系统编译安装，使用udp协议自定义端口，搭建的目的是为了能实现通过证书+账户密码双重认证的方法，登录到阿里云VPC内部，对服务器进行配置管理。</code></pre><br>
+        <h3 id="一、前期准备"><a href="#一、前期准备" class="headerlink" title="一、前期准备"></a>一、前期准备</h3><h4 id="1-1-概述"><a href="#1-1-概述" class="headerlink" title="1.1 概述"></a>1.1 概述</h4><pre><code>OpenVPN 是一个基于 OpenSSL 库的应用层 VPN 实现，和传统 VPN 相比，它的优点是简单易用、安全稳定。此次基于centos7.3系统编译安装，使用udp协议自定义端口，搭建的目的是为了能实现通过证书+账户密码双重认证的方法，登录到阿里云VPC内部，对服务器进行配置管理。</code></pre><br>
 
 <a id="more"></a>
 
-<h3 id="1-2-准备工具文件"><a href="#1-2-准备工具文件" class="headerlink" title="1.2 准备工具文件"></a>1.2 准备工具文件</h3><pre><code>Easy-rsa.zip  //秘钥制作工具
+<h4 id="1-2-准备工具文件"><a href="#1-2-准备工具文件" class="headerlink" title="1.2 准备工具文件"></a>1.2 准备工具文件</h4><pre><code>Easy-rsa.zip  //秘钥制作工具
 Lzo-2.0.6.tar.gz  //依赖包
 Openvpn-2.3.3.tar.gz  //安装包 </code></pre><br>
 
@@ -648,7 +648,7 @@ net.ipv4.ip_forward = 1  #将值改为1保存
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、前期准备"><span class="nav-text">一、前期准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-概述"><span class="nav-text">1.1 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-准备工具文件"><span class="nav-text">1.2 准备工具文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、安装Openvpn"><span class="nav-text">二、安装Openvpn</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-安装依赖包"><span class="nav-text">2.1 安装依赖包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-上传包文件"><span class="nav-text">2.2 上传包文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-创建安装目录"><span class="nav-text">2.3 创建安装目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-开始安装openvpn"><span class="nav-text">2.4 开始安装openvpn</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、配置openvpn"><span class="nav-text">三、配置openvpn</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-配置Vars文件及生成服务端证书"><span class="nav-text">3.1 配置Vars文件及生成服务端证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-配置openvpn-server文件"><span class="nav-text">3.2 配置openvpn server文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、用户密码-证书验证配置"><span class="nav-text">四、用户密码+证书验证配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-创建客户端用户"><span class="nav-text">4.1 创建客户端用户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-配置账户密码验证"><span class="nav-text">4.2 配置账户密码验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-注销用户客户端"><span class="nav-text">4.3  注销用户客户端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4-启动openvpn"><span class="nav-text">4.4  启动openvpn</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、配置防火墙"><span class="nav-text">五、配置防火墙</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-开启路由转发"><span class="nav-text">5.1  开启路由转发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-配置iptables-NAT转发"><span class="nav-text">5.2  配置iptables NAT转发</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、前期准备"><span class="nav-text">一、前期准备</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-概述"><span class="nav-text">1.1 概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-准备工具文件"><span class="nav-text">1.2 准备工具文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、安装Openvpn"><span class="nav-text">二、安装Openvpn</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-安装依赖包"><span class="nav-text">2.1 安装依赖包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-上传包文件"><span class="nav-text">2.2 上传包文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-创建安装目录"><span class="nav-text">2.3 创建安装目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-开始安装openvpn"><span class="nav-text">2.4 开始安装openvpn</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、配置openvpn"><span class="nav-text">三、配置openvpn</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-配置Vars文件及生成服务端证书"><span class="nav-text">3.1 配置Vars文件及生成服务端证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-配置openvpn-server文件"><span class="nav-text">3.2 配置openvpn server文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、用户密码-证书验证配置"><span class="nav-text">四、用户密码+证书验证配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-创建客户端用户"><span class="nav-text">4.1 创建客户端用户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-配置账户密码验证"><span class="nav-text">4.2 配置账户密码验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-注销用户客户端"><span class="nav-text">4.3  注销用户客户端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4-启动openvpn"><span class="nav-text">4.4  启动openvpn</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、配置防火墙"><span class="nav-text">五、配置防火墙</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-开启路由转发"><span class="nav-text">5.1  开启路由转发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-配置iptables-NAT转发"><span class="nav-text">5.2  配置iptables NAT转发</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
