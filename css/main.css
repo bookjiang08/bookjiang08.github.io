@@ -1769,7 +1769,7 @@ article:last-child .post-eof {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #63ffb6;
+  background: #9a58d7;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2749,37 +2749,14 @@ span.exturl {
   color: #008000;
   border-bottom: none;
 }
-.highlight {
-  position: relative;
+.sidebar {
+  background: url("/images/start.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
-.btn-copy {
-  display: inline-block;
-  cursor: pointer;
-  background-color: #eee;
-  background-image: linear-gradient(#fcfcfc, #eee);
-  border: 1px solid #d5d5d5;
-  border-radius: 3px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-appearance: none;
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 20px;
-  color: #333;
-  -webkit-transition: opacity 0.3s ease-in-out;
-  -o-transition: opacity 0.3s ease-in-out;
-  transition: opacity 0.3s ease-in-out;
-  padding: 2px 6px;
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  opacity: 0;
-}
-.btn-copy span {
-  margin-left: 5px;
-}
-.highlight:hover .btn-copy {
-  opacity: 1;
+.sidebar p,
+.sidebar span,
+.sidebar a {
+  color: #fff;
 }
