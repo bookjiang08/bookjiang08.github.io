@@ -1753,7 +1753,7 @@ article:last-child .post-eof {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #57b3b1;
+  background: #ff6228;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2711,12 +2711,32 @@ margin-left
   border-bottom: 1px solid #fc6423;
 }
 ::selection {
-  background: #00c4b6;
+  background: #ffc0cb;
   color: #f7f7f7;
 }
 ::-moz-selection {
   background: #00c4b6;
   color: #f7f7f7;
+}
+.post-copyright {
+  margin: 2em 0 0;
+  padding: 0.5em 1em;
+  border-left: 0.3em solid #ff1700;
+  background-color: rgba(249,249,249,0);
+  list-style: none;
+}
+a,
+span.exturl {
+  overflow-wrap: break-word;
+  overflow-wrap: break-word;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  background-color: transparent;
+  color: #000;
+  text-decoration: none;
+  outline: none;
+  border-bottom: 1.3px solid #ffc0cb;
+  cursor: pointer;
 }
 .post-nav-item a {
   position: relative;
