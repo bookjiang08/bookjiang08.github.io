@@ -57,15 +57,19 @@
   };
 </script>
 
-  <meta property="og:type" content="article">
-<meta property="og:title" content="Read me">
-<meta property="og:url" content="http://loverbook.cn/2019/05/20/README/index.html">
+  <meta name="description" content="一、准备1.1 准备工具当拿到一台新的思科交换机，开始动手配置，目标实现远程登陆和管理  硬件：笔记本、Console配置线、交换机Cisco3560一台  软件：SecureCRT">
+<meta name="keywords" content="网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cisco switch配置管理">
+<meta property="og:url" content="http://loverbook.cn/2019/07/25/cisco-switch/index.html">
 <meta property="og:site_name" content="Book&#39;s blog">
+<meta property="og:description" content="一、准备1.1 准备工具当拿到一台新的思科交换机，开始动手配置，目标实现远程登陆和管理  硬件：笔记本、Console配置线、交换机Cisco3560一台  软件：SecureCRT">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-15T02:16:09.925Z">
+<meta property="og:updated_time" content="2019-09-15T15:19:56.876Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Read me">
-  <link rel="canonical" href="http://loverbook.cn/2019/05/20/README/">
+<meta name="twitter:title" content="Cisco switch配置管理">
+<meta name="twitter:description" content="一、准备1.1 准备工具当拿到一台新的思科交换机，开始动手配置，目标实现远程登陆和管理  硬件：笔记本、Console配置线、交换机Cisco3560一台  软件：SecureCRT">
+  <link rel="canonical" href="http://loverbook.cn/2019/07/25/cisco-switch/">
 
 
 <script id="page-configurations">
@@ -79,7 +83,7 @@
   };
 </script>
 
-  <title>Read me | Book's blog</title>
+  <title>Cisco switch配置管理 | Book's blog</title>
   
 
 
@@ -243,7 +247,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="http://loverbook.cn/2019/05/20/README/">
+    <link itemprop="mainEntityOfPage" href="http://loverbook.cn/2019/07/25/cisco-switch/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Book Jiang">
@@ -255,7 +259,7 @@
       <meta itemprop="name" content="Book's blog">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Read me
+        <h1 class="post-title" itemprop="name headline">Cisco switch配置管理
 
           
         </h1>
@@ -271,7 +275,7 @@
                 
               
 
-              <time title="创建时间：2019-05-20 12:30:28" itemprop="dateCreated datePublished" datetime="2019-05-20T12:30:28+08:00">2019-05-20</time>
+              <time title="创建时间：2019-07-25 13:38:00" itemprop="dateCreated datePublished" datetime="2019-07-25T13:38:00+08:00">2019-07-25</time>
             </span>
           
             
@@ -282,7 +286,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-15 10:16:09" itemprop="dateModified" datetime="2019-09-15T10:16:09+08:00">2019-09-15</time>
+                <time title="修改时间：2019-09-15 23:19:56" itemprop="dateModified" datetime="2019-09-15T23:19:56+08:00">2019-09-15</time>
               </span>
             
           
@@ -292,7 +296,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/book/" itemprop="url" rel="index"><span itemprop="name">book</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
 
                 
                 
@@ -319,7 +323,7 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/05/20/README/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/05/20/README/" itemprop="commentCount"></span></a>
+    <a title="valine" href="/2019/07/25/cisco-switch/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/07/25/cisco-switch/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -331,7 +335,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>0</span>
+              <span>5k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -341,7 +345,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span>1 分钟</span>
+              <span>5 分钟</span>
             </span>
           
 
@@ -354,11 +358,134 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <a id="more"></a>
+        <h3 id="一、准备"><a href="#一、准备" class="headerlink" title="一、准备"></a>一、准备</h3><h4 id="1-1-准备工具"><a href="#1-1-准备工具" class="headerlink" title="1.1 准备工具"></a>1.1 准备工具</h4><p><code>当拿到一台新的思科交换机，开始动手配置，目标实现远程登陆和管理</code></p>
+<pre><code> 硬件：笔记本、Console配置线、交换机Cisco3560一台
+ 软件：SecureCRT</code></pre><a id="more"></a>
+<br>
 
+<h4 id="1-2-连接交换机"><a href="#1-2-连接交换机" class="headerlink" title="1.2 连接交换机"></a>1.2 连接交换机</h4><pre><code>首先在“计算机”----“管理”----“设备管理器”中查看com口的编号(本例为com3口)
+然后打开SecureCRT软件，添加连接：
+协议：Serial
+端口：com3
+波特率：9600</code></pre><p><code>成功连接之后开始进行配置</code>    </p>
+<br>
 
+<h3 id="二、交换机配置管理"><a href="#二、交换机配置管理" class="headerlink" title="二、交换机配置管理"></a>二、交换机配置管理</h3><h4 id="2-1、配置登录用户、密码及SSH连接"><a href="#2-1、配置登录用户、密码及SSH连接" class="headerlink" title="2.1、配置登录用户、密码及SSH连接"></a>2.1、配置登录用户、密码及SSH连接</h4><pre><code>Switch#configure terminal       //进入配置模式
+Switch(config)# ip domain-name loverbook.com //在生成加密密码时需要用到用户名和域名
+Switch(config)#crypto key generate rsa   //生成加密密钥
+The name for the keys will be: Switch.loverbook.com
+Choose the size of the key modulus in the range of 360 to 2048 for your General Purpose Keys. Choosing a key modulus greater than 512 may takea few minutes.
+How many bits in the modulus [512]: 1024   //生成一个rsa算法的密钥，密钥为1024位
+% Generating 1024 bit RSA keys, keys will be non-exportable...[OK]
+Switch(config)#line vty 0 15   //进入vty模式
+Switch(config-line)#transport input none  //取消任何登录方式
+Switch(config-line)#transport input ssh  //只允许ssh登录
+Switch(config-line)#exit  //退出vty
+Switch(config)#aaa new-mode   //开启AAA认证
+Switch(config)#aaa authentication login default local  //本地认证
+Switch(config)# username admin privilege 15 password admin //创建一个用户和密码
+Switch(config)#ip ssh version 2 //启用ssh版本号
+Switch#sh ip ssh   //查看自己配置的ssh
+SSH Enabled - version 2.0
+Authentication timeout: 120 secs; Authentication retries: 3</code></pre><br>
 
+<h4 id="2-2-为交换机配置远程管理IP地址："><a href="#2-2-为交换机配置远程管理IP地址：" class="headerlink" title="2.2 为交换机配置远程管理IP地址："></a>2.2 为交换机配置远程管理IP地址：</h4><pre><code>BOOK#conf  t
+BOOK(config)#int vlan 1  //进入默认vlan 1（把交换机第一口划到vlan1中，连接上层设备）
+BOOK(config-if)#ip address 192.168.1.1  255.255.255.0  //配置管理地址，即可在客户端用新建的用户及密码SSH登录</code></pre><br>
 
+<h4 id="2-3-配置交换机名字及enable用户模式密码"><a href="#2-3-配置交换机名字及enable用户模式密码" class="headerlink" title="2.3 配置交换机名字及enable用户模式密码"></a>2.3 配置交换机名字及enable用户模式密码</h4><pre><code>Switch#configure terminal  
+Switch(config)#hostname  BOOK     //配置交换机名称
+BOOK(config)#enable secret BOOK    //配置用户模式密码
+Switch(config)#service password-encryption   //对所有设置的密码进行加密，可以不配置</code></pre><br>
+
+<h4 id="2-4-端口及vlan的配置管理"><a href="#2-4-端口及vlan的配置管理" class="headerlink" title="2.4 端口及vlan的配置管理"></a>2.4 端口及vlan的配置管理</h4><ul>
+<li>常用<code>show int status</code>查看端口状态:<code>connected、disable、notconnect</code>三种状态</li>
+</ul>
+<ul>
+<li>创建和删除vlan （以实际办公网段为准）</li>
+</ul>
+<pre><code>BOOK#conf  t        
+BOOK(config)#vlan 12    //创建12网段
+BOOK(config-vlan)#no shutdown  //默认创建好就是开启的，这步可以省略
+BOOK(config)# no  vlan  12   //删除12网段</code></pre><ul>
+<li>端口配置</li>
+</ul>
+<pre><code>BOOK#conf  t
+BOOK(config)#int fa0/2   //进入端口2
+BOOK(config-if)#switchport mode access  //把端口设置为access普通端口
+BOOK(config-if)#shutdown    //端口关闭
+BOOK(config-if)#no shutdown  //端口打开
+BOOK(config-if)#switchport  access  vlan  12 //把2端口加入12网段</code></pre><br>
+
+<h4 id="2-5-开启三层路由及静态路由配置"><a href="#2-5-开启三层路由及静态路由配置" class="headerlink" title="2.5. 开启三层路由及静态路由配置"></a>2.5. 开启三层路由及静态路由配置</h4><p>防火墙内网口地址：<code>192.168.1.2</code>  &amp;  交换机默认vlan1管理地址：<code>192.168.1.1</code></p>
+<pre><code>BOOK#conf t
+BOOK(config)#ip routing   //开启三层路由，开启后所有网段互通
+BOOK(config)#no ip routing  //关闭三层路由
+BOOK(config)#ip  route 0.0.0.0 0.0.0.0  192.168.1.2  //指向上一层防火墙内网口地址
+备注：然后新加的12网段，需要在防火墙上添加一个返程路由即可
+Cisco防火墙配置路由
+BOOK-office#  conf t
+BOOK-office(config)# route inside 192.168.12.0 255.255.255.0  192.168.1.1  </code></pre><br>
+
+<h3 id="三、实战演练"><a href="#三、实战演练" class="headerlink" title="三、实战演练"></a>三、实战演练</h3><h4 id="3-1-新增部署网段的步骤"><a href="#3-1-新增部署网段的步骤" class="headerlink" title="3.1 新增部署网段的步骤"></a>3.1 新增部署网段的步骤</h4><pre><code>BOOK#conf t
+BOOK(config)#vlan 13 //创建vlan 13
+BOOK(config-vlan)#exit  //退出到配置模式
+BOOK(config)#int vlan 13  // 进入vlan 13
+BOOK(config-if)#ip address 192.168.13.1  255.255.255.0 //配置99网段的网关地址
+BOOK(config-if)#description bangong-vlan13  //可以对vlan13进行描述，方便后期管理
+BOOK(config-if)#exit  //退出到配置模式
+BOOK(config)#ip dhcp pool 13  //创建99网段的地址池
+BOOK(dhcp-config)# network 192.168.13.0  255.255.255.0  //配置网段
+BOOK(dhcp-config)# default-router 192.168.13.1  //指定网段的网关
+BOOK(dhcp-config)# dns-server 8.8.8.8  202.96.209.5  //配置网段的主和辅DNS
+BOOK(dhcp-config)# lease  2  //IP地址的租约时间为2天，超过两天没用就会释放
+BOOK(config-if)#exit  //退出到配置模式
+BOOK(config)#ip dhcp excluded-address 192.168.13.1 192.168.13.20 //排除掉的IP地址不分配
+BOOK(config)#int  range  fa0/2 -24 //对2到24端口全局配置
+BOOK(config-if-range)#switchport access vlan 13 //全部加入到13网段</code></pre><br>
+
+<h4 id="3-2-IP和MAC地址绑定"><a href="#3-2-IP和MAC地址绑定" class="headerlink" title="3.2 IP和MAC地址绑定"></a>3.2 IP和MAC地址绑定</h4><ul>
+<li>需求：张三想把IP地址192.168.12.80和507b.9dbe.55ea绑定，让客户端只有连接上网络，就会分配这个IP地址，如果更改其它IP则无法上网</li>
+<li>思路：首先 12网段的地址池已经有了，客户端如果想获取特定的ip地址，必须先把这个地址从12网段里排除掉，让这个地址不会分配，然后建立一个自己的99网段地址池</li>
+<li>步骤如下：</li>
+</ul>
+<pre><code>BOOK(config)#ip dhcp excluded-address 192.168.12.80  //先把这个IP地址排除不分配
+BOOK(config)#ip dhcp pool 12_zhangsan  //建立一个张三自己的地址池，名字不能和已有的pool_12重复
+BOOK(dhcp-config)# host 192.168.12.80  255.255.255.0 //指定张三的ip地址
+BOOK(dhcp-config)# client-identifier 0150.7b9d.be55.ea // MAC地址格式为01xx.xxxx.xxxx.xx
+BOOK(dhcp-config)# dns-server 8.8.8.8 202.96.209.5 //指定DNS
+BOOK(dhcp-config)# default-router 192.168.12.1 // 指定网关
+BOOK(config)#arp 192.168.12.80   7b.9dbe.55ea  ARPA //绑定生效
+客户端网卡禁用启用：</code></pre><br>
+
+<h4 id="3-3-网段访问控制列表"><a href="#3-3-网段访问控制列表" class="headerlink" title="3.3 网段访问控制列表"></a>3.3 网段访问控制列表</h4><ul>
+<li>需求：要求办公12网段和财务网段33隔离开，只允许特定的主机可以访问33网段，其它拒绝掉</li>
+</ul>
+<pre><code>BOOK# conf t
+BOOK(config)#ip access-list extended 100  //做一个访问控制列表，编号100
+BOOK(config-ext-nacl)#permit ip host 192.168.12.80 any //允许张三这台机器可以访问任何网段
+BOOK(config-ext-nacl)#permit ip host 192.168.12.80 host 192.168.33.8 //允许张三访问88.8主机
+BOOK(config-ext-nacl)#deny  ip any 192.168.22.0 0.0.0.255  //拒绝12网段访问33网段
+BOOK(config-ext-nacl)#permit ip any any //允许所有，这条必须加上，否则未放行的无法上网            
+BOOK(config-ext-nacl)#exit  //退出到配置模式
+BOOK(config)#int vlan 12  //进入12网段下
+BOOK(config-if)#ip  access-group  100  in  //应用访问控制列表</code></pre><br>
+
+<h4 id="3-4-常用基本维护命令"><a href="#3-4-常用基本维护命令" class="headerlink" title="3.4 常用基本维护命令"></a>3.4 常用基本维护命令</h4><pre><code>Show int status  查看端口状态
+Show  run     查看配置
+Show  ip  dhcp  pool  查看全部地址池的使用情况
+Show  ip  dhcp  pool  vlan 12  只查看12网段的地址池
+Show  ip  dhcp  binding      查看租约信息
+Show  ip  dhcp  conflict      查看地址冲突信息
+Show  ip  dhcp  server  statistics    查看DHCP收发数据包统计表
+Show  ip  arp  192.168.12.xx   根据ip地址追踪mac地址
+Show mac address-table address  7b.9dbe.55ea根据mac追踪具体端口位置
+如果出现网络地址受限，获取不到IP地址，看看是不是地址池满了，重新释放刷新地址池
+清除命令：
+Clear ip dhcp server statist         清除收发数据统计信息
+clear ip dhcp binding  *             清除所有租约信息
+clear mac address-table dynamic      清除动态MAC地址列表
+clear arp-cache                    清除arp缓存</code></pre><br>
 
     </div>
 
@@ -392,7 +519,7 @@
     <strong>本文作者： </strong>Book Jiang</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://loverbook.cn/2019/05/20/README/" title="Read me">http://loverbook.cn/2019/05/20/README/</a>
+    <a href="http://loverbook.cn/2019/07/25/cisco-switch/" title="Cisco switch配置管理">http://loverbook.cn/2019/07/25/cisco-switch/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -416,14 +543,23 @@
 
 
       <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/网络/" <i class="fa fa-tag"></i>  网络</a>
+            
+          </div>
+        
 
         
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/05/20/Openvpnserver/" rel="next" title="Openvpn服务器搭建">
-                  <i class="fa fa-chevron-left"></i> Openvpn服务器搭建
+                <a href="/2019/07/22/cisco-asa/" rel="next" title="Cisco asa防火墙配置管理">
+                  <i class="fa fa-chevron-left"></i> Cisco asa防火墙配置管理
                 </a>
               
             </div>
@@ -432,8 +568,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/05/22/test/" rel="prev" title="思科三层交换机配置">
-                  思科三层交换机配置 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/09/03/Anti-reptile/" rel="prev" title="Tengine配置防百度爬虫">
+                  Tengine配置防百度爬虫 <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -467,8 +603,6 @@
     </div>
   </div>
 
-
-
   <aside class="sidebar">
     <div class="sidebar-inner">
         
@@ -488,6 +622,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、准备"><span class="nav-text">一、准备</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-准备工具"><span class="nav-text">1.1 准备工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-连接交换机"><span class="nav-text">1.2 连接交换机</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、交换机配置管理"><span class="nav-text">二、交换机配置管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1、配置登录用户、密码及SSH连接"><span class="nav-text">2.1、配置登录用户、密码及SSH连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-为交换机配置远程管理IP地址："><span class="nav-text">2.2 为交换机配置远程管理IP地址：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-配置交换机名字及enable用户模式密码"><span class="nav-text">2.3 配置交换机名字及enable用户模式密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-端口及vlan的配置管理"><span class="nav-text">2.4 端口及vlan的配置管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-开启三层路由及静态路由配置"><span class="nav-text">2.5. 开启三层路由及静态路由配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、实战演练"><span class="nav-text">三、实战演练</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-新增部署网段的步骤"><span class="nav-text">3.1 新增部署网段的步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-IP和MAC地址绑定"><span class="nav-text">3.2 IP和MAC地址绑定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-网段访问控制列表"><span class="nav-text">3.3 网段访问控制列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-常用基本维护命令"><span class="nav-text">3.4 常用基本维护命令</span></a></li></ol></li></ol></div>
+        
       </div>
       <!--/noindex-->
 
@@ -586,14 +722,14 @@
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">12k</span>
+    <span title="站点总字数">17k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">11 分钟</span>
+    <span title="站点阅读时长">15 分钟</span>
 </div>
 
     <span id="sitetime"></span>
