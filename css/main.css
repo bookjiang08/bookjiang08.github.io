@@ -1769,7 +1769,7 @@ article:last-child .post-eof {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #9a58d7;
+  background: #a8b1a8;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
