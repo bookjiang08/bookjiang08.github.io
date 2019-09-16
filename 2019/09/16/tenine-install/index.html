@@ -65,7 +65,7 @@
 <meta property="og:site_name" content="Book&#39;s blog">
 <meta property="og:description" content="一、前言 Tengine是由淘宝网发起的Web服务器项目。它在Nginx的基础上，针对大访问量网站的需求，添加了很多高级功能和特性。 我个人很欣赏的一个功能，它有一个很好的dyups模块，可以动态上下线upstream中的后端机器，而不用重启服务  二、开始安装2.1 安装依赖yum install gcc gcc-c++ pcre pcre-devel zlib zlib-devel opens">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-16T14:51:27.759Z">
+<meta property="og:updated_time" content="2019-09-16T15:34:12.546Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tengine安装">
 <meta name="twitter:description" content="一、前言 Tengine是由淘宝网发起的Web服务器项目。它在Nginx的基础上，针对大访问量网站的需求，添加了很多高级功能和特性。 我个人很欣赏的一个功能，它有一个很好的dyups模块，可以动态上下线upstream中的后端机器，而不用重启服务  二、开始安装2.1 安装依赖yum install gcc gcc-c++ pcre pcre-devel zlib zlib-devel opens">
@@ -275,7 +275,7 @@
                 
               
 
-              <time title="创建时间：2019-09-16 22:50:28 / 修改时间：22:51:27" itemprop="dateCreated datePublished" datetime="2019-09-16T22:50:28+08:00">2019-09-16</time>
+              <time title="创建时间：2019-09-16 22:50:28 / 修改时间：23:34:12" itemprop="dateCreated datePublished" datetime="2019-09-16T22:50:28+08:00">2019-09-16</time>
             </span>
           
             
@@ -359,9 +359,9 @@
 
 <h4 id="2-2-下载解压"><a href="#2-2-下载解压" class="headerlink" title="2.2 下载解压"></a>2.2 下载解压</h4><ul>
 <li>从官网 <code>http://tengine.taobao.org/</code>下载<code>tengine-2.2.3.tar.gz</code></li>
-<li>解压到/root/目录下<pre><code>tar zxvf  tengine-2.2.3.tar.gz</code></pre></li>
+<li>解压到/root/目录下</li>
 </ul>
-<h4 id="2-3-编译安装"><a href="#2-3-编译安装" class="headerlink" title="2.3 编译安装"></a>2.3 编译安装</h4><pre><code>cd tengine-2.2.3
+<pre><code>tar zxvf  tengine-2.2.3.tar.gz</code></pre><h4 id="2-3-编译安装"><a href="#2-3-编译安装" class="headerlink" title="2.3 编译安装"></a>2.3 编译安装</h4><pre><code>cd tengine-2.2.3
 ./configure --prefix=/usr/local/nginx --with-http_lua_module --with-http_dyups_module --with-http_dyups_lua_api --with-threads --with-http_v2_module --with-http_geoip_module --with-http_ssl_module --with-http_secure_link_module --add-module=/root/ngx_http_substitutions_filter_module --with-force-exit   --with-http_realip_module </code></pre><br>
 
 <h4 id="2-4-服务启动"><a href="#2-4-服务启动" class="headerlink" title="2.4 服务启动"></a>2.4 服务启动</h4><pre><code>ln -s /usr/local/nginx/sbin/nginx /sbin/nginx
