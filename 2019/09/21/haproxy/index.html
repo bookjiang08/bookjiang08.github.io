@@ -65,7 +65,7 @@
 <meta property="og:site_name" content="Book&#39;s blog">
 <meta property="og:description" content="一、前言1.1 Haproxy功能特性 HAProxy提供高可用性、负载均衡以及基于TCP和HTTP应用的代理，支持虚拟主机，它是免费、快速并且可靠的一种解决方案。 HAProxy运行在当前的硬件上，完全可以支持数以万计的并发连接。并且它的运行模式使得它可以很简单安全的整合进您当前的架构中， 同时可以保护你的web服务器不被暴露到网络上。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-21T15:17:41.992Z">
+<meta property="og:updated_time" content="2019-09-21T15:22:58.019Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Keepalived+Haproxy高可用怎么玩">
 <meta name="twitter:description" content="一、前言1.1 Haproxy功能特性 HAProxy提供高可用性、负载均衡以及基于TCP和HTTP应用的代理，支持虚拟主机，它是免费、快速并且可靠的一种解决方案。 HAProxy运行在当前的硬件上，完全可以支持数以万计的并发连接。并且它的运行模式使得它可以很简单安全的整合进您当前的架构中， 同时可以保护你的web服务器不被暴露到网络上。">
@@ -275,7 +275,7 @@
                 
               
 
-              <time title="创建时间：2019-09-21 21:05:28 / 修改时间：23:17:41" itemprop="dateCreated datePublished" datetime="2019-09-21T21:05:28+08:00">2019-09-21</time>
+              <time title="创建时间：2019-09-21 21:05:28 / 修改时间：23:22:58" itemprop="dateCreated datePublished" datetime="2019-09-21T21:05:28+08:00">2019-09-21</time>
             </span>
           
             
@@ -327,7 +327,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>13k</span>
+              <span>14k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -602,6 +602,7 @@ vrrp_instance VI_1 {
 <h4 id="3-5-验证配置"><a href="#3-5-验证配置" class="headerlink" title="3.5 验证配置"></a>3.5 验证配置</h4><ul>
 <li>杀掉主服务器上的haproxy程序，看看keepalived是否也紧跟着同时被杀掉了，虚ip被漂移到备用服务器上了</li>
 <li>连接虚拟ip的6379端口以及3306端口，看能否正常转发到后端服务器上</li>
+<li>访问haproxy管理页面：<a href="http://172.16.20.20:1080/admin" target="_blank" rel="noopener">http://172.16.20.20:1080/admin</a> (root/123456)</li>
 </ul>
 <br>
 
