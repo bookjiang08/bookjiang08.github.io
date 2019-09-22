@@ -31,7 +31,7 @@
     version: '7.4.0',
     exturl: false,
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":true},
-    copycode: {"enable":"ture","show_result":"ture","style":"mac"},
+    copycode: {"enable":"ture","show_result":"ture","style":"flat"},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: false,
@@ -57,18 +57,18 @@
   };
 </script>
 
-  <meta name="description" content="一、配置远程登录 关于怎么用console线连接防火墙,可以参考我上一篇交换机配置博客：https://www.loverbook.cn/2019/07/25/cisco-switch/ Cisco asa 版本8.3之前的命令和之后区别很大，此篇博客以新版本命令为参考，版本太旧建议升级ios  1.1 配置主机名及enable密码">
+  <meta name="description" content="一、配置远程登录  关于怎么用console线连接防火墙,可以参考我上一篇交换机配置博客：https://www.loverbook.cn/2019/07/25/cisco-switch/ Cisco asa 版本8.3之前的命令和之后区别很大，此篇博客以新版本命令为参考，版本太旧建议升级ios   1.1 配置主机名及enable密码">
 <meta name="keywords" content="网络">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cisco asa防火墙配置管理">
 <meta property="og:url" content="http://loverbook.cn/2019/07/22/cisco-asa/index.html">
 <meta property="og:site_name" content="Book&#39;s blog">
-<meta property="og:description" content="一、配置远程登录 关于怎么用console线连接防火墙,可以参考我上一篇交换机配置博客：https://www.loverbook.cn/2019/07/25/cisco-switch/ Cisco asa 版本8.3之前的命令和之后区别很大，此篇博客以新版本命令为参考，版本太旧建议升级ios  1.1 配置主机名及enable密码">
+<meta property="og:description" content="一、配置远程登录  关于怎么用console线连接防火墙,可以参考我上一篇交换机配置博客：https://www.loverbook.cn/2019/07/25/cisco-switch/ Cisco asa 版本8.3之前的命令和之后区别很大，此篇博客以新版本命令为参考，版本太旧建议升级ios   1.1 配置主机名及enable密码">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-15T16:25:45.584Z">
+<meta property="og:updated_time" content="2019-09-22T02:47:50.636Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cisco asa防火墙配置管理">
-<meta name="twitter:description" content="一、配置远程登录 关于怎么用console线连接防火墙,可以参考我上一篇交换机配置博客：https://www.loverbook.cn/2019/07/25/cisco-switch/ Cisco asa 版本8.3之前的命令和之后区别很大，此篇博客以新版本命令为参考，版本太旧建议升级ios  1.1 配置主机名及enable密码">
+<meta name="twitter:description" content="一、配置远程登录  关于怎么用console线连接防火墙,可以参考我上一篇交换机配置博客：https://www.loverbook.cn/2019/07/25/cisco-switch/ Cisco asa 版本8.3之前的命令和之后区别很大，此篇博客以新版本命令为参考，版本太旧建议升级ios   1.1 配置主机名及enable密码">
   <link rel="canonical" href="http://loverbook.cn/2019/07/22/cisco-asa/">
 
 
@@ -286,7 +286,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-16 00:25:45" itemprop="dateModified" datetime="2019-09-16T00:25:45+08:00">2019-09-16</time>
+                <time title="修改时间：2019-09-22 10:47:50" itemprop="dateModified" datetime="2019-09-22T10:47:50+08:00">2019-09-22</time>
               </span>
             
           
@@ -358,10 +358,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="一、配置远程登录"><a href="#一、配置远程登录" class="headerlink" title="一、配置远程登录"></a>一、配置远程登录</h3><ul>
+        <h3 id="一、配置远程登录"><a href="#一、配置远程登录" class="headerlink" title="一、配置远程登录"></a>一、配置远程登录</h3><blockquote>
+<ul>
 <li>关于怎么用console线连接防火墙,可以参考我上一篇交换机配置博客：<a href="https://www.loverbook.cn/2019/07/25/cisco-switch/" target="_blank" rel="noopener">https://www.loverbook.cn/2019/07/25/cisco-switch/</a></li>
 <li>Cisco asa 版本8.3之前的命令和之后区别很大，此篇博客以新版本命令为参考，版本太旧建议升级ios</li>
 </ul>
+</blockquote>
 <h4 id="1-1-配置主机名及enable密码"><a href="#1-1-配置主机名及enable密码" class="headerlink" title="1.1 配置主机名及enable密码"></a>1.1 配置主机名及enable密码</h4><a id="more"></a>
 
 <pre><code>ciscoasa(config)# hostname  BOOK-office
@@ -380,10 +382,12 @@ show ssh                                  //参看SSH配置信息
 show crypto key mypubkey rsa    //查看产生的rsa密钥值
 crypto key zeroize                    //清空所有产生的密钥</code></pre><br>
 
-<h3 id="二、接口配置"><a href="#二、接口配置" class="headerlink" title="二、接口配置"></a>二、接口配置</h3><h4 id="2-1-内外接口IP配置"><a href="#2-1-内外接口IP配置" class="headerlink" title="2.1 内外接口IP配置"></a>2.1 内外接口IP配置</h4><ul>
+<h3 id="二、接口配置"><a href="#二、接口配置" class="headerlink" title="二、接口配置"></a>二、接口配置</h3><h4 id="2-1-内外接口IP配置"><a href="#2-1-内外接口IP配置" class="headerlink" title="2.1 内外接口IP配置"></a>2.1 内外接口IP配置</h4><blockquote>
+<ul>
 <li>外接口 Gi0/0：100.100.100.100(自己公网IP)</li>
 <li>内接口 Gi0/1:  192.168.1.1</li>
 </ul>
+</blockquote>
 <pre><code>BOOK-office(config)# int gigabitEthernet 0/0   //把gi0/0配置成外接口
 BOOK-office(config-if)# no shutdown         //开启端口 
 BOOK-office(config-if)# security-level 0       
@@ -395,7 +399,9 @@ BOOK-office(config-if)# security-level 100     //流量只允许高往低走
 BOOK-office(config-if)# nameif inside
 BOOK-office(config-if)# ip address 192.168.1.1  255.255.255.0</code></pre><br>
 
-<h3 id="三、防火墙内外流量打通"><a href="#三、防火墙内外流量打通" class="headerlink" title="三、防火墙内外流量打通"></a>三、防火墙内外流量打通</h3><h4 id="3-1-NAT转换"><a href="#3-1-NAT转换" class="headerlink" title="3.1 NAT转换"></a>3.1 NAT转换</h4><p><code>把内部局域网网段转换流量出去进行上网</code></p>
+<h3 id="三、防火墙内外流量打通"><a href="#三、防火墙内外流量打通" class="headerlink" title="三、防火墙内外流量打通"></a>三、防火墙内外流量打通</h3><h4 id="3-1-NAT转换"><a href="#3-1-NAT转换" class="headerlink" title="3.1 NAT转换"></a>3.1 NAT转换</h4><blockquote>
+<p><code>把内部局域网网段转换流量出去进行上网</code></p>
+</blockquote>
 <pre><code>BOOK-office(config)#object network inside  //定义一个地址对象inside 包含所有内网
 BOOK-office(config-network-object)# subnet 0.0.0.0  0.0.0.0 
 BOOK-office(config-network-object)# nat (inside,outside) dynamic interface  //Nat 转换</code></pre><br>
@@ -412,7 +418,11 @@ BOOK-office(config)# route inside 192.168.2.0 255.255.255.0 192.168.1.2 1 //内�
 BOOK-office(config)# route inside 192.168.12.0 255.255.255.0 192.168.1.2 1 //新增网段2和网段12返程路由</code></pre><p><code>这样防火墙就可以实现内部局域网上网了，可以进行远程连接和上网测试了！！</code>                       </p>
 <br>
 
-<h3 id="四、NAT端口映射"><a href="#四、NAT端口映射" class="headerlink" title="四、NAT端口映射"></a>四、NAT端口映射</h3><h4 id="4-1-端口映射"><a href="#4-1-端口映射" class="headerlink" title="4.1 端口映射"></a>4.1 端口映射</h4><p><code>举例将内网一台测试服务器192.168.12.13的内网3389端口映射到外网的3389端口</code></p>
+<h3 id="四、NAT端口映射"><a href="#四、NAT端口映射" class="headerlink" title="四、NAT端口映射"></a>四、NAT端口映射</h3><h4 id="4-1-端口映射"><a href="#4-1-端口映射" class="headerlink" title="4.1 端口映射"></a>4.1 端口映射</h4><blockquote>
+<ul>
+<li>举例将内网一台测试服务器192.168.12.13的内网3389端口映射到外网的3389端口</li>
+</ul>
+</blockquote>
 <pre><code>BOOK-office(config)#object network  testserver  //定义一个地址对象 testserver
 BOOK-office(config-network-object)# host 192.168.12.13
 BOOK-office(config-network-object)#nat (inside,outside) static interface service tcp 3389 3389  </code></pre><br>
@@ -422,9 +432,11 @@ BOOK-office(config)#access-list 100 extended permit tcp any host 192.168.12.13 e
 -------将列表100应用到外接口上生效------
 BOOK-office(config)# access-group  100  in interface inside</code></pre><br>
 
-<h3 id="五、宽带拨号（可选）"><a href="#五、宽带拨号（可选）" class="headerlink" title="五、宽带拨号（可选）"></a>五、宽带拨号（可选）</h3><h4 id="5-1-宽带PPOE拨号"><a href="#5-1-宽带PPOE拨号" class="headerlink" title="5.1 宽带PPOE拨号"></a>5.1 宽带PPOE拨号</h4><ul>
+<h3 id="五、宽带拨号（可选）"><a href="#五、宽带拨号（可选）" class="headerlink" title="五、宽带拨号（可选）"></a>五、宽带拨号（可选）</h3><h4 id="5-1-宽带PPOE拨号"><a href="#5-1-宽带PPOE拨号" class="headerlink" title="5.1 宽带PPOE拨号"></a>5.1 宽带PPOE拨号</h4><blockquote>
+<ul>
 <li>应用场景：没有固定IP地址，防火墙连接防火墙直接自身拨号，可以用此方法配置</li>
 </ul>
+</blockquote>
 <pre><code>-------配置宽带账号和密码-------
 BOOK-office(config)# vpdn group ads1 request dialout pppoe
 BOOK-office(config)# vpdn group ads1 localname adxxxxx   //此处填写宽带账户
