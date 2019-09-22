@@ -31,7 +31,7 @@
     version: '7.4.0',
     exturl: false,
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":true},
-    copycode: {"enable":"ture","show_result":"ture","style":"flat"},
+    copycode: {"enable":false,"show_result":false,"style":"flat"},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: false,
@@ -58,7 +58,7 @@
 </script>
 
   <meta name="description" content="一、前言1.1 Haproxy功能特性  HAProxy提供高可用性、负载均衡以及基于TCP和HTTP应用的代理，支持虚拟主机，它是免费、快速并且可靠的一种解决方案。 HAProxy运行在当前的硬件上，完全可以支持数以万计的并发连接。并且它的运行模式使得它可以很简单安全的整合进您当前的架构中， 同时可以保护你的web服务器不被暴露到网络上。">
-<meta name="keywords" content="haproxy,负载均衡">
+<meta name="keywords" content="负载均衡,haproxy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Keepalived+Haproxy高可用怎么玩">
 <meta property="og:url" content="http://loverbook.cn/2019/09/21/haproxy/index.html">
@@ -345,7 +345,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span>12 分钟</span>
+              <span>13 分钟</span>
             </span>
           
 
@@ -388,17 +388,18 @@
 <li>新增www用户，用于启动haproxy服务</li>
 </ul>
 </blockquote>
-<pre><code>ssh  192.168.10.1
-yum install gcc gcc-c++ pcre pcre-devel zlib zlib-devel openssl openssl-devel lua-devel GeoIP GeoIP-devel GeoIP-data  systemd-devel -y
-useradd www -s /sbin/nologin </code></pre><br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh  192.168.10.1</span><br><span class="line">yum install gcc gcc-c++ pcre pcre-devel zlib zlib-devel openssl openssl-devel lua-devel GeoIP GeoIP-devel GeoIP-data  systemd-devel -y</span><br><span class="line">useradd www -s /sbin/nologin</span><br></pre></td></tr></table></figure>
+
+<br>
 
 <h4 id="2-2-安装haproxy"><a href="#2-2-安装haproxy" class="headerlink" title="2.2 安装haproxy"></a>2.2 安装haproxy</h4><blockquote>
 <ul>
 <li>拷贝<code>haproxy-1.9.8-0.el7.x86_64.rpm</code>到<code>/root/</code>目录下</li>
 </ul>
 </blockquote>
-<pre><code>rpm -ivh  haproxy-1.9.8-0.el7.x86_64.rpm
-</code></pre><br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh  haproxy-1.9.8-0.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+<br>
 
 <h4 id="2-3-配置haproxy-cfg"><a href="#2-3-配置haproxy-cfg" class="headerlink" title="2.3 配置haproxy.cfg"></a>2.3 配置haproxy.cfg</h4><blockquote>
 <ul>
@@ -406,71 +407,17 @@ useradd www -s /sbin/nologin </code></pre><br>
 <li>vim haproxy.cfg</li>
 </ul>
 </blockquote>
-<pre><code>global
-    log 127.0.0.1 local0
-    log 127.0.0.1 local1 notice  //开启日志用的
-    user www
-    group www
-    maxconn 100000
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">global</span><br><span class="line">    log 127.0.0.1 local0</span><br><span class="line">    log 127.0.0.1 local1 notice  //开启日志用的</span><br><span class="line">    user www</span><br><span class="line">    group www</span><br><span class="line">    maxconn 100000</span><br><span class="line"></span><br><span class="line">defaults</span><br><span class="line">    mode tcp</span><br><span class="line">    retries 3</span><br><span class="line">    option tcplog</span><br><span class="line">    option redispatch</span><br><span class="line">    option abortonclose</span><br><span class="line">   #option dontlognull</span><br><span class="line">    option log-health-checks //开启后端server健康检查日志输出</span><br><span class="line">    option httpclose</span><br><span class="line">    balance roundrobin    //后端server流量轮询</span><br><span class="line">    maxconn 100000</span><br><span class="line">    timeout connect 3000</span><br><span class="line">    timeout client 3600000</span><br><span class="line">    timeout server 3600000</span><br><span class="line"></span><br><span class="line">listen status    //开启haproxy后台管理页面</span><br><span class="line">    bind :1080</span><br><span class="line">    mode http</span><br><span class="line">    log global</span><br><span class="line">    stats enable</span><br><span class="line">    stats refresh 30s</span><br><span class="line">    stats uri /admin  </span><br><span class="line">    stats realm HAProxy\ Stats</span><br><span class="line">    stats hide-version</span><br><span class="line">    stats auth root:123456  //配置账户密码</span><br><span class="line">    stats admin if TRUE</span><br><span class="line"></span><br><span class="line">#####################</span><br><span class="line">配置两组四层服务案例</span><br><span class="line">#####################</span><br><span class="line">frontend MySQL  //定义这个服务的名字为MySQL</span><br><span class="line">    bind 172.16.20.20:3306  //监听VIP的3306端口</span><br><span class="line">    log global</span><br><span class="line"></span><br><span class="line">    acl ACL_DB-MYSQL-1   dst 172.16.20.20</span><br><span class="line">    use_backend DB-MYSQL-1  if ACL_DB-MYSQL-1 </span><br><span class="line">    </span><br><span class="line">frontend redis     //定义这个服务的名字为redis</span><br><span class="line">    bind 172.16.20.20:10333  //监听的VIP的10333端口</span><br><span class="line">    log global</span><br><span class="line">    default_backend redis</span><br><span class="line"></span><br><span class="line">backend DB-MYSQL-1</span><br><span class="line">    log 127.0.0.1 local0  notice //这行必须加上，否则日志不输出健康检查状态</span><br><span class="line">    server 192.168.100.20 192.168.100.21:3306 check inter 1000 rise 3 fall 3</span><br><span class="line">    server 192.168.100.21 192.168.100.21:3306 check inter 1000 rise 3 fall 3  backup //状态为备机，只要上面一个服务器挂了，健康检查3秒之后下线，然后备机就顶上了</span><br><span class="line"></span><br><span class="line">backend  redis</span><br><span class="line">   log 127.0.0.1 local0  notice</span><br><span class="line">   server 192.168.100.22 192.168.100.22:6379 check inter 1000 rise 3 fall 3</span><br></pre></td></tr></table></figure>
 
-defaults
-    mode tcp
-    retries 3
-    option tcplog
-    option redispatch
-    option abortonclose
-   #option dontlognull
-    option log-health-checks //开启后端server健康检查日志输出
-    option httpclose
-    balance roundrobin    //后端server流量轮询
-    maxconn 100000
-    timeout connect 3000
-    timeout client 3600000
-    timeout server 3600000
+<br>
 
-listen status    //开启haproxy后台管理页面
-    bind :1080
-    mode http
-    log global
-    stats enable
-    stats refresh 30s
-    stats uri /admin  
-    stats realm HAProxy\ Stats
-    stats hide-version
-    stats auth root:123456  //配置账户密码
-    stats admin if TRUE
+<h4 id="2-4-启动服务"><a href="#2-4-启动服务" class="headerlink" title="2.4 启动服务"></a>2.4 启动服务</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#验证配置有没有语法错误</span><br><span class="line">/etc/haproxy/sbin/haproxy  -c -f  /etc/haproxy/haproxy.cfg</span><br><span class="line">Configuration file is valid //出现这个表示配置文件没问题</span><br><span class="line">systemctl start  haproxy  //启动</span><br><span class="line">systemctl reload haproxy  //重新载入配置</span><br></pre></td></tr></table></figure>
 
-#####################
-配置两组四层服务案例
-#####################
-frontend MySQL  //定义这个服务的名字为MySQL
-    bind 172.16.20.20:3306  //监听VIP的3306端口
-    log global
+<br>
 
-    acl ACL_DB-MYSQL-1   dst 172.16.20.20
-    use_backend DB-MYSQL-1  if ACL_DB-MYSQL-1 
+<h3 id="三、Keepalived安装配置"><a href="#三、Keepalived安装配置" class="headerlink" title="三、Keepalived安装配置"></a>三、Keepalived安装配置</h3><h4 id="3-1-yum安装"><a href="#3-1-yum安装" class="headerlink" title="3.1 yum安装"></a>3.1 yum安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install keepalived  -y</span><br></pre></td></tr></table></figure>
 
-frontend redis     //定义这个服务的名字为redis
-    bind 172.16.20.20:10333  //监听的VIP的10333端口
-    log global
-    default_backend redis
-
-backend DB-MYSQL-1
-    log 127.0.0.1 local0  notice //这行必须加上，否则日志不输出健康检查状态
-    server 192.168.100.20 192.168.100.21:3306 check inter 1000 rise 3 fall 3
-    server 192.168.100.21 192.168.100.21:3306 check inter 1000 rise 3 fall 3  backup //状态为备机，只要上面一个服务器挂了，健康检查3秒之后下线，然后备机就顶上了
-
-backend  redis
-   log 127.0.0.1 local0  notice
-   server 192.168.100.22 192.168.100.22:6379 check inter 1000 rise 3 fall 3 </code></pre><br>
-
-<h4 id="2-4-启动服务"><a href="#2-4-启动服务" class="headerlink" title="2.4 启动服务"></a>2.4 启动服务</h4><pre><code>#验证配置有没有语法错误
-/etc/haproxy/sbin/haproxy  -c -f  /etc/haproxy/haproxy.cfg
-Configuration file is valid //出现这个表示配置文件没问题
-systemctl start  haproxy  //启动
-systemctl reload haproxy  //重新载入配置</code></pre><br>
-
-<h3 id="三、Keepalived安装配置"><a href="#三、Keepalived安装配置" class="headerlink" title="三、Keepalived安装配置"></a>三、Keepalived安装配置</h3><h4 id="3-1-yum安装"><a href="#3-1-yum安装" class="headerlink" title="3.1 yum安装"></a>3.1 yum安装</h4><pre><code>yum install keepalived  -y</code></pre><br>
+<br>
 
 <h4 id="3-2-keepalived配置文件"><a href="#3-2-keepalived配置文件" class="headerlink" title="3.2 keepalived配置文件"></a>3.2 keepalived配置文件</h4><blockquote>
 <ul>
@@ -478,45 +425,9 @@ systemctl reload haproxy  //重新载入配置</code></pre><br>
 <li>vim   /etc/keepalived/keepalived.conf</li>
 </ul>
 </blockquote>
-<pre><code>! Configuration File for keepalived
-global_defs {
-}
-#这是第一个脚本，检测haproxy进程是否存在，不存在则结束keepalived,VIP漂移到备用从服务器，实现高可用
-vrrp_script check_haproxy {
-    script &quot;/etc/keepalived/check_haproxy.sh&quot;  //脚本存放路径
-     }
-vrrp_instance VI_1 {
-    state BACKUP  //都定义backup为非抢占模式
-    nopreempt
-    interface eth0
-    virtual_router_id 100
-    priority 100  //主机器权重为100，从机器要比这小，可以配置90
-    advert_int 1
-    unicast_src_ip 192.168.10.1  //本机主IP
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">! Configuration File for keepalived</span><br><span class="line">global_defs &#123;</span><br><span class="line">&#125;</span><br><span class="line">#这是第一个脚本，检测haproxy进程是否存在，不存在则结束keepalived,VIP漂移到备用从服务器，实现高可用</span><br><span class="line">vrrp_script check_haproxy &#123;</span><br><span class="line">    script &quot;/etc/keepalived/check_haproxy.sh&quot;  //脚本存放路径</span><br><span class="line">     &#125;</span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state BACKUP  //都定义backup为非抢占模式</span><br><span class="line">    nopreempt</span><br><span class="line">    interface eth0</span><br><span class="line">    virtual_router_id 100</span><br><span class="line">    priority 100  //主机器权重为100，从机器要比这小，可以配置90</span><br><span class="line">    advert_int 1</span><br><span class="line">    unicast_src_ip 192.168.10.1  //本机主IP</span><br><span class="line"></span><br><span class="line">    unicast_peer &#123;</span><br><span class="line">        192.168.10.2  //对端从IP,在从机器上，这两个主从IP是反过来的</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass haproxy //这里可以自定义一个字符串，但两边要保证一致</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">         172.16.20.20/16  //虚拟IP配置在这里</span><br><span class="line">     &#125;</span><br><span class="line">     #以下是另外一个脚本，在日志里面打印出keepalived服务状态，</span><br><span class="line">    notify_master &quot;/etc/keepalived/notify_action.sh MASTER&quot;  </span><br><span class="line">    notify_backup &quot;/etc/keepalived/notify_action.sh BACKUP&quot;</span><br><span class="line">    notify_fault &quot;/etc/keepalived/notify_action.sh FAULT&quot;</span><br><span class="line">    notify_stop &quot;/etc/keepalived/notify_action.sh STOP&quot;</span><br><span class="line">    garp_master_delay 1</span><br><span class="line">    garp_master_refresh 5</span><br><span class="line"></span><br><span class="line">    track_script &#123;</span><br><span class="line">        check_haproxy  //调用上面定义的脚本</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    unicast_peer {
-        192.168.10.2  //对端从IP,在从机器上，这两个主从IP是反过来的
-    }
-
-    authentication {
-        auth_type PASS
-        auth_pass haproxy //这里可以自定义一个字符串，但两边要保证一致
-    }
-    virtual_ipaddress {
-         172.16.20.20/16  //虚拟IP配置在这里
-     }
-     #以下是另外一个脚本，在日志里面打印出keepalived服务状态，
-    notify_master &quot;/etc/keepalived/notify_action.sh MASTER&quot;  
-    notify_backup &quot;/etc/keepalived/notify_action.sh BACKUP&quot;
-    notify_fault &quot;/etc/keepalived/notify_action.sh FAULT&quot;
-    notify_stop &quot;/etc/keepalived/notify_action.sh STOP&quot;
-    garp_master_delay 1
-    garp_master_refresh 5
-
-    track_script {
-        check_haproxy  //调用上面定义的脚本
-     }
-}</code></pre><br>
+<br>
 
 <h4 id="3-3-自定义脚本"><a href="#3-3-自定义脚本" class="headerlink" title="3.3 自定义脚本"></a>3.3 自定义脚本</h4><h5 id="3-3-1-haproxy状态检测脚本"><a href="#3-3-1-haproxy状态检测脚本" class="headerlink" title="3.3.1 haproxy状态检测脚本"></a>3.3.1 haproxy状态检测脚本</h5><blockquote>
 <ul>
@@ -524,12 +435,9 @@ vrrp_instance VI_1 {
 <li>vim  /etc/keepalived/check_haproxy.sh</li>
 </ul>
 </blockquote>
-<pre><code>#!/bin/bash
-#检测nginx进程不存在了，尝试启动，发现启动不了则切换到备用机器
-A=`ps -C haproxy --no-header |wc -l`
-if [ `ps -C haproxy --no-header |wc -l` -eq 0 ];then
-        systemctl stop  keepalived
-fi</code></pre><br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#检测nginx进程不存在了，尝试启动，发现启动不了则切换到备用机器</span><br><span class="line">A=`ps -C haproxy --no-header |wc -l`</span><br><span class="line">if [ `ps -C haproxy --no-header |wc -l` -eq 0 ];then</span><br><span class="line">        systemctl stop  keepalived</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<br>
 
 <h5 id="3-3-2-Keepalived日志输出状态"><a href="#3-3-2-Keepalived日志输出状态" class="headerlink" title="3.3.2 Keepalived日志输出状态"></a>3.3.2 Keepalived日志输出状态</h5><blockquote>
 <ul>
@@ -538,51 +446,22 @@ fi</code></pre><br>
 <li>vim /etc/keepalived/notify_action.sh</li>
 </ul>
 </blockquote>
-<pre><code>#!/bin/bash
-#/etc/keepalived/notify_action.sh
-log_file=/var/log/keepalived.log
-log_write()
-{
-    echo &quot;[`date &#39;+%Y-%m-%d %T&#39;`] $1&quot; &gt;&gt; $log_file
-}
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#/etc/keepalived/notify_action.sh</span><br><span class="line">log_file=/var/log/keepalived.log</span><br><span class="line">log_write()</span><br><span class="line">&#123;</span><br><span class="line">    echo &quot;[`date &apos;+%Y-%m-%d %T&apos;`] $1&quot; &gt;&gt; $log_file</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[ ! -d /var/keepalived/ ] &amp;&amp; mkdir -p /var/keepalived/</span><br><span class="line"></span><br><span class="line">case &quot;$1&quot; in</span><br><span class="line">    &quot;MASTER&quot; )</span><br><span class="line">        echo -n &quot;$1&quot; &gt; /var/keepalived/state</span><br><span class="line">        log_write &quot; notify_master&quot;</span><br><span class="line">        echo -n &quot;0&quot; &gt; /var/keepalived/vip_check_failed_count</span><br><span class="line">        ;;</span><br><span class="line"></span><br><span class="line">    &quot;BACKUP&quot; )</span><br><span class="line">        echo -n &quot;$1&quot; &gt; /var/keepalived/state</span><br><span class="line">        log_write &quot; notify_backup&quot;</span><br><span class="line">        ;;</span><br><span class="line"></span><br><span class="line">    &quot;FAULT&quot; )</span><br><span class="line">        echo -n &quot;$1&quot; &gt; /var/keepalived/state</span><br><span class="line">        log_write &quot; notify_fault&quot;</span><br><span class="line">        ;;</span><br><span class="line"></span><br><span class="line">    &quot;STOP&quot; )</span><br><span class="line">        echo -n &quot;$1&quot; &gt; /var/keepalived/state</span><br><span class="line">        log_write &quot; notify_stop&quot;</span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        log_write &quot;notify_action.sh: STATE ERROR!!!&quot;</span><br><span class="line">        ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
 
-[ ! -d /var/keepalived/ ] &amp;&amp; mkdir -p /var/keepalived/
+<br>
 
-case &quot;$1&quot; in
-    &quot;MASTER&quot; )
-        echo -n &quot;$1&quot; &gt; /var/keepalived/state
-        log_write &quot; notify_master&quot;
-        echo -n &quot;0&quot; &gt; /var/keepalived/vip_check_failed_count
-        ;;
+<h5 id="3-3-3-脚本添加权限"><a href="#3-3-3-脚本添加权限" class="headerlink" title="3.3.3 脚本添加权限"></a>3.3.3 脚本添加权限</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x check_haproxy.sh  notify_action.sh</span><br></pre></td></tr></table></figure>
 
-    &quot;BACKUP&quot; )
-        echo -n &quot;$1&quot; &gt; /var/keepalived/state
-        log_write &quot; notify_backup&quot;
-        ;;
-
-    &quot;FAULT&quot; )
-        echo -n &quot;$1&quot; &gt; /var/keepalived/state
-        log_write &quot; notify_fault&quot;
-        ;;
-
-    &quot;STOP&quot; )
-        echo -n &quot;$1&quot; &gt; /var/keepalived/state
-        log_write &quot; notify_stop&quot;
-        ;;
-    *)
-        log_write &quot;notify_action.sh: STATE ERROR!!!&quot;
-        ;;
-esac</code></pre><br>
-
-<h5 id="3-3-3-脚本添加权限"><a href="#3-3-3-脚本添加权限" class="headerlink" title="3.3.3 脚本添加权限"></a>3.3.3 脚本添加权限</h5><pre><code>chmod +x check_haproxy.sh  notify_action.sh</code></pre><br>
+<br>
 
 <h4 id="3-4-启动keepalived服务"><a href="#3-4-启动keepalived服务" class="headerlink" title="3.4 启动keepalived服务"></a>3.4 启动keepalived服务</h4><blockquote>
 <ul>
 <li>启动服务后，可以通过<code>ip a</code>查看本机ip是否多了一个虚拟ip：172.16.20.20 绑定在上面，这样就算成功了</li>
 </ul>
 </blockquote>
-<pre><code>systemctl start keepalived   //启动
-systemctl reload keepalived  //变更配置后，一般用这个命令重新加载</code></pre><br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start keepalived   //启动</span><br><span class="line">systemctl reload keepalived  //变更配置后，一般用这个命令重新加载</span><br></pre></td></tr></table></figure>
+
+<br>
 
 <h4 id="3-4-备用从服务器操作注意事项"><a href="#3-4-备用从服务器操作注意事项" class="headerlink" title="3.4 备用从服务器操作注意事项"></a>3.4 备用从服务器操作注意事项</h4><blockquote>
 <ul>
@@ -591,45 +470,9 @@ systemctl reload keepalived  //变更配置后，一般用这个命令重新加�
 <li>vim   /etc/keepalived/keepalived.conf</li>
 </ul>
 </blockquote>
-<pre><code>! Configuration File for keepalived
-global_defs {
-}
-#这是第一个脚本，检测haproxy进程是否存在，不存在则结束keepalived,VIP漂移到备用从服务器，实现高可用
-vrrp_script check_haproxy {
-    script &quot;/etc/keepalived/check_haproxy.sh&quot;  //脚本存放路径
-     }
-vrrp_instance VI_1 {
-    state BACKUP  //都定义backup为非抢占模式
-    nopreempt
-    interface eth0
-    virtual_router_id 100  //此ID号保持一致，同一个局域网最好不要有重复的
-    priority 90  //主机器权重为100，这里设置90，一定要比主的小
-    advert_int 1
-    unicast_src_ip 192.168.10.2  //本机主IP
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">! Configuration File for keepalived</span><br><span class="line">global_defs &#123;</span><br><span class="line">&#125;</span><br><span class="line">#这是第一个脚本，检测haproxy进程是否存在，不存在则结束keepalived,VIP漂移到备用从服务器，实现高可用</span><br><span class="line">vrrp_script check_haproxy &#123;</span><br><span class="line">    script &quot;/etc/keepalived/check_haproxy.sh&quot;  //脚本存放路径</span><br><span class="line">     &#125;</span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state BACKUP  //都定义backup为非抢占模式</span><br><span class="line">    nopreempt</span><br><span class="line">    interface eth0</span><br><span class="line">    virtual_router_id 100  //此ID号保持一致，同一个局域网最好不要有重复的</span><br><span class="line">    priority 90  //主机器权重为100，这里设置90，一定要比主的小</span><br><span class="line">    advert_int 1</span><br><span class="line">    unicast_src_ip 192.168.10.2  //本机主IP</span><br><span class="line"></span><br><span class="line">    unicast_peer &#123;</span><br><span class="line">        192.168.10.1  //对端从IP</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass haproxy //这里可以自定义一个字符串，但两边要保证一致</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">         172.16.20.20/16  //虚拟IP配置在这里</span><br><span class="line">     &#125;</span><br><span class="line">     #以下是另外一个脚本，在日志里面打印出keepalived服务状态，</span><br><span class="line">    notify_master &quot;/etc/keepalived/notify_action.sh MASTER&quot;  </span><br><span class="line">    notify_backup &quot;/etc/keepalived/notify_action.sh BACKUP&quot;</span><br><span class="line">    notify_fault &quot;/etc/keepalived/notify_action.sh FAULT&quot;</span><br><span class="line">    notify_stop &quot;/etc/keepalived/notify_action.sh STOP&quot;</span><br><span class="line">    garp_master_delay 1</span><br><span class="line">    garp_master_refresh 5</span><br><span class="line"></span><br><span class="line">    track_script &#123;</span><br><span class="line">        check_haproxy  //调用上面定义的脚本</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    unicast_peer {
-        192.168.10.1  //对端从IP
-    }
-
-    authentication {
-        auth_type PASS
-        auth_pass haproxy //这里可以自定义一个字符串，但两边要保证一致
-    }
-    virtual_ipaddress {
-         172.16.20.20/16  //虚拟IP配置在这里
-     }
-     #以下是另外一个脚本，在日志里面打印出keepalived服务状态，
-    notify_master &quot;/etc/keepalived/notify_action.sh MASTER&quot;  
-    notify_backup &quot;/etc/keepalived/notify_action.sh BACKUP&quot;
-    notify_fault &quot;/etc/keepalived/notify_action.sh FAULT&quot;
-    notify_stop &quot;/etc/keepalived/notify_action.sh STOP&quot;
-    garp_master_delay 1
-    garp_master_refresh 5
-
-    track_script {
-        check_haproxy  //调用上面定义的脚本
-     }
-}</code></pre><br>
+<br>
 
 
 <h4 id="3-5-验证配置"><a href="#3-5-验证配置" class="headerlink" title="3.5 验证配置"></a>3.5 验证配置</h4><blockquote>
@@ -655,12 +498,16 @@ vrrp_instance VI_1 {
 <li>vim /etc/sysconfig/keepalived</li>
 </ul>
 </blockquote>
-<pre><code>KEEPALIVED_OPTIONS=&quot;-D -S 0 -d&quot;</code></pre><blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KEEPALIVED_OPTIONS=&quot;-D -S 0 -d&quot;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
 <ul>
 <li>vim /etc/rsyslog.conf </li>
 </ul>
 </blockquote>
-<pre><code>local0.*  /var/log/keepalived.log</code></pre><blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">local0.*  /var/log/keepalived.log</span><br></pre></td></tr></table></figure>
+
+<blockquote>
 <ul>
 <li>service rsyslog restart </li>
 </ul>
@@ -673,15 +520,16 @@ vrrp_instance VI_1 {
 <li>vim /etc/rsyslog.conf</li>
 </ul>
 </blockquote>
-<pre><code>vim /etc/rsyslog.conf
-$ModLoad imudp
-$UDPServerRun 514
-local0.*     /var/log/haproxy/haproxy.log</code></pre><blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/rsyslog.conf</span><br><span class="line">$ModLoad imudp</span><br><span class="line">$UDPServerRun 514</span><br><span class="line">local0.*     /var/log/haproxy/haproxy.log</span><br></pre></td></tr></table></figure>
+
+<blockquote>
 <ul>
 <li>vim /etc/rsyslog.conf </li>
 </ul>
 </blockquote>
-<pre><code>local0.*  /var/log/keepalived.log</code></pre><blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">local0.*  /var/log/keepalived.log</span><br></pre></td></tr></table></figure>
+
+<blockquote>
 <ul>
 <li>service rsyslog restart </li>
 </ul>
@@ -694,20 +542,9 @@ local0.*     /var/log/haproxy/haproxy.log</code></pre><blockquote>
 <li>vim /etc/logrotate.d/logrotate_haproxy</li>
 </ul>
 </blockquote>
-<pre><code>/var/log/haproxy/haproxy.log {
-        su root root
-        daily
-        missingok
-        rotate 15  //默认我设置的是保留15天
-        compress
-        notifempty
-        create 644 root root
-        dateext
-        sharedscripts
-        postrotate
-            systemctl restart rsyslog
-        endscript
-}</code></pre><blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/var/log/haproxy/haproxy.log &#123;</span><br><span class="line">        su root root</span><br><span class="line">        daily</span><br><span class="line">        missingok</span><br><span class="line">        rotate 15  //默认我设置的是保留15天</span><br><span class="line">        compress</span><br><span class="line">        notifempty</span><br><span class="line">        create 644 root root</span><br><span class="line">        dateext</span><br><span class="line">        sharedscripts</span><br><span class="line">        postrotate</span><br><span class="line">            systemctl restart rsyslog</span><br><span class="line">        endscript</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
 <ul>
 <li>测试切割：<code>logrotate -d /etc/logrotate.d/logrotate_haproxy</code></li>
 <li>强制执行切割：<code>/usr/sbin/logrotate  -f /etc/logrotate.d/logrotate_haproxy</code></li>
@@ -715,160 +552,14 @@ local0.*     /var/log/haproxy/haproxy.log</code></pre><blockquote>
 </blockquote>
 <br>
 
-<h3 id="五、额外补充"><a href="#五、额外补充" class="headerlink" title="五、额外补充"></a>五、额外补充</h3><h4 id="5-1-Haproxy管理页面参数介绍"><a href="#5-1-Haproxy管理页面参数介绍" class="headerlink" title="5.1 Haproxy管理页面参数介绍"></a>5.1 Haproxy管理页面参数介绍</h4><pre><code>haproxy页面参数解释：
+<h3 id="五、额外补充"><a href="#五、额外补充" class="headerlink" title="五、额外补充"></a>五、额外补充</h3><h4 id="5-1-Haproxy管理页面参数介绍"><a href="#5-1-Haproxy管理页面参数介绍" class="headerlink" title="5.1 Haproxy管理页面参数介绍"></a>5.1 Haproxy管理页面参数介绍</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">haproxy页面参数解释：</span><br><span class="line"></span><br><span class="line">页面详细参数解释</span><br><span class="line">Queue</span><br><span class="line">Cur: current queued requests //当前的队列请求数量</span><br><span class="line">Max：max queued requests     //最大的队列请求数量</span><br><span class="line">Limit：           //队列限制数量</span><br><span class="line">Session rate(每秒的连接回话)列表：</span><br><span class="line">scur: current sessions        //每秒的当前回话的限制数量</span><br><span class="line">smax: max sessions           //每秒的新的最大的回话量</span><br><span class="line">slim: sessions limit           //每秒的新回话的限制数量</span><br><span class="line"></span><br><span class="line">Sessions </span><br><span class="line">Total:            //总共回话量</span><br><span class="line"></span><br><span class="line">Cur:             //当前的回话</span><br><span class="line">Max: //最大回话 </span><br><span class="line">Limit: //回话限制</span><br><span class="line">Lbtot: total number of times a server was selected //选中一台服务器所用的总时间</span><br><span class="line">Bytes</span><br><span class="line">In： //网络的字节数输入总量  </span><br><span class="line">Out： //网络的字节数输出总量</span><br><span class="line"></span><br><span class="line">Denied</span><br><span class="line">Req: denied requests//拒绝请求量</span><br><span class="line"></span><br><span class="line">Resp：denied responses //拒绝回应</span><br><span class="line">Errors</span><br><span class="line">Req：request errors             //错误请求</span><br><span class="line">Conn：connection errors          //错误的连接</span><br><span class="line">Resp: response errors (among which srv_abrt)  ///错误的回应</span><br><span class="line"></span><br><span class="line">Warnings</span><br><span class="line">Retr: retries (warning)                      //重新尝试</span><br><span class="line">Redis：redispatches (warning)               //再次发送</span><br><span class="line">Server列表：</span><br><span class="line">Status:状态，包括up(后端机活动)和down(后端机挂掉)两种状态</span><br><span class="line">LastChk:    持续检查后端服务器的时间</span><br><span class="line">Wght: (weight) : 权重</span><br><span class="line">Act: server is active (server), number of active servers (backend) //活动链接数量</span><br><span class="line">Bck: server is backup (server), number of backup servers (backend) //backup：备份的服务器数量</span><br><span class="line">Down：          //后端服务器连接后都是down的数量</span><br><span class="line">Downtime: downtime: total downtime (in seconds)    //总的downtime 时间</span><br><span class="line">Throttle: warm up status                          //设备变热状态</span><br></pre></td></tr></table></figure>
 
-页面详细参数解释
-Queue
-Cur: current queued requests //当前的队列请求数量
-Max：max queued requests     //最大的队列请求数量
-Limit：           //队列限制数量
-Session rate(每秒的连接回话)列表：
-scur: current sessions        //每秒的当前回话的限制数量
-smax: max sessions           //每秒的新的最大的回话量
-slim: sessions limit           //每秒的新回话的限制数量
-
-Sessions 
-Total:            //总共回话量
-
-Cur:             //当前的回话
-Max: //最大回话 
-Limit: //回话限制
-Lbtot: total number of times a server was selected //选中一台服务器所用的总时间
-Bytes
-In： //网络的字节数输入总量  
-Out： //网络的字节数输出总量
-
-Denied
-Req: denied requests//拒绝请求量
-
-Resp：denied responses //拒绝回应
-Errors
-Req：request errors             //错误请求
-Conn：connection errors          //错误的连接
-Resp: response errors (among which srv_abrt)  ///错误的回应
-
-Warnings
-Retr: retries (warning)                      //重新尝试
-Redis：redispatches (warning)               //再次发送
-Server列表：
-Status:状态，包括up(后端机活动)和down(后端机挂掉)两种状态
-LastChk:    持续检查后端服务器的时间
-Wght: (weight) : 权重
-Act: server is active (server), number of active servers (backend) //活动链接数量
-Bck: server is backup (server), number of backup servers (backend) //backup：备份的服务器数量
-Down：          //后端服务器连接后都是down的数量
-Downtime: downtime: total downtime (in seconds)    //总的downtime 时间
-Throttle: warm up status                          //设备变热状态</code></pre><br>
+<br>
 
 
-<h4 id="5-2-Haproxy配置文件参数介绍"><a href="#5-2-Haproxy配置文件参数介绍" class="headerlink" title="5.2 Haproxy配置文件参数介绍"></a>5.2 Haproxy配置文件参数介绍</h4><pre><code>haproxy 配置中分成五部分内容，分别如下：
-global：  设置全局配置参数，属于进程的配置，通常是和操作系统相关。
-defaults：配置默认参数，这些参数可以被用到frontend，backend，Listen组件；
-frontend：接收请求的前端虚拟节点，Frontend可以更加规则直接指定具体使用后端的backend；
-backend：后端服务集群的配置，是真实服务器，一个Backend对应一个或者多个实体服务器；
-Listen ：frontend和backend的组合体。
-————————————————
-版权声明：本文为CSDN博主「Resines」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/genglei1022/article/details/83374188
-global   # 全局参数的设置
-    log 127.0.0.1 local0 info
-    # log语法：log &lt;address_1&gt;[max_level_1] # 全局的日志配置，使用log关键字，指定使用127.0.0.1上的syslog服务中的local0日志设备，记录日志等级为info的日志
-    user haproxy
-    group haproxy
-    # 设置运行haproxy的用户和组，也可使用uid，gid关键字替代之
-    daemon
-    # 以守护进程的方式运行
-    nbproc 16
-    # 设置haproxy启动时的进程数，根据官方文档的解释，我将其理解为：该值的设置应该和服务器的CPU核心数一致，即常见的2颗8核心CPU的服务器，即共有16核心，则可以将其值设置为：&lt;=16 ，创建多个进程数，可以减少每个进程的任务队列，但是过多的进程数也可能会导致进程的崩溃。这里我设置为16
-    maxconn 4096
-    # 定义每个haproxy进程的最大连接数 ，由于每个连接包括一个客户端和一个服务器端，所以单个进程的TCP会话最大数目将是该值的两倍。
-    #ulimit -n 65536
-    # 设置最大打开的文件描述符数，在1.4的官方文档中提示，该值会自动计算，所以不建议进行设置
-    pidfile /var/run/haproxy.pid
-    # 定义haproxy的pid 
-defaults # 默认部分的定义
-    mode http
-    # mode语法：mode {http|tcp|health} 。http是七层模式，tcp是四层模式，health是健康检测，返回OK
-    log 127.0.0.1 local3 err
-    # 使用127.0.0.1上的syslog服务的local3设备记录错误信息
-    retries 3
-    # 定义连接后端服务器的失败重连次数，连接失败次数超过此值后将会将对应后端服务器标记为不可用
-    option httplog
-    # 启用日志记录HTTP请求，默认haproxy日志记录是不记录HTTP请求的，只记录“时间[Jan 5 13:23:46] 日志服务器[127.0.0.1] 实例名已经pid[haproxy[25218]] 信息[Proxy http_80_in stopped.]”，日志格式很简单。
-    option redispatch
-    # 当使用了cookie时，haproxy将会将其请求的后端服务器的serverID插入到cookie中，以保证会话的SESSION持久性；而此时，如果后端的服务器宕掉了，但是客户端的cookie是不会刷新的，如果设置此参数，将会将客户的请求强制定向到另外一个后端server上，以保证服务的正常。
-    option abortonclose
-    # 当服务器负载很高的时候，自动结束掉当前队列处理比较久的链接
-    option dontlognull
-    # 启用该项，日志中将不会记录空连接。所谓空连接就是在上游的负载均衡器或者监控系统为了探测该服务是否存活可用时，需要定期的连接或者获取某一固定的组件或页面，或者探测扫描端口是否在监听或开放等动作被称为空连接；官方文档中标注，如果该服务上游没有其他的负载均衡器的话，建议不要使用该参数，因为互联网上的恶意扫描或其他动作就不会被记录下来
-    option httpclose
-    # 这个参数我是这样理解的：使用该参数，每处理完一个request时，haproxy都会去检查http头中的Connection的值，如果该值不是close，haproxy将会将其删除，如果该值为空将会添加为：Connection: close。使每个客户端和服务器端在完成一次传输后都会主动关闭TCP连接。与该参数类似的另外一个参数是“option forceclose”，该参数的作用是强制关闭对外的服务通道，因为有的服务器端收到Connection: close时，也不会自动关闭TCP连接，如果客户端也不关闭，连接就会一直处于打开，直到超时。
-    contimeout 5000
-    # 设置成功连接到一台服务器的最长等待时间，默认单位是毫秒，新版本的haproxy使用timeout connect替代，该参数向后兼容
-    clitimeout 3000
-    # 设置连接客户端发送数据时的成功连接最长等待时间，默认单位是毫秒，新版本haproxy使用timeout client替代。该参数向后兼容
-    srvtimeout 3000
-    # 设置服务器端回应客户度数据发送的最长等待时间，默认单位是毫秒，新版本haproxy使用timeout server替代。该参数向后兼容
+<h4 id="5-2-Haproxy配置文件参数介绍"><a href="#5-2-Haproxy配置文件参数介绍" class="headerlink" title="5.2 Haproxy配置文件参数介绍"></a>5.2 Haproxy配置文件参数介绍</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line">haproxy 配置中分成五部分内容，分别如下：</span><br><span class="line">global：  设置全局配置参数，属于进程的配置，通常是和操作系统相关。</span><br><span class="line">defaults：配置默认参数，这些参数可以被用到frontend，backend，Listen组件；</span><br><span class="line">frontend：接收请求的前端虚拟节点，Frontend可以更加规则直接指定具体使用后端的backend；</span><br><span class="line">backend：后端服务集群的配置，是真实服务器，一个Backend对应一个或者多个实体服务器；</span><br><span class="line">Listen ：frontend和backend的组合体。</span><br><span class="line">————————————————</span><br><span class="line">版权声明：本文为CSDN博主「Resines」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。</span><br><span class="line">原文链接：https://blog.csdn.net/genglei1022/article/details/83374188</span><br><span class="line">global   # 全局参数的设置</span><br><span class="line">    log 127.0.0.1 local0 info</span><br><span class="line">    # log语法：log &lt;address_1&gt;[max_level_1] # 全局的日志配置，使用log关键字，指定使用127.0.0.1上的syslog服务中的local0日志设备，记录日志等级为info的日志</span><br><span class="line">    user haproxy</span><br><span class="line">    group haproxy</span><br><span class="line">    # 设置运行haproxy的用户和组，也可使用uid，gid关键字替代之</span><br><span class="line">    daemon</span><br><span class="line">    # 以守护进程的方式运行</span><br><span class="line">    nbproc 16</span><br><span class="line">    # 设置haproxy启动时的进程数，根据官方文档的解释，我将其理解为：该值的设置应该和服务器的CPU核心数一致，即常见的2颗8核心CPU的服务器，即共有16核心，则可以将其值设置为：&lt;=16 ，创建多个进程数，可以减少每个进程的任务队列，但是过多的进程数也可能会导致进程的崩溃。这里我设置为16</span><br><span class="line">    maxconn 4096</span><br><span class="line">    # 定义每个haproxy进程的最大连接数 ，由于每个连接包括一个客户端和一个服务器端，所以单个进程的TCP会话最大数目将是该值的两倍。</span><br><span class="line">    #ulimit -n 65536</span><br><span class="line">    # 设置最大打开的文件描述符数，在1.4的官方文档中提示，该值会自动计算，所以不建议进行设置</span><br><span class="line">    pidfile /var/run/haproxy.pid</span><br><span class="line">    # 定义haproxy的pid </span><br><span class="line">defaults # 默认部分的定义</span><br><span class="line">    mode http</span><br><span class="line">    # mode语法：mode &#123;http|tcp|health&#125; 。http是七层模式，tcp是四层模式，health是健康检测，返回OK</span><br><span class="line">    log 127.0.0.1 local3 err</span><br><span class="line">    # 使用127.0.0.1上的syslog服务的local3设备记录错误信息</span><br><span class="line">    retries 3</span><br><span class="line">    # 定义连接后端服务器的失败重连次数，连接失败次数超过此值后将会将对应后端服务器标记为不可用</span><br><span class="line">    option httplog</span><br><span class="line">    # 启用日志记录HTTP请求，默认haproxy日志记录是不记录HTTP请求的，只记录“时间[Jan 5 13:23:46] 日志服务器[127.0.0.1] 实例名已经pid[haproxy[25218]] 信息[Proxy http_80_in stopped.]”，日志格式很简单。</span><br><span class="line">    option redispatch</span><br><span class="line">    # 当使用了cookie时，haproxy将会将其请求的后端服务器的serverID插入到cookie中，以保证会话的SESSION持久性；而此时，如果后端的服务器宕掉了，但是客户端的cookie是不会刷新的，如果设置此参数，将会将客户的请求强制定向到另外一个后端server上，以保证服务的正常。</span><br><span class="line">    option abortonclose</span><br><span class="line">    # 当服务器负载很高的时候，自动结束掉当前队列处理比较久的链接</span><br><span class="line">    option dontlognull</span><br><span class="line">    # 启用该项，日志中将不会记录空连接。所谓空连接就是在上游的负载均衡器或者监控系统为了探测该服务是否存活可用时，需要定期的连接或者获取某一固定的组件或页面，或者探测扫描端口是否在监听或开放等动作被称为空连接；官方文档中标注，如果该服务上游没有其他的负载均衡器的话，建议不要使用该参数，因为互联网上的恶意扫描或其他动作就不会被记录下来</span><br><span class="line">    option httpclose</span><br><span class="line">    # 这个参数我是这样理解的：使用该参数，每处理完一个request时，haproxy都会去检查http头中的Connection的值，如果该值不是close，haproxy将会将其删除，如果该值为空将会添加为：Connection: close。使每个客户端和服务器端在完成一次传输后都会主动关闭TCP连接。与该参数类似的另外一个参数是“option forceclose”，该参数的作用是强制关闭对外的服务通道，因为有的服务器端收到Connection: close时，也不会自动关闭TCP连接，如果客户端也不关闭，连接就会一直处于打开，直到超时。</span><br><span class="line">    contimeout 5000</span><br><span class="line">    # 设置成功连接到一台服务器的最长等待时间，默认单位是毫秒，新版本的haproxy使用timeout connect替代，该参数向后兼容</span><br><span class="line">    clitimeout 3000</span><br><span class="line">    # 设置连接客户端发送数据时的成功连接最长等待时间，默认单位是毫秒，新版本haproxy使用timeout client替代。该参数向后兼容</span><br><span class="line">    srvtimeout 3000</span><br><span class="line">    # 设置服务器端回应客户度数据发送的最长等待时间，默认单位是毫秒，新版本haproxy使用timeout server替代。该参数向后兼容</span><br><span class="line"> </span><br><span class="line">listen status # 定义一个名为status的部分</span><br><span class="line">    bind 0.0.0.0:1080</span><br><span class="line">    # 定义监听的套接字</span><br><span class="line">    mode http</span><br><span class="line">    # 定义为HTTP模式</span><br><span class="line">    log global</span><br><span class="line">    # 继承global中log的定义</span><br><span class="line">    stats refresh 30s</span><br><span class="line">    # stats是haproxy的一个统计页面的套接字，该参数设置统计页面的刷新间隔为30s</span><br><span class="line">    stats uri /admin?stats</span><br><span class="line">    # 设置统计页面的uri为/admin?stats</span><br><span class="line">    stats realm Private lands</span><br><span class="line">    # 设置统计页面认证时的提示内容</span><br><span class="line">    stats auth admin:password</span><br><span class="line">    # 设置统计页面认证的用户和密码，如果要设置多个，另起一行写入即可</span><br><span class="line">    stats hide-version</span><br><span class="line">    # 隐藏统计页面上的haproxy版本信息</span><br><span class="line"> </span><br><span class="line">frontend http_80_in # 定义一个名为http_80_in的前端部分</span><br><span class="line">    bind 0.0.0.0:80</span><br><span class="line">    # http_80_in定义前端部分监听的套接字</span><br><span class="line">    mode http</span><br><span class="line">    # 定义为HTTP模式</span><br><span class="line">    log global</span><br><span class="line">    # 继承global中log的定义</span><br><span class="line">    option forwardfor</span><br><span class="line">    # 启用X-Forwarded-For，在requests头部插入客户端IP发送给后端的server，使后端server获取到客户端的真实IP</span><br><span class="line">    acl static_down nbsrv(static_server) lt 1</span><br><span class="line">    # 定义一个名叫static_down的acl，当backend static_sever中存活机器数小于1时会被匹配到</span><br><span class="line">    acl php_web url_reg /*.php$</span><br><span class="line">    #acl php_web path_end .php</span><br><span class="line">    # 定义一个名叫php_web的acl，当请求的url末尾是以.php结尾的，将会被匹配到，上面两种写法任选其一</span><br><span class="line">    acl static_web url_reg /*.(css|jpg|png|jpeg|js|gif)$</span><br><span class="line">    #acl static_web path_end .gif .png .jpg .css .js .jpeg</span><br><span class="line">    # 定义一个名叫static_web的acl，当请求的url末尾是以.css、.jpg、.png、.jpeg、.js、.gif结尾的，将会被匹配到，上面两种写法任选其一</span><br><span class="line">    use_backend php_server if static_down</span><br><span class="line">    # 如果满足策略static_down时，就将请求交予backend php_server</span><br><span class="line">    use_backend php_server if php_web</span><br><span class="line">    # 如果满足策略php_web时，就将请求交予backend php_server</span><br><span class="line">    use_backend static_server if static_web</span><br><span class="line">    # 如果满足策略static_web时，就将请求交予backend static_server</span><br><span class="line"> </span><br><span class="line">backend php_server #定义一个名为php_server的后端部分</span><br><span class="line">    mode http</span><br><span class="line">    # 设置为http模式</span><br><span class="line">    balance source</span><br><span class="line">    # 设置haproxy的调度算法为源地址hash</span><br><span class="line">    cookie SERVERID</span><br><span class="line">    # 允许向cookie插入SERVERID，每台服务器的SERVERID可在下面使用cookie关键字定义</span><br><span class="line">    option httpchk GET /test/index.php</span><br><span class="line">    # 开启对后端服务器的健康检测，通过GET /test/index.php来判断后端服务器的健康情况</span><br><span class="line">    server php_server_1 10.12.25.68:80 cookie 1 check inter 2000 rise 3 fall 3 weight 2</span><br><span class="line">    server php_server_2 10.12.25.72:80 cookie 2 check inter 2000 rise 3 fall 3 weight 1</span><br><span class="line">    server php_server_bak 10.12.25.79:80 cookie 3 check inter 1500 rise 3 fall 3 backup</span><br><span class="line">    # server语法：server [:port] [param*] # 使用server关键字来设置后端服务器；为后端服务器所设置的内部名称[php_server_1]，该名称将会呈现在日志或警报中、后端服务器的IP地址，支持端口映射[10.12.25.68:80]、指定该服务器的SERVERID为1[cookie 1]、接受健康监测[check]、监测的间隔时长，单位毫秒[inter 2000]、监测正常多少次后被认为后端服务器是可用的[rise 3]、监测失败多少次后被认为后端服务器是不可用的[fall 3]、分发的权重[weight 2]、最后为备份用的后端服务器，当正常的服务器全部都宕机后，才会启用备份服务器[backup]</span><br><span class="line"> </span><br><span class="line">backend static_server</span><br><span class="line">    mode http</span><br><span class="line">    option httpchk GET /test/index.html</span><br></pre></td></tr></table></figure>
 
-listen status # 定义一个名为status的部分
-    bind 0.0.0.0:1080
-    # 定义监听的套接字
-    mode http
-    # 定义为HTTP模式
-    log global
-    # 继承global中log的定义
-    stats refresh 30s
-    # stats是haproxy的一个统计页面的套接字，该参数设置统计页面的刷新间隔为30s
-    stats uri /admin?stats
-    # 设置统计页面的uri为/admin?stats
-    stats realm Private lands
-    # 设置统计页面认证时的提示内容
-    stats auth admin:password
-    # 设置统计页面认证的用户和密码，如果要设置多个，另起一行写入即可
-    stats hide-version
-    # 隐藏统计页面上的haproxy版本信息
 
-frontend http_80_in # 定义一个名为http_80_in的前端部分
-    bind 0.0.0.0:80
-    # http_80_in定义前端部分监听的套接字
-    mode http
-    # 定义为HTTP模式
-    log global
-    # 继承global中log的定义
-    option forwardfor
-    # 启用X-Forwarded-For，在requests头部插入客户端IP发送给后端的server，使后端server获取到客户端的真实IP
-    acl static_down nbsrv(static_server) lt 1
-    # 定义一个名叫static_down的acl，当backend static_sever中存活机器数小于1时会被匹配到
-    acl php_web url_reg /*.php$
-    #acl php_web path_end .php
-    # 定义一个名叫php_web的acl，当请求的url末尾是以.php结尾的，将会被匹配到，上面两种写法任选其一
-    acl static_web url_reg /*.(css|jpg|png|jpeg|js|gif)$
-    #acl static_web path_end .gif .png .jpg .css .js .jpeg
-    # 定义一个名叫static_web的acl，当请求的url末尾是以.css、.jpg、.png、.jpeg、.js、.gif结尾的，将会被匹配到，上面两种写法任选其一
-    use_backend php_server if static_down
-    # 如果满足策略static_down时，就将请求交予backend php_server
-    use_backend php_server if php_web
-    # 如果满足策略php_web时，就将请求交予backend php_server
-    use_backend static_server if static_web
-    # 如果满足策略static_web时，就将请求交予backend static_server
-
-backend php_server #定义一个名为php_server的后端部分
-    mode http
-    # 设置为http模式
-    balance source
-    # 设置haproxy的调度算法为源地址hash
-    cookie SERVERID
-    # 允许向cookie插入SERVERID，每台服务器的SERVERID可在下面使用cookie关键字定义
-    option httpchk GET /test/index.php
-    # 开启对后端服务器的健康检测，通过GET /test/index.php来判断后端服务器的健康情况
-    server php_server_1 10.12.25.68:80 cookie 1 check inter 2000 rise 3 fall 3 weight 2
-    server php_server_2 10.12.25.72:80 cookie 2 check inter 2000 rise 3 fall 3 weight 1
-    server php_server_bak 10.12.25.79:80 cookie 3 check inter 1500 rise 3 fall 3 backup
-    # server语法：server [:port] [param*] # 使用server关键字来设置后端服务器；为后端服务器所设置的内部名称[php_server_1]，该名称将会呈现在日志或警报中、后端服务器的IP地址，支持端口映射[10.12.25.68:80]、指定该服务器的SERVERID为1[cookie 1]、接受健康监测[check]、监测的间隔时长，单位毫秒[inter 2000]、监测正常多少次后被认为后端服务器是可用的[rise 3]、监测失败多少次后被认为后端服务器是不可用的[fall 3]、分发的权重[weight 2]、最后为备份用的后端服务器，当正常的服务器全部都宕机后，才会启用备份服务器[backup]
-
-backend static_server
-    mode http
-    option httpchk GET /test/index.html</code></pre>
     </div>
 
     
@@ -930,9 +621,9 @@ backend static_server
           
           <div class="post-tags">
             
-              <a href="/tags/haproxy/" <i class="fa fa-tag"></i>  haproxy</a>
-            
               <a href="/tags/负载均衡/" <i class="fa fa-tag"></i>  负载均衡</a>
+            
+              <a href="/tags/haproxy/" <i class="fa fa-tag"></i>  haproxy</a>
             
           </div>
         
@@ -1119,14 +810,14 @@ backend static_server
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">35k</span>
+    <span title="站点总字数">36k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">31 分钟</span>
+    <span title="站点阅读时长">33 分钟</span>
 </div>
 
     <span id="sitetime"></span>
@@ -1273,7 +964,6 @@ NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min
   });
 }, window.Valine);
 </script>
-
 
 
 

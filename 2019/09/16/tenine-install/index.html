@@ -31,7 +31,7 @@
     version: '7.4.0',
     exturl: false,
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":true},
-    copycode: {"enable":"ture","show_result":"ture","style":"flat"},
+    copycode: {"enable":false,"show_result":false,"style":"flat"},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: false,
@@ -57,18 +57,18 @@
   };
 </script>
 
-  <meta name="description" content="一、前言  Tengine是由淘宝网发起的Web服务器项目。它在Nginx的基础上，针对大访问量网站的需求，添加了很多高级功能和特性。 我个人很欣赏的一个功能，它有一个很好的dyups模块，可以动态上下线upstream中的后端机器，而不用重启服务   二、开始安装2.1 安装依赖yum install gcc gcc-c++ pcre pcre-devel zlib zlib-devel ope">
+  <meta name="description" content="一、前言  Tengine是由淘宝网发起的Web服务器项目。它在Nginx的基础上，针对大访问量网站的需求，添加了很多高级功能和特性。 我个人很欣赏的一个功能，它有一个很好的dyups模块，可以动态上下线upstream中的后端机器，而不用重启服务   二、开始安装2.1 安装依赖1yum install gcc gcc-c++ pcre pcre-devel zlib zlib-devel op">
 <meta name="keywords" content="tengine,负载均衡">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tengine安装">
 <meta property="og:url" content="http://loverbook.cn/2019/09/16/tenine-install/index.html">
 <meta property="og:site_name" content="Book&#39;s blog">
-<meta property="og:description" content="一、前言  Tengine是由淘宝网发起的Web服务器项目。它在Nginx的基础上，针对大访问量网站的需求，添加了很多高级功能和特性。 我个人很欣赏的一个功能，它有一个很好的dyups模块，可以动态上下线upstream中的后端机器，而不用重启服务   二、开始安装2.1 安装依赖yum install gcc gcc-c++ pcre pcre-devel zlib zlib-devel ope">
+<meta property="og:description" content="一、前言  Tengine是由淘宝网发起的Web服务器项目。它在Nginx的基础上，针对大访问量网站的需求，添加了很多高级功能和特性。 我个人很欣赏的一个功能，它有一个很好的dyups模块，可以动态上下线upstream中的后端机器，而不用重启服务   二、开始安装2.1 安装依赖1yum install gcc gcc-c++ pcre pcre-devel zlib zlib-devel op">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-09-22T03:07:30.572Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tengine安装">
-<meta name="twitter:description" content="一、前言  Tengine是由淘宝网发起的Web服务器项目。它在Nginx的基础上，针对大访问量网站的需求，添加了很多高级功能和特性。 我个人很欣赏的一个功能，它有一个很好的dyups模块，可以动态上下线upstream中的后端机器，而不用重启服务   二、开始安装2.1 安装依赖yum install gcc gcc-c++ pcre pcre-devel zlib zlib-devel ope">
+<meta name="twitter:description" content="一、前言  Tengine是由淘宝网发起的Web服务器项目。它在Nginx的基础上，针对大访问量网站的需求，添加了很多高级功能和特性。 我个人很欣赏的一个功能，它有一个很好的dyups模块，可以动态上下线upstream中的后端机器，而不用重启服务   二、开始安装2.1 安装依赖1yum install gcc gcc-c++ pcre pcre-devel zlib zlib-devel op">
   <link rel="canonical" href="http://loverbook.cn/2019/09/16/tenine-install/">
 
 
@@ -335,7 +335,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>803</span>
+              <span>809</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -364,7 +364,9 @@
 <li>我个人很欣赏的一个功能，它有一个很好的dyups模块，可以动态上下线upstream中的后端机器，而不用重启服务</li>
 </ul>
 </blockquote>
-<h3 id="二、开始安装"><a href="#二、开始安装" class="headerlink" title="二、开始安装"></a>二、开始安装</h3><h4 id="2-1-安装依赖"><a href="#2-1-安装依赖" class="headerlink" title="2.1 安装依赖"></a>2.1 安装依赖</h4><pre><code>yum install gcc gcc-c++ pcre pcre-devel zlib zlib-devel openssl openssl-devel lua-devel GeoIP GeoIP-devel GeoIP-data  systemd-devel -y</code></pre><a id="more"></a>
+<h3 id="二、开始安装"><a href="#二、开始安装" class="headerlink" title="二、开始安装"></a>二、开始安装</h3><h4 id="2-1-安装依赖"><a href="#2-1-安装依赖" class="headerlink" title="2.1 安装依赖"></a>2.1 安装依赖</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install gcc gcc-c++ pcre pcre-devel zlib zlib-devel openssl openssl-devel lua-devel GeoIP GeoIP-devel GeoIP-data  systemd-devel -y</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
 <br>
 
 <h4 id="2-2-下载解压"><a href="#2-2-下载解压" class="headerlink" title="2.2 下载解压"></a>2.2 下载解压</h4><blockquote>
@@ -373,12 +375,15 @@
 <li>解压到/root/目录下</li>
 </ul>
 </blockquote>
-<pre><code>tar zxvf  tengine-2.2.3.tar.gz</code></pre><h4 id="2-3-编译安装"><a href="#2-3-编译安装" class="headerlink" title="2.3 编译安装"></a>2.3 编译安装</h4><pre><code>cd tengine-2.2.3
-./configure --prefix=/usr/local/nginx --with-http_lua_module --with-http_dyups_module --with-http_dyups_lua_api --with-threads --with-http_v2_module --with-http_geoip_module --with-http_ssl_module --with-http_secure_link_module --add-module=/root/ngx_http_substitutions_filter_module --with-force-exit   --with-http_realip_module </code></pre><br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf  tengine-2.2.3.tar.gz</span><br></pre></td></tr></table></figure>
 
-<h4 id="2-4-服务启动"><a href="#2-4-服务启动" class="headerlink" title="2.4 服务启动"></a>2.4 服务启动</h4><pre><code>ln -s /usr/local/nginx/sbin/nginx /sbin/nginx
-nginx  -t
-nginx  -s reload</code></pre>
+<h4 id="2-3-编译安装"><a href="#2-3-编译安装" class="headerlink" title="2.3 编译安装"></a>2.3 编译安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd tengine-2.2.3</span><br><span class="line">./configure --prefix=/usr/local/nginx --with-http_lua_module --with-http_dyups_module --with-http_dyups_lua_api --with-threads --with-http_v2_module --with-http_geoip_module --with-http_ssl_module --with-http_secure_link_module --add-module=/root/ngx_http_substitutions_filter_module --with-force-exit   --with-http_realip_module</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h4 id="2-4-服务启动"><a href="#2-4-服务启动" class="headerlink" title="2.4 服务启动"></a>2.4 服务启动</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/local/nginx/sbin/nginx /sbin/nginx</span><br><span class="line">nginx  -t</span><br><span class="line">nginx  -s reload</span><br></pre></td></tr></table></figure>
+
+
     </div>
 
     
@@ -633,14 +638,14 @@ nginx  -s reload</code></pre>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">35k</span>
+    <span title="站点总字数">36k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">31 分钟</span>
+    <span title="站点阅读时长">33 分钟</span>
 </div>
 
     <span id="sitetime"></span>
@@ -787,7 +792,6 @@ NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min
   });
 }, window.Valine);
 </script>
-
 
 
 
