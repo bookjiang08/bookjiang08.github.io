@@ -57,19 +57,17 @@
   };
 </script>
 
-  <meta name="description" content="一、前言  Tengine是由淘宝网发起的Web服务器项目。它在Nginx的基础上，针对大访问量网站的需求，添加了很多高级功能和特性。 我个人很欣赏的一个功能，它有一个很好的dyups模块，可以动态上下线upstream中的后端机器，而不用重启服务   二、开始安装2.1 安装依赖yum install gcc gcc-c++ pcre pcre-devel zlib zlib-devel ope">
-<meta name="keywords" content="tengine,负载均衡">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Tengine安装">
-<meta property="og:url" content="http://loverbook.cn/2019/09/16/tenine-install/index.html">
+  <meta name="description" content="每天进步一点点">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Book&#39;s blog">
+<meta property="og:url" content="http://loverbook.cn/tags/思科防火墙/index.html">
 <meta property="og:site_name" content="Book&#39;s blog">
-<meta property="og:description" content="一、前言  Tengine是由淘宝网发起的Web服务器项目。它在Nginx的基础上，针对大访问量网站的需求，添加了很多高级功能和特性。 我个人很欣赏的一个功能，它有一个很好的dyups模块，可以动态上下线upstream中的后端机器，而不用重启服务   二、开始安装2.1 安装依赖yum install gcc gcc-c++ pcre pcre-devel zlib zlib-devel ope">
+<meta property="og:description" content="每天进步一点点">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-22T03:07:30.572Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tengine安装">
-<meta name="twitter:description" content="一、前言  Tengine是由淘宝网发起的Web服务器项目。它在Nginx的基础上，针对大访问量网站的需求，添加了很多高级功能和特性。 我个人很欣赏的一个功能，它有一个很好的dyups模块，可以动态上下线upstream中的后端机器，而不用重启服务   二、开始安装2.1 安装依赖yum install gcc gcc-c++ pcre pcre-devel zlib zlib-devel ope">
-  <link rel="canonical" href="http://loverbook.cn/2019/09/16/tenine-install/">
+<meta name="twitter:title" content="Book&#39;s blog">
+<meta name="twitter:description" content="每天进步一点点">
+  <link rel="canonical" href="http://loverbook.cn/tags/思科防火墙/">
 
 
 <script id="page-configurations">
@@ -77,13 +75,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: true,
+    isPost: false,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>Tengine安装 | Book's blog</title>
+  <title>标签: 思科防火墙 | Book's blog</title>
   
 
 
@@ -203,6 +201,24 @@
 
     
 
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
 </nav>
   <div class="site-search">
     <div class="popup search-popup">
@@ -241,250 +257,64 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-  <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="http://loverbook.cn/2019/09/16/tenine-install/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Book Jiang">
-      <meta itemprop="description" content="每天进步一点点">
-      <meta itemprop="image" content="/images/book.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Book's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Tengine安装
-
-          
+  <div class="post-block tag">
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1 class="collection-header">思科防火墙<small>标签</small>
         </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-16 22:50:28" itemprop="dateCreated datePublished" datetime="2019-09-16T22:50:28+08:00">2019-09-16</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-22 11:07:30" itemprop="dateModified" datetime="2019-09-22T11:07:30+08:00">2019-09-22</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/负载均衡/" itemprop="url" rel="index"><span itemprop="name">负载均衡</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
-            </span>
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2019/09/16/tenine-install/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/09/16/tenine-install/" itemprop="commentCount"></span></a>
-  </span>
-  
-  
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">本文字数：</span>
-              
-              <span>803</span>
-            </span>
-          
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              
-              <span>1 分钟</span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h3><blockquote>
-<ul>
-<li>Tengine是由淘宝网发起的Web服务器项目。它在Nginx的基础上，针对大访问量网站的需求，添加了很多高级功能和特性。</li>
-<li>我个人很欣赏的一个功能，它有一个很好的dyups模块，可以动态上下线upstream中的后端机器，而不用重启服务</li>
-</ul>
-</blockquote>
-<h3 id="二、开始安装"><a href="#二、开始安装" class="headerlink" title="二、开始安装"></a>二、开始安装</h3><h4 id="2-1-安装依赖"><a href="#2-1-安装依赖" class="headerlink" title="2.1 安装依赖"></a>2.1 安装依赖</h4><pre><code>yum install gcc gcc-c++ pcre pcre-devel zlib zlib-devel openssl openssl-devel lua-devel GeoIP GeoIP-devel GeoIP-data  systemd-devel -y</code></pre><a id="more"></a>
-<br>
-
-<h4 id="2-2-下载解压"><a href="#2-2-下载解压" class="headerlink" title="2.2 下载解压"></a>2.2 下载解压</h4><blockquote>
-<ul>
-<li>从官网 <code>http://tengine.taobao.org/</code>下载<code>tengine-2.2.3.tar.gz</code></li>
-<li>解压到/root/目录下</li>
-</ul>
-</blockquote>
-<pre><code>tar zxvf  tengine-2.2.3.tar.gz</code></pre><h4 id="2-3-编译安装"><a href="#2-3-编译安装" class="headerlink" title="2.3 编译安装"></a>2.3 编译安装</h4><pre><code>cd tengine-2.2.3
-./configure --prefix=/usr/local/nginx --with-http_lua_module --with-http_dyups_module --with-http_dyups_lua_api --with-threads --with-http_v2_module --with-http_geoip_module --with-http_ssl_module --with-http_secure_link_module --add-module=/root/ngx_http_substitutions_filter_module --with-force-exit   --with-http_realip_module </code></pre><br>
-
-<h4 id="2-4-服务启动"><a href="#2-4-服务启动" class="headerlink" title="2.4 服务启动"></a>2.4 服务启动</h4><pre><code>ln -s /usr/local/nginx/sbin/nginx /sbin/nginx
-nginx  -t
-nginx  -s reload</code></pre>
-    </div>
-
-    
-    
-    
-        
-      
-        <div id="reward-container">
-  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
-    打赏
-  </button>
-  <div id="qr" style="display: none;">
-        
-      
-      <div style="display: inline-block">
-        <img src="/images/wechat.jpg" alt="Book Jiang 微信支付">
-        <p>微信支付</p>
       </div>
 
-  </div>
-</div>
-
-      
-        
-
-<div>
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者： </strong>Book Jiang</li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="http://loverbook.cn/2019/09/16/tenine-install/" title="Tengine安装">http://loverbook.cn/2019/09/16/tenine-install/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
-</ul>
-</div>
-
       
 
+  
+  
+
+  
     
-    
-    <div>
-      
-      <div>
-    
-        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
-    
-</div>
-      
+    <div class="collection-year">
+      <h1 class="collection-header">2019</h1>
     </div>
-    
-
-
-      <footer class="post-footer">
-          
-            
-          
-          <div class="post-tags">
-            
-              <a href="/tags/tengine/" <i class="fa fa-tag"></i>  tengine</a>
-            
-              <a href="/tags/负载均衡/" <i class="fa fa-tag"></i>  负载均衡</a>
-            
-          </div>
-        
-
-        
-
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-              
-                <a href="/2019/09/03/Anti-reptile/" rel="next" title="Tengine配置防百度爬虫">
-                  <i class="fa fa-chevron-left"></i> Tengine配置防百度爬虫
-                </a>
-              
-            </div>
-
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2019/09/21/haproxy/" rel="prev" title="Keepalived+Haproxy高可用怎么玩">
-                  Keepalived+Haproxy高可用怎么玩 <i class="fa fa-chevron-right"></i>
-                </a>
-              
-            </div>
-          </div>
-        
-      </footer>
-    
-  </div>
   
-  
-  
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+          <a class="post-title-link" href="/2019/07/22/cisco-asa/" itemprop="url">
+            <span itemprop="name">Cisco asa防火墙配置管理</span>
+          </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2019-07-22T16:30:00+08:00"
+              content="2019-07-22">
+          07-22
+        </time>
+      </div>
+
+    </header>
   </article>
 
+
+
+    </div>
   </div>
+  
+  
+  
+
+  
+
 
 
           </div>
           
-    
-    <div class="comments" id="comments"></div>
-  
 
         </div>
           
@@ -499,11 +329,6 @@ nginx  -s reload</code></pre>
 
   <aside class="sidebar">
     <div class="sidebar-inner">
-        
-        
-        
-        
-      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
@@ -516,8 +341,6 @@ nginx  -s reload</code></pre>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、前言"><span class="nav-text">一、前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、开始安装"><span class="nav-text">二、开始安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-安装依赖"><span class="nav-text">2.1 安装依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-下载解压"><span class="nav-text">2.2 下载解压</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-编译安装"><span class="nav-text">2.3 编译安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-服务启动"><span class="nav-text">2.4 服务启动</span></a></li></ol></li></ol></div>
-        
       </div>
       <!--/noindex-->
 
