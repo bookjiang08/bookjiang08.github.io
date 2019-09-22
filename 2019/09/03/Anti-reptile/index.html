@@ -65,7 +65,7 @@
 <meta property="og:site_name" content="Book&#39;s blog">
 <meta property="og:description" content="发现此xxx.xxxx.cn一直被下面这个ua爬取:   Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)  tengine配置if判断ua，挡掉这个爬虫">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-22T03:05:53.908Z">
+<meta property="og:updated_time" content="2019-09-22T03:59:43.607Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tengine配置防百度爬虫">
 <meta name="twitter:description" content="发现此xxx.xxxx.cn一直被下面这个ua爬取:   Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)  tengine配置if判断ua，挡掉这个爬虫">
@@ -286,7 +286,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-22 11:05:53" itemprop="dateModified" datetime="2019-09-22T11:05:53+08:00">2019-09-22</time>
+                <time title="修改时间：2019-09-22 11:59:43" itemprop="dateModified" datetime="2019-09-22T11:59:43+08:00">2019-09-22</time>
               </span>
             
           
@@ -373,7 +373,7 @@
 
 
 
-<h2 id="1-配置conf"><a href="#1-配置conf" class="headerlink" title="1.配置conf"></a>1.配置conf</h2><pre><code>vim xxx.xxxx.cn 
+<h3 id="1-配置conf"><a href="#1-配置conf" class="headerlink" title="1.配置conf"></a>1.配置conf</h3><pre><code>vim xxx.xxxx.cn 
 #添加以下配置
  if ($http_user_agent ~ &quot;Mozilla/5.0\ \(compatible;\ Baiduspider/2.0;\ \+http://www.baidu.com/search/spider.html&quot;)
         {
@@ -386,9 +386,9 @@
         }</code></pre><br>
 
 
-<h2 id="2-测试nginx-t-和-nginx-s-reload"><a href="#2-测试nginx-t-和-nginx-s-reload" class="headerlink" title="2.测试nginx  -t 和 nginx -s  reload"></a>2.测试<code>nginx  -t</code> 和 <code>nginx -s  reload</code></h2><br>
+<h3 id="2-测试nginx-t-和-nginx-s-reload"><a href="#2-测试nginx-t-和-nginx-s-reload" class="headerlink" title="2.测试nginx  -t 和 nginx -s  reload"></a>2.测试<code>nginx  -t</code> 和 <code>nginx -s  reload</code></h3><br>
 
-<h2 id="3-额外补充方法："><a href="#3-额外补充方法：" class="headerlink" title="3.额外补充方法："></a>3.额外补充方法：</h2><h3 id="3-1-新建user-agent-deny-conf配置文件"><a href="#3-1-新建user-agent-deny-conf配置文件" class="headerlink" title="3.1 新建user-agent_deny.conf配置文件"></a>3.1 新建<code>user-agent_deny.conf</code>配置文件</h3><pre><code>#禁止Scrapy等工具的抓取
+<h3 id="3-额外补充方法："><a href="#3-额外补充方法：" class="headerlink" title="3.额外补充方法："></a>3.额外补充方法：</h3><h4 id="3-1-新建user-agent-deny-conf配置文件"><a href="#3-1-新建user-agent-deny-conf配置文件" class="headerlink" title="3.1 新建user-agent_deny.conf配置文件"></a>3.1 新建<code>user-agent_deny.conf</code>配置文件</h4><pre><code>#禁止Scrapy等工具的抓取
 if ($http_user_agent ~* (Scrapy|Curl|HttpClient)) {
     return 403;
 }
@@ -404,7 +404,7 @@ if ($request_method !~ ^(GET|HEAD|POST)$) {
 }
 #然后直接reload即可</code></pre><br>
 
-<h3 id="3-2-添加default-server"><a href="#3-2-添加default-server" class="headerlink" title="3.2 添加default_server;"></a>3.2 添加default_server;</h3><pre><code> server {
+<h4 id="3-2-添加default-server"><a href="#3-2-添加default-server" class="headerlink" title="3.2 添加default_server;"></a>3.2 添加default_server;</h4><pre><code> server {
             listen       81  default_server;
             server_name  _;
             return       403;
@@ -553,7 +553,7 @@ if ($request_method !~ ^(GET|HEAD|POST)$) {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-配置conf"><span class="nav-text">1.配置conf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-测试nginx-t-和-nginx-s-reload"><span class="nav-text">2.测试nginx  -t 和 nginx -s  reload</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-额外补充方法："><span class="nav-text">3.额外补充方法：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-新建user-agent-deny-conf配置文件"><span class="nav-text">3.1 新建user-agent_deny.conf配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-添加default-server"><span class="nav-text">3.2 添加default_server;</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-配置conf"><span class="nav-text">1.配置conf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-测试nginx-t-和-nginx-s-reload"><span class="nav-text">2.测试nginx  -t 和 nginx -s  reload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-额外补充方法："><span class="nav-text">3.额外补充方法：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-新建user-agent-deny-conf配置文件"><span class="nav-text">3.1 新建user-agent_deny.conf配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-添加default-server"><span class="nav-text">3.2 添加default_server;</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -631,6 +631,23 @@ if ($request_method !~ ^(GET|HEAD|POST)$) {
 
 
       </div>
+     
+
+
+       
+       <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+      <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/haproxy/">haproxy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-运维/">linux 运维</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tengine/">tengine</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/思科交换机/">思科交换机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/思科防火墙/">思科防火墙</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a><span class="tag-list-count">3</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+
+
 
     </div>
   </aside>
