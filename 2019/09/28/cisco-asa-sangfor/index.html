@@ -75,7 +75,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/09/28/Erfyn4o8QhuUp9i.png">
 <meta property="og:image" content="https://i.loli.net/2019/09/28/enKlmjDcE1f6Yhq.png">
 <meta property="og:image" content="https://i.loli.net/2019/09/28/9SdbnaE2xIhgm5C.png">
-<meta property="og:updated_time" content="2019-09-27T19:04:08.964Z">
+<meta property="og:updated_time" content="2019-09-27T19:07:06.150Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cisco asa防火墙与深信服设备打通IPsec-VPN">
 <meta name="twitter:description" content="一、前言 为了实现北京分部能够和苏州总部内部局域网互通，先通过两边的设备打通IPSEC 点到点VPN隧道 设备：Cisco asa 5545（总部）、深信服SG设备（北京）">
@@ -286,7 +286,7 @@
                 
               
 
-              <time title="创建时间：2019-09-28 01:18:00 / 修改时间：03:04:08" itemprop="dateCreated datePublished" datetime="2019-09-28T01:18:00+08:00">2019-09-28</time>
+              <time title="创建时间：2019-09-28 01:18:00 / 修改时间：03:07:06" itemprop="dateCreated datePublished" datetime="2019-09-28T01:18:00+08:00">2019-09-28</time>
             </span>
           
             
@@ -371,7 +371,7 @@
 
 <h3 id="二、配置Cisco-asa防火墙"><a href="#二、配置Cisco-asa防火墙" class="headerlink" title="二、配置Cisco asa防火墙"></a>二、配置Cisco asa防火墙</h3><h4 id="2-1-建立地址对象"><a href="#2-1-建立地址对象" class="headerlink" title="2.1 建立地址对象"></a>2.1 建立地址对象</h4><blockquote>
 <ul>
-<li>苏州总部的三个网段109、110、111：</li>
+<li>苏州总部的三个网段109、110、111</li>
 <li>北京的网段30网段</li>
 </ul>
 </blockquote>
@@ -397,9 +397,9 @@
 
 <br>
 
-<h4 id="2-4-配置ikev1"><a href="#2-4-配置ikev1" class="headerlink" title="2.4 配置ikev1"></a>2.4 配置ikev1</h4><blockquote>
+<h4 id="2-4-配置第一阶段ikev1"><a href="#2-4-配置第一阶段ikev1" class="headerlink" title="2.4 配置第一阶段ikev1"></a>2.4 配置第一阶段ikev1</h4><blockquote>
 <ul>
-<li>第一阶段ikev1：8.4（2）版本及以上的ASA支持2个版本的IKE，在此处我们选择IKEV1</li>
+<li>Cisco asa 8.4（2）版本及以上的ASA支持2个版本的IKE，在此处我们选择IKEV1</li>
 <li>创建一个策略名为120,定义两边共同的协商算法</li>
 </ul>
 </blockquote>
@@ -592,7 +592,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、前言"><span class="nav-text">一、前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、配置Cisco-asa防火墙"><span class="nav-text">二、配置Cisco asa防火墙</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-建立地址对象"><span class="nav-text">2.1 建立地址对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-创建Access-list访问列表"><span class="nav-text">2.2 创建Access-list访问列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-Nat转换"><span class="nav-text">2.3 Nat转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-配置ikev1"><span class="nav-text">2.4 配置ikev1</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、分部深信服SG配置"><span class="nav-text">三、分部深信服SG配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-VPN配置"><span class="nav-text">3.1 VPN配置</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、前言"><span class="nav-text">一、前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、配置Cisco-asa防火墙"><span class="nav-text">二、配置Cisco asa防火墙</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-建立地址对象"><span class="nav-text">2.1 建立地址对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-创建Access-list访问列表"><span class="nav-text">2.2 创建Access-list访问列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-Nat转换"><span class="nav-text">2.3 Nat转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-配置第一阶段ikev1"><span class="nav-text">2.4 配置第一阶段ikev1</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、分部深信服SG配置"><span class="nav-text">三、分部深信服SG配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-VPN配置"><span class="nav-text">3.1 VPN配置</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
