@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Tengine日常操作攻略</title>
+      <link href="/2019/09/28/tenine-operation/"/>
+      <url>/2019/09/28/tenine-operation/</url>
+      
+        <content type="html"><![CDATA[<h3 id="一、常用操作"><a href="#一、常用操作" class="headerlink" title="一、常用操作"></a>一、常用操作</h3><h4 id="1-1-重定向"><a href="#1-1-重定向" class="headerlink" title="1.1 重定向"></a>1.1 重定向</h4><blockquote><ul><li>302 临时重定向</li></ul></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /query &#123;</span><br><span class="line">          rewrite ^(.*)$  https://docs.qq.com/doc/DVEtQbVdOcUpTZWl2 redirect;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure><blockquote><ul><li>301 永久重定向</li></ul></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /ceshi &#123;</span><br><span class="line">          rewrite ^(.*)$  https://$host$1 permanent;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure><br><h4 id="1-2-配置返回403"><a href="#1-2-配置返回403" class="headerlink" title="1.2 配置返回403"></a>1.2 配置返回403</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /abcd &#123;</span><br><span class="line">         return 404;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure><h4 id="1-3-拒绝全部访问"><a href="#1-3-拒绝全部访问" class="headerlink" title="1.3 拒绝全部访问"></a>1.3 拒绝全部访问</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /configs/ &#123;</span><br><span class="line">         deny all;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure><h4 id="1-4-拒绝某一个IP"><a href="#1-4-拒绝某一个IP" class="headerlink" title="1.4 拒绝某一个IP"></a>1.4 拒绝某一个IP</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">       deny 125.119.249.65;</span><br><span class="line">       allow all;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 负载均衡 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> tengine </tag>
+            
+            <tag> 负载均衡 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Cisco asa防火墙与深信服设备打通IPsec-VPN</title>
       <link href="/2019/09/28/cisco-asa-sangfor/"/>
       <url>/2019/09/28/cisco-asa-sangfor/</url>
