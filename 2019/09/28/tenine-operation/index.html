@@ -65,7 +65,7 @@
 <meta property="og:site_name" content="Book&#39;s blog">
 <meta property="og:description" content="一、常用操作1.1 重定向 302 临时重定向  123location /query &amp;#123;          rewrite ^(.*)$  https://docs.qq.com/doc/DVEtQbVdOcUpTZWl2 redirect;   &amp;#125;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-28T15:38:23.194Z">
+<meta property="og:updated_time" content="2019-09-28T15:43:02.976Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tengine日常操作攻略">
 <meta name="twitter:description" content="一、常用操作1.1 重定向 302 临时重定向  123location /query &amp;#123;          rewrite ^(.*)$  https://docs.qq.com/doc/DVEtQbVdOcUpTZWl2 redirect;   &amp;#125;">
@@ -275,7 +275,7 @@
                 
               
 
-              <time title="创建时间：2019-09-28 19:52:28 / 修改时间：23:38:23" itemprop="dateCreated datePublished" datetime="2019-09-28T19:52:28+08:00">2019-09-28</time>
+              <time title="创建时间：2019-09-28 19:52:28 / 修改时间：23:43:02" itemprop="dateCreated datePublished" datetime="2019-09-28T19:52:28+08:00">2019-09-28</time>
             </span>
           
             
@@ -364,10 +364,10 @@
 
 <br>
 
-<h4 id="1-2-配置返回403"><a href="#1-2-配置返回403" class="headerlink" title="1.2 配置返回403"></a>1.2 配置返回403</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /abcd &#123;</span><br><span class="line">         return 404;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="1-2-配置返回403"><a href="#1-2-配置返回403" class="headerlink" title="1.2 配置返回403"></a>1.2 配置返回403</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location /abcd &#123;</span><br><span class="line">         return 403;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>正则匹配返回403</li>
+<li>if嵌套语句返回403</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">set $flag 0;</span><br><span class="line">if ($args ~* &quot;occupyStock&quot;) &#123;</span><br><span class="line">    set $flag &quot;$&#123;flag&#125;1&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">if ($flag = &quot;01&quot;) &#123;</span><br><span class="line">    return 403;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
@@ -381,19 +381,19 @@
 
 <br>
 
-<h4 id="1-5-代理"><a href="#1-5-代理" class="headerlink" title="1.5 代理"></a>1.5 代理</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">location /thirdparty &#123;</span><br><span class="line">       proxy_redirect off;</span><br><span class="line">       proxy_set_header Host app.jia-fu.cn;</span><br><span class="line">       proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">       proxy_pass http://thirdparty_host/thirdparty;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="1-5-代理"><a href="#1-5-代理" class="headerlink" title="1.5 代理"></a>1.5 代理</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">location /thirdparty &#123;</span><br><span class="line">       proxy_redirect off;</span><br><span class="line">       proxy_set_header Host www.512book.cn;</span><br><span class="line">       proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">       proxy_pass http://www.512book.cn/thirtparty;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 
 <br>
 
 <h4 id="1-6-Upstream健康检查模块"><a href="#1-6-Upstream健康检查模块" class="headerlink" title="1.6 Upstream健康检查模块"></a>1.6 Upstream健康检查模块</h4><ul>
 <li>tcp协议，适用于后端是linux主机</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> upstream  www_book_cn &#123;</span><br><span class="line">    keepalive 32;</span><br><span class="line">    keepalive_timeout 30s;</span><br><span class="line">    check interval=1000 rise=2 fall=3 timeout=1000 type=tcp;</span><br><span class="line">    check_keepalive_requests 10000;</span><br><span class="line">    server 10.10.12.19:8797;</span><br><span class="line">    server 10.10.12.37:8797;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> upstream  www_512book_cn &#123;</span><br><span class="line">    keepalive 32;</span><br><span class="line">    keepalive_timeout 30s;</span><br><span class="line">    check interval=1000 rise=2 fall=3 timeout=1000 type=tcp;</span><br><span class="line">    check_keepalive_requests 10000;</span><br><span class="line">    server 10.10.12.19:8797;</span><br><span class="line">    server 10.10.12.37:8797;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>http协议，适用于后端是winserver web站点服务</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">upstream  www_book_cn &#123;</span><br><span class="line">     least_conn;</span><br><span class="line">     keepalive 32;</span><br><span class="line">     keepalive_timeout 30s;</span><br><span class="line">     check interval=3000 rise=2 fall=3 timeout=1000 type=http default_down=false;</span><br><span class="line">     check_http_send &quot;GET /_stats/build.txt HTTP/1.1\r\nHost: localhost\r\nConnection: keep-alive\r\n\r\n&quot;;</span><br><span class="line">     check_keepalive_requests 10000;</span><br><span class="line">     server 10.10.12.19:8797;</span><br><span class="line">     server 10.10.12.37:8797;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">upstream  www_512book_cn &#123;</span><br><span class="line">     least_conn;</span><br><span class="line">     keepalive 32;</span><br><span class="line">     keepalive_timeout 30s;</span><br><span class="line">     check interval=3000 rise=2 fall=3 timeout=1000 type=http default_down=false;</span><br><span class="line">     check_http_send &quot;GET /_stats/build.txt HTTP/1.1\r\nHost: localhost\r\nConnection: keep-alive\r\n\r\n&quot;;</span><br><span class="line">     check_keepalive_requests 10000;</span><br><span class="line">     server 10.10.12.19:8797;</span><br><span class="line">     server 10.10.12.37:8797;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 
 <br>
     </div>
