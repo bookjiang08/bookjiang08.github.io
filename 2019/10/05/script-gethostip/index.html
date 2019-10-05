@@ -57,17 +57,19 @@
   };
 </script>
 
-  <meta name="description" content="每天进步一点点">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Book&#39;s blog">
-<meta property="og:url" content="http://loverbook.cn/tags/haproxy/index.html">
+  <meta name="description" content="一、背景 现在要求通过api接口，把腾讯云上所有的主机实例名称和对应内网ip地址抓取下来保存到dnsmasq文件中，供内部解析使用">
+<meta name="keywords" content="linux 运维,脚本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python脚本抓取腾讯云上主机名称及对应IP">
+<meta property="og:url" content="http://loverbook.cn/2019/10/05/script-gethostip/index.html">
 <meta property="og:site_name" content="Book&#39;s blog">
-<meta property="og:description" content="每天进步一点点">
+<meta property="og:description" content="一、背景 现在要求通过api接口，把腾讯云上所有的主机实例名称和对应内网ip地址抓取下来保存到dnsmasq文件中，供内部解析使用">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-10-05T14:06:35.345Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Book&#39;s blog">
-<meta name="twitter:description" content="每天进步一点点">
-  <link rel="canonical" href="http://loverbook.cn/tags/haproxy/">
+<meta name="twitter:title" content="Python脚本抓取腾讯云上主机名称及对应IP">
+<meta name="twitter:description" content="一、背景 现在要求通过api接口，把腾讯云上所有的主机实例名称和对应内网ip地址抓取下来保存到dnsmasq文件中，供内部解析使用">
+  <link rel="canonical" href="http://loverbook.cn/2019/10/05/script-gethostip/">
 
 
 <script id="page-configurations">
@@ -75,13 +77,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>标签: haproxy | Book's blog</title>
+  <title>Python脚本抓取腾讯云上主机名称及对应IP | Book's blog</title>
   
 
 
@@ -201,24 +203,6 @@
 
     
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
 </nav>
   <div class="site-search">
     <div class="popup search-popup">
@@ -257,64 +241,234 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-  <div class="post-block tag">
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">haproxy<small>标签</small>
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://loverbook.cn/2019/10/05/script-gethostip/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Book Jiang">
+      <meta itemprop="description" content="每天进步一点点">
+      <meta itemprop="image" content="/images/book.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Book's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Python脚本抓取腾讯云上主机名称及对应IP
+
+          
         </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-05 22:02:28 / 修改时间：22:06:35" itemprop="dateCreated datePublished" datetime="2019-10-05T22:02:28+08:00">2019-10-05</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/脚本/" itemprop="url" rel="index"><span itemprop="name">脚本</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/10/05/script-gethostip/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/10/05/script-gethostip/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>2.2k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>2 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h3><ul>
+<li><p>现在要求通过api接口，把腾讯云上所有的主机实例名称和对应内网ip地址抓取下来保存到dnsmasq文件中，供内部解析使用</p>
+<a id="more"></a>
+</li>
+<li><p>公司内部有自己搭建的DNSMasq集群，用来解析主机名及对应IP。因为几千台机器，管理时大家都是通过主机名来区别什么服务,前提是每台主机命名要符合规范</p>
+</li>
+</ul>
+<br>
+
+<h3 id="二、脚本"><a href="#二、脚本" class="headerlink" title="二、脚本"></a>二、脚本</h3><h4 id="2-1-python脚本"><a href="#2-1-python脚本" class="headerlink" title="2.1 python脚本"></a>2.1 python脚本</h4><ul>
+<li>Vim /root/python/GetDNS.py </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">#! /usr/bin/env python3</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"></span><br><span class="line">import os</span><br><span class="line">from tencentcloud.common import credential</span><br><span class="line">from tencentcloud.common.exception.tencent_cloud_sdk_exception import TencentCloudSDKException</span><br><span class="line">from tencentcloud.cvm.v20170312 import cvm_client, models</span><br><span class="line"></span><br><span class="line">#HOST_FILE=&quot;/etc/dnsmasq.hosts&quot;</span><br><span class="line">#if os.path.exists(HOST_FILE):</span><br><span class="line">#    pass</span><br><span class="line">#else:</span><br><span class="line">#    print(&quot;没有发现DNS FILE，将会创建！&quot;)</span><br><span class="line">#    os.system(&quot;touch /etc/dnsmasq.hosts&quot;)</span><br><span class="line">def get_exist():</span><br><span class="line">    exist_ip = []</span><br><span class="line">    if not os.path.exists(&apos;/etc/dnsmasq.hosts&apos;):</span><br><span class="line">        return exist_ip</span><br><span class="line">    with open(&apos;/etc/dnsmasq.hosts&apos;, &apos;r&apos;) as f:</span><br><span class="line">        for data in f.readlines():</span><br><span class="line">            exist_ip.append(data.strip().split(&apos; &apos;)[0])</span><br><span class="line">    return exist_ip</span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">def add_data():</span><br><span class="line">    secretId = &apos;AKIDY1JQOj4yTq58zhuXfbNFwWv9F7sT757x&apos;</span><br><span class="line">    secretKey = &apos;nPq580gCZkjYBrdPvKYaR6ZqzxlPtCJx&apos;</span><br><span class="line">    cred = credential.Credential(secretId=secretId, secretKey=secretKey)</span><br><span class="line">    client = cvm_client.CvmClient(cred, &quot;ap-shanghai&quot;)</span><br><span class="line">    req = models.DescribeInstancesRequest()</span><br><span class="line">    resp = client.DescribeInstances(req)</span><br><span class="line">    exist_ip = get_exist()</span><br><span class="line">    for i in range(int(resp.TotalCount / 20) + 1):</span><br><span class="line">        req.Offset = i * 20</span><br><span class="line">        resp = client.DescribeInstances(req)</span><br><span class="line">        for j in resp.InstanceSet:</span><br><span class="line">            if j.PrivateIpAddresses[0] in exist_ip:</span><br><span class="line">                continue</span><br><span class="line">            line = &apos;&#123;&#125; &#123;&#125;.ad.tuhu.cn&apos;.format(j.PrivateIpAddresses[0], j.InstanceName)</span><br><span class="line">            #line = &apos;&#123;&#125; &#123;&#125;&apos;.format(j.PrivateIpAddresses[0], j.InstanceName)</span><br><span class="line">            with open(&apos;/etc/dnsmasq.hosts&apos;, &apos;a+&apos;) as f:</span><br><span class="line">                f.write(line + &apos;\n&apos;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    add_data()</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h4 id="2-2-定时任务"><a href="#2-2-定时任务" class="headerlink" title="2.2 定时任务"></a>2.2 定时任务</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*/1  * * * * echo `date`&gt;&gt;/var/log/dnsmasq/getlist.log &amp;&amp; python /root/python/GetDNS.py  &gt;&gt;/var/log/dnsmasq/getlist.log</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        
+      
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechat.jpg" alt="Book Jiang 微信支付">
+        <p>微信支付</p>
       </div>
+
+  </div>
+</div>
+
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Book Jiang</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://loverbook.cn/2019/10/05/script-gethostip/" title="Python脚本抓取腾讯云上主机名称及对应IP">http://loverbook.cn/2019/10/05/script-gethostip/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
 
       
 
-  
-  
-
-  
     
-    <div class="collection-year">
-      <h1 class="collection-header">2019</h1>
+    
+    <div>
+      
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
     </div>
-  
+    
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      <h2 class="post-title">
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/linux-运维/" <i class="fa fa-tag"></i>  linux 运维</a>
+            
+              <a href="/tags/脚本/" <i class="fa fa-tag"></i>  脚本</a>
+            
+          </div>
         
-          <a class="post-title-link" href="/2019/09/21/haproxy/" itemprop="url">
-            <span itemprop="name">Keepalived+Haproxy高可用怎么玩</span>
-          </a>
+
         
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-09-21T21:05:28+08:00"
-              content="2019-09-21">
-          09-21
-        </time>
-      </div>
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/09/28/tenine-operation/" rel="next" title="Tengine日常操作攻略">
+                  <i class="fa fa-chevron-left"></i> Tengine日常操作攻略
+                </a>
+              
+            </div>
 
-    </header>
-  </article>
+            <span class="post-nav-divider"></span>
 
-
-
-    </div>
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
   </div>
   
   
   
+  </article>
 
-  
-
+  </div>
 
 
           </div>
           
+    
+    <div class="comments" id="comments"></div>
+  
 
         </div>
           
@@ -329,6 +483,11 @@
 
   <aside class="sidebar">
     <div class="sidebar-inner">
+        
+        
+        
+        
+      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
@@ -341,6 +500,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、背景"><span class="nav-text">一、背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、脚本"><span class="nav-text">二、脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-python脚本"><span class="nav-text">2.1 python脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-定时任务"><span class="nav-text">2.2 定时任务</span></a></li></ol></li></ol></div>
+        
       </div>
       <!--/noindex-->
 
