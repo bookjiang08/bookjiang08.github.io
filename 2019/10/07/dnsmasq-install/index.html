@@ -65,7 +65,7 @@
 <meta property="og:site_name" content="Book&#39;s blog">
 <meta property="og:description" content="一、Dnsmasq介绍1.1 简介 Dnsmasq是一个小巧且方便地用于配置DNS和DHCP的工具，作为域名解析服务器(DNS)，dnsmasq可以通过缓存 DNS 请求来提高对访问过的网址的连接速度。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-07T03:37:01.612Z">
+<meta property="og:updated_time" content="2019-10-07T11:58:40.748Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dnsmasq安装及配置">
 <meta name="twitter:description" content="一、Dnsmasq介绍1.1 简介 Dnsmasq是一个小巧且方便地用于配置DNS和DHCP的工具，作为域名解析服务器(DNS)，dnsmasq可以通过缓存 DNS 请求来提高对访问过的网址的连接速度。">
@@ -275,7 +275,7 @@
                 
               
 
-              <time title="创建时间：2019-10-07 06:50:38 / 修改时间：11:37:01" itemprop="dateCreated datePublished" datetime="2019-10-07T06:50:38+08:00">2019-10-07</time>
+              <time title="创建时间：2019-10-07 06:50:38 / 修改时间：19:58:40" itemprop="dateCreated datePublished" datetime="2019-10-07T06:50:38+08:00">2019-10-07</time>
             </span>
           
             
@@ -351,16 +351,16 @@
 
       
         <h3 id="一、Dnsmasq介绍"><a href="#一、Dnsmasq介绍" class="headerlink" title="一、Dnsmasq介绍"></a>一、Dnsmasq介绍</h3><h4 id="1-1-简介"><a href="#1-1-简介" class="headerlink" title="1.1 简介"></a>1.1 简介</h4><blockquote>
-<p>Dnsmasq是一个小巧且方便地用于配置DNS和DHCP的工具，作为域名解析服务器(DNS)，dnsmasq可以通过缓存 DNS 请求来提高对访问过的网址的连接速度。</p>
+<p><code>Dnsmasq</code>是一个小巧且方便地用于配置DNS和DHCP的工具，作为域名解析服务器(DNS)，dnsmasq可以通过缓存 DNS 请求来提高对访问过的网址的连接速度。</p>
 </blockquote>
 <a id="more"></a>
 
 <br>
 
 <h4 id="1-2-原理"><a href="#1-2-原理" class="headerlink" title="1.2 原理"></a>1.2 原理</h4><ul>
-<li>本机APP访问主机的/etc/resolv.conf获取DNSServer，该文件指向的DNSServer为Dnsmasq。</li>
-<li>本地局域网中的主机可以直接访问Dnsmasq，即在这些主机中/etc/resolv.conf指向了Dnsmasq。</li>
-<li>Dnsmasq需要通过上游DNS来进行域名解析，上游DNS可以配置在/etc/resolv.dnsmasq.conf中，该文件需要在Dnsmasq的配置文件/etc/dnsmasq.conf中指定。</li>
+<li>本机APP访问主机的<code>/etc/resolv.conf</code>获取DNSServer，该文件指向的DNSServer为Dnsmasq。</li>
+<li>本地局域网中的主机可以直接访问Dnsmasq，即在这些主机中<code>/etc/resolv.conf</code>指向了Dnsmasq。</li>
+<li>Dnsmasq需要通过上游DNS来进行域名解析，上游DNS可以配置在<code>/etc/resolv.dnsmasq.conf</code>中，该文件需要在Dnsmasq的配置文件<code>/etc/dnsmasq.conf</code>中指定。</li>
 </ul>
 <br>
 
@@ -369,7 +369,7 @@
 </li>
 <li><p>应对ISP的DNS劫持（反DNS劫持），输入一个不存在的域名，正常的情况下浏览器是显示无法连接，DNS劫持会跳转到一个广告页面。先随便nslookup 一个不存在的域名，看看ISP商劫持的IP地址。</p>
 </li>
-<li><p>智能DNS加快解析速度，打开/etc/dnsmasq.conf文件，server=后面可以添加指定的DNS，例如国内外不同的网站使用不同的DNS。</p>
+<li><p>智能DNS加快解析速度，打开<code>/etc/dnsmasq.conf</code>文件，<code>server=</code>后面可以添加指定的DNS，例如国内外不同的网站使用不同的DNS。</p>
 </li>
 </ul>
 <p><code>国内指定DNS</code></p>
@@ -389,7 +389,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">address=/freehao123.com/123.123.123.123</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>管理控制内网DNS，首先将局域网中的所有的设备的本地DNS设置为已经安装Dnsmasq的服务器IP地址。然后修改已经安装Dnsmasq的服务器Hosts文件：/etc/hosts，指定域名到特定的IP中。</li>
+<li>管理控制内网DNS，首先将局域网中的所有的设备的本地DNS设置为已经安装Dnsmasq的服务器IP地址。然后修改已经安装Dnsmasq的服务器Hosts文件：<code>/etc/hosts</code>，指定域名到特定的IP中。</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">例如想让局域网中的所有用户访问www.freehao123.com时跳转到192.168.0.2，添加：192.168.0.2  www.freehao123.com在Hosts文件中既可，整个过程也可以说是“DNS劫持”</span><br></pre></td></tr></table></figure>
 
@@ -404,7 +404,7 @@
 <li>dnsmasq配置文件</li>
 <li>vim  /etc/dnsmasq.conf</li>
 </ul>
-<p><code>dnsmasq有很多自定义的配置，此处我根据公司目前需求环境简化了很多，大家如果有兴趣的话，可以多去了解一下，或者直接参考本博客最后面额外补充的内容</code></p>
+<p><code>Dnsmasq</code>有很多自定义的配置，此处我根据公司目前需求环境简化了很多，大家如果有兴趣的话，可以多去了解一下，或者直接参考<code>本博客最后面额外补充</code>的内容</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 指定上游DNS服务器</span><br><span class="line">resolv-file=/etc/resolv.dnsmasq.conf</span><br><span class="line"></span><br><span class="line"># 如果没有指定上游resolv.dnsmasq.conf配置文件的话，这里就可以开启 no-resolv</span><br><span class="line">#no-resolv </span><br><span class="line">#向所有上游服务器发送查询，而不是一个</span><br><span class="line">#all-servers</span><br><span class="line"></span><br><span class="line"># 记录dns查询日志，如果指定 log-queries=extra 那么在每行开始处都有额外的日志信息</span><br><span class="line">log-queries</span><br><span class="line">log-facility=/var/log/dnsmasq/dnsmasq.log</span><br><span class="line"></span><br><span class="line"># 不加载本地的 /etc/hosts 文件</span><br><span class="line">no-hosts</span><br><span class="line"># 重新指定本地hosts文件，用来保存所有的解析记录</span><br><span class="line">addn-hosts=/etc/dnsmasq.hosts</span><br><span class="line">cache-size=20000</span><br><span class="line">local-ttl=600</span><br><span class="line">dns-forward-max=20000</span><br></pre></td></tr></table></figure>
 
 <br>
@@ -422,7 +422,7 @@
 <br>
 
 <h4 id="2-4-日志维护"><a href="#2-4-日志维护" class="headerlink" title="2.4 日志维护"></a>2.4 日志维护</h4><blockquote>
-<p>内网解析量很多，每天产生大量日志，避免磁盘爆满影响服务，建议开启nscd缓存以及定时任务清理本地解析日志</p>
+<p>内网解析量很多，每天产生大量日志，避免磁盘爆满影响服务，建议开启<code>nscd</code>缓存以及定时任务清理本地解析日志</p>
 </blockquote>
 <br>
 
@@ -444,7 +444,7 @@
 <br>
 
 <h5 id="2-52-客户端配置"><a href="#2-52-客户端配置" class="headerlink" title="2.52 客户端配置"></a>2.52 客户端配置</h5><blockquote>
-<p>在局域网中找一台机器，修改本机resolv.conf中的dns解析地址为Dnsmasq地址，然后本机 <code>ping ansible-host</code> 看是否反馈的地址是 <code>172.17.17.100</code> 则服务配置成功</p>
+<p>在局域网中找一台机器，修改本机<code>resolv.conf</code>中的dns解析地址为Dnsmasq地址，然后本机 <code>ping ansible-host</code> 看是否反馈的地址是 <code>172.17.17.100</code> 则服务配置成功</p>
 </blockquote>
 <ul>
 <li>vim /etc/resolv.conf</li>
