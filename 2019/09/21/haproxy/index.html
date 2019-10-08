@@ -66,7 +66,7 @@
 <meta property="og:description" content="一、前言1.1 Haproxy功能特性  HAProxy提供高可用性、负载均衡以及基于TCP和HTTP应用的代理，支持虚拟主机，它是免费、快速并且可靠的一种解决方案。 HAProxy运行在当前的硬件上，完全可以支持数以万计的并发连接。并且它的运行模式使得它可以很简单安全的整合进您当前的架构中， 同时可以保护你的web服务器不被暴露到网络上。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.loli.net/2019/09/23/7rOYuLz1iXf9eJk.png">
-<meta property="og:updated_time" content="2019-10-07T17:11:14.147Z">
+<meta property="og:updated_time" content="2019-10-08T16:50:36.364Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Keepalived+Haproxy高可用怎么玩">
 <meta name="twitter:description" content="一、前言1.1 Haproxy功能特性  HAProxy提供高可用性、负载均衡以及基于TCP和HTTP应用的代理，支持虚拟主机，它是免费、快速并且可靠的一种解决方案。 HAProxy运行在当前的硬件上，完全可以支持数以万计的并发连接。并且它的运行模式使得它可以很简单安全的整合进您当前的架构中， 同时可以保护你的web服务器不被暴露到网络上。">
@@ -288,7 +288,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-08 01:11:14" itemprop="dateModified" datetime="2019-10-08T01:11:14+08:00">2019-10-08</time>
+                <time title="修改时间：2019-10-09 00:50:36" itemprop="dateModified" datetime="2019-10-09T00:50:36+08:00">2019-10-09</time>
               </span>
             
           
@@ -385,31 +385,24 @@
 <p><img src="https://i.loli.net/2019/09/23/7rOYuLz1iXf9eJk.png" alt="haproxy01.png"></p>
 <br>
 
-<h3 id="二、Haproxy安装配置"><a href="#二、Haproxy安装配置" class="headerlink" title="二、Haproxy安装配置"></a>二、Haproxy安装配置</h3><h4 id="2-1-安装依赖"><a href="#2-1-安装依赖" class="headerlink" title="2.1 安装依赖"></a>2.1 安装依赖</h4><blockquote>
-<ul>
-<li>SSH登陆第一台服务器<code>192.168.10.1</code></li>
-<li>新增www用户，用于启动haproxy服务</li>
+<h3 id="二、Haproxy安装配置"><a href="#二、Haproxy安装配置" class="headerlink" title="二、Haproxy安装配置"></a>二、Haproxy安装配置</h3><h4 id="2-1-安装依赖"><a href="#2-1-安装依赖" class="headerlink" title="2.1 安装依赖"></a>2.1 安装依赖</h4><ul>
+<li>SSH登陆第一台服务器<code>192.168.10.1</code><br><code>- 新增</code>www`用户，用于启动haproxy服务</li>
 </ul>
-</blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh  192.168.10.1</span><br><span class="line">yum install gcc gcc-c++ pcre pcre-devel zlib zlib-devel openssl openssl-devel lua-devel GeoIP GeoIP-devel GeoIP-data  systemd-devel -y</span><br><span class="line">useradd www -s /sbin/nologin</span><br></pre></td></tr></table></figure>
 
 <br>
 
-<h4 id="2-2-安装haproxy"><a href="#2-2-安装haproxy" class="headerlink" title="2.2 安装haproxy"></a>2.2 安装haproxy</h4><blockquote>
-<ul>
+<h4 id="2-2-安装haproxy"><a href="#2-2-安装haproxy" class="headerlink" title="2.2 安装haproxy"></a>2.2 安装haproxy</h4><ul>
 <li>拷贝<code>haproxy-1.9.8-0.el7.x86_64.rpm</code>到<code>/root/</code>目录下</li>
 </ul>
-</blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh  haproxy-1.9.8-0.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
 
 <br>
 
-<h4 id="2-3-配置haproxy-cfg"><a href="#2-3-配置haproxy-cfg" class="headerlink" title="2.3 配置haproxy.cfg"></a>2.3 配置haproxy.cfg</h4><blockquote>
-<ul>
+<h4 id="2-3-配置haproxy-cfg"><a href="#2-3-配置haproxy-cfg" class="headerlink" title="2.3 配置haproxy.cfg"></a>2.3 配置haproxy.cfg</h4><ul>
 <li>进入主目录<code>/etc/haproxy/</code></li>
 <li>vim haproxy.cfg</li>
 </ul>
-</blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">global</span><br><span class="line">    log 127.0.0.1 local0</span><br><span class="line">    log 127.0.0.1 local1 notice  //开启日志用的</span><br><span class="line">    user www</span><br><span class="line">    group www</span><br><span class="line">    maxconn 100000</span><br><span class="line"></span><br><span class="line">defaults</span><br><span class="line">    mode tcp</span><br><span class="line">    retries 3</span><br><span class="line">    option tcplog</span><br><span class="line">    option redispatch</span><br><span class="line">    option abortonclose</span><br><span class="line">   #option dontlognull</span><br><span class="line">    option log-health-checks //开启后端server健康检查日志输出</span><br><span class="line">    option httpclose</span><br><span class="line">    balance roundrobin    //后端server流量轮询</span><br><span class="line">    maxconn 100000</span><br><span class="line">    timeout connect 3000</span><br><span class="line">    timeout client 3600000</span><br><span class="line">    timeout server 3600000</span><br><span class="line"></span><br><span class="line">listen status    //开启haproxy后台管理页面</span><br><span class="line">    bind :1080</span><br><span class="line">    mode http</span><br><span class="line">    log global</span><br><span class="line">    stats enable</span><br><span class="line">    stats refresh 30s</span><br><span class="line">    stats uri /admin  </span><br><span class="line">    stats realm HAProxy\ Stats</span><br><span class="line">    stats hide-version</span><br><span class="line">    stats auth root:123456  //配置账户密码</span><br><span class="line">    stats admin if TRUE</span><br><span class="line"></span><br><span class="line">#####################</span><br><span class="line">配置两组四层服务案例</span><br><span class="line">#####################</span><br><span class="line">frontend MySQL  //定义这个服务的名字为MySQL</span><br><span class="line">    bind 172.16.20.20:3306  //监听VIP的3306端口</span><br><span class="line">    log global</span><br><span class="line"></span><br><span class="line">    acl ACL_DB-MYSQL-1   dst 172.16.20.20</span><br><span class="line">    use_backend DB-MYSQL-1  if ACL_DB-MYSQL-1 </span><br><span class="line">    </span><br><span class="line">frontend redis     //定义这个服务的名字为redis</span><br><span class="line">    bind 172.16.20.20:10333  //监听的VIP的10333端口</span><br><span class="line">    log global</span><br><span class="line">    default_backend redis</span><br><span class="line"></span><br><span class="line">backend DB-MYSQL-1</span><br><span class="line">    log 127.0.0.1 local0  notice //这行必须加上，否则日志不输出健康检查状态</span><br><span class="line">    server 192.168.100.20 192.168.100.21:3306 check inter 1000 rise 3 fall 3</span><br><span class="line">    server 192.168.100.21 192.168.100.21:3306 check inter 1000 rise 3 fall 3  backup //状态为备机，只要上面一个服务器挂了，健康检查3秒之后下线，然后备机就顶上了</span><br><span class="line"></span><br><span class="line">backend  redis</span><br><span class="line">   log 127.0.0.1 local0  notice</span><br><span class="line">   server 192.168.100.22 192.168.100.22:6379 check inter 1000 rise 3 fall 3</span><br></pre></td></tr></table></figure>
 
 <br>
@@ -422,33 +415,27 @@
 
 <br>
 
-<h4 id="3-2-keepalived配置文件"><a href="#3-2-keepalived配置文件" class="headerlink" title="3.2 keepalived配置文件"></a>3.2 keepalived配置文件</h4><blockquote>
-<ul>
-<li>keepalived 采用的是非抢占模式（建议）</li>
+<h4 id="3-2-keepalived配置文件"><a href="#3-2-keepalived配置文件" class="headerlink" title="3.2 keepalived配置文件"></a>3.2 keepalived配置文件</h4><ul>
+<li>keepalived 采用的是<code>非抢占模式</code>（建议）</li>
 <li>vim   /etc/keepalived/keepalived.conf</li>
 </ul>
-</blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">! Configuration File for keepalived</span><br><span class="line">global_defs &#123;</span><br><span class="line">&#125;</span><br><span class="line">#这是第一个脚本，检测haproxy进程是否存在，不存在则结束keepalived,VIP漂移到备用从服务器，实现高可用</span><br><span class="line">vrrp_script check_haproxy &#123;</span><br><span class="line">    script &quot;/etc/keepalived/check_haproxy.sh&quot;  //脚本存放路径</span><br><span class="line">     &#125;</span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state BACKUP  //都定义backup为非抢占模式</span><br><span class="line">    nopreempt</span><br><span class="line">    interface eth0</span><br><span class="line">    virtual_router_id 100</span><br><span class="line">    priority 100  //主机器权重为100，从机器要比这小，可以配置90</span><br><span class="line">    advert_int 1</span><br><span class="line">    unicast_src_ip 192.168.10.1  //本机主IP</span><br><span class="line"></span><br><span class="line">    unicast_peer &#123;</span><br><span class="line">        192.168.10.2  //对端从IP,在从机器上，这两个主从IP是反过来的</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass haproxy //这里可以自定义一个字符串，但两边要保证一致</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">         172.16.20.20/16  //虚拟IP配置在这里</span><br><span class="line">     &#125;</span><br><span class="line">     #以下是另外一个脚本，在日志里面打印出keepalived服务状态，</span><br><span class="line">    notify_master &quot;/etc/keepalived/notify_action.sh MASTER&quot;  </span><br><span class="line">    notify_backup &quot;/etc/keepalived/notify_action.sh BACKUP&quot;</span><br><span class="line">    notify_fault &quot;/etc/keepalived/notify_action.sh FAULT&quot;</span><br><span class="line">    notify_stop &quot;/etc/keepalived/notify_action.sh STOP&quot;</span><br><span class="line">    garp_master_delay 1</span><br><span class="line">    garp_master_refresh 5</span><br><span class="line"></span><br><span class="line">    track_script &#123;</span><br><span class="line">        check_haproxy  //调用上面定义的脚本</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <br>
 
-<h4 id="3-3-自定义脚本"><a href="#3-3-自定义脚本" class="headerlink" title="3.3 自定义脚本"></a>3.3 自定义脚本</h4><h5 id="3-3-1-haproxy状态检测脚本"><a href="#3-3-1-haproxy状态检测脚本" class="headerlink" title="3.3.1 haproxy状态检测脚本"></a>3.3.1 haproxy状态检测脚本</h5><blockquote>
-<ul>
-<li>此脚本的目的是检测haproxy状态，当haproxy主程序挂掉之后，自动杀掉keepalived程序，把vip漂移到备用从服务器，从而实现高可用</li>
+<h4 id="3-3-自定义脚本"><a href="#3-3-自定义脚本" class="headerlink" title="3.3 自定义脚本"></a>3.3 自定义脚本</h4><h5 id="3-3-1-haproxy状态检测脚本"><a href="#3-3-1-haproxy状态检测脚本" class="headerlink" title="3.3.1 haproxy状态检测脚本"></a>3.3.1 haproxy状态检测脚本</h5><ul>
+<li>此脚本的目的是检测<code>haproxy状态</code>，当haproxy主程序挂掉之后，自动杀掉keepalived进程，把vip漂移到备用从服务器，从而实现高可用</li>
 <li>vim  /etc/keepalived/check_haproxy.sh</li>
 </ul>
-</blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#检测nginx进程不存在了，尝试启动，发现启动不了则切换到备用机器</span><br><span class="line">A=`ps -C haproxy --no-header |wc -l`</span><br><span class="line">if [ `ps -C haproxy --no-header |wc -l` -eq 0 ];then</span><br><span class="line">        systemctl stop  keepalived</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
 <br>
 
-<h5 id="3-3-2-Keepalived日志输出状态"><a href="#3-3-2-Keepalived日志输出状态" class="headerlink" title="3.3.2 Keepalived日志输出状态"></a>3.3.2 Keepalived日志输出状态</h5><blockquote>
-<ul>
+<h5 id="3-3-2-Keepalived日志输出状态"><a href="#3-3-2-Keepalived日志输出状态" class="headerlink" title="3.3.2 Keepalived日志输出状态"></a>3.3.2 Keepalived日志输出状态</h5><ul>
 <li>这个脚本可选，属于我自己自定义的，没有需要可以跳过，并去掉keepalived配置文件里的引用此脚本部分</li>
 <li>此脚本目的就是当keepalived状态发生改变，比如服务停止、启动把定义的状态输出到日志上，以便后续排错</li>
 <li>vim /etc/keepalived/notify_action.sh</li>
 </ul>
-</blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#/etc/keepalived/notify_action.sh</span><br><span class="line">log_file=/var/log/keepalived.log</span><br><span class="line">log_write()</span><br><span class="line">&#123;</span><br><span class="line">    echo &quot;[`date &apos;+%Y-%m-%d %T&apos;`] $1&quot; &gt;&gt; $log_file</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[ ! -d /var/keepalived/ ] &amp;&amp; mkdir -p /var/keepalived/</span><br><span class="line"></span><br><span class="line">case &quot;$1&quot; in</span><br><span class="line">    &quot;MASTER&quot; )</span><br><span class="line">        echo -n &quot;$1&quot; &gt; /var/keepalived/state</span><br><span class="line">        log_write &quot; notify_master&quot;</span><br><span class="line">        echo -n &quot;0&quot; &gt; /var/keepalived/vip_check_failed_count</span><br><span class="line">        ;;</span><br><span class="line"></span><br><span class="line">    &quot;BACKUP&quot; )</span><br><span class="line">        echo -n &quot;$1&quot; &gt; /var/keepalived/state</span><br><span class="line">        log_write &quot; notify_backup&quot;</span><br><span class="line">        ;;</span><br><span class="line"></span><br><span class="line">    &quot;FAULT&quot; )</span><br><span class="line">        echo -n &quot;$1&quot; &gt; /var/keepalived/state</span><br><span class="line">        log_write &quot; notify_fault&quot;</span><br><span class="line">        ;;</span><br><span class="line"></span><br><span class="line">    &quot;STOP&quot; )</span><br><span class="line">        echo -n &quot;$1&quot; &gt; /var/keepalived/state</span><br><span class="line">        log_write &quot; notify_stop&quot;</span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        log_write &quot;notify_action.sh: STATE ERROR!!!&quot;</span><br><span class="line">        ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
 
 <br>
@@ -457,94 +444,72 @@
 
 <br>
 
-<h4 id="3-4-启动keepalived服务"><a href="#3-4-启动keepalived服务" class="headerlink" title="3.4 启动keepalived服务"></a>3.4 启动keepalived服务</h4><blockquote>
-<ul>
-<li>启动服务后，可以通过<code>ip a</code>查看本机ip是否多了一个虚拟ip：172.16.20.20 绑定在上面，这样就算成功了</li>
+<h4 id="3-4-启动keepalived服务"><a href="#3-4-启动keepalived服务" class="headerlink" title="3.4 启动keepalived服务"></a>3.4 启动keepalived服务</h4><ul>
+<li>启动服务后，可以通过<code>ip a</code>查看本机ip是否多了一个<code>虚拟ip：172.16.20.20</code>绑定在上面，这样就算成功了</li>
 </ul>
-</blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start keepalived   //启动</span><br><span class="line">systemctl reload keepalived  //变更配置后，一般用这个命令重新加载</span><br></pre></td></tr></table></figure>
 
 <br>
 
-<h4 id="3-4-备用从服务器操作注意事项"><a href="#3-4-备用从服务器操作注意事项" class="headerlink" title="3.4 备用从服务器操作注意事项"></a>3.4 备用从服务器操作注意事项</h4><blockquote>
-<ul>
+<h4 id="3-4-备用从服务器操作注意事项"><a href="#3-4-备用从服务器操作注意事项" class="headerlink" title="3.4 备用从服务器操作注意事项"></a>3.4 备用从服务器操作注意事项</h4><ul>
 <li>把上面haproxy安装配置和keepalived安装配置照着完全做一份，操作步骤一样，可以安装好把主服务器上配置文件拷贝过去</li>
 <li>唯一的区别就是从服务器的keepalived配置文件有稍微区别需要注意,我直接附上配置</li>
 <li>vim   /etc/keepalived/keepalived.conf</li>
 </ul>
-</blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">! Configuration File for keepalived</span><br><span class="line">global_defs &#123;</span><br><span class="line">&#125;</span><br><span class="line">#这是第一个脚本，检测haproxy进程是否存在，不存在则结束keepalived,VIP漂移到备用从服务器，实现高可用</span><br><span class="line">vrrp_script check_haproxy &#123;</span><br><span class="line">    script &quot;/etc/keepalived/check_haproxy.sh&quot;  //脚本存放路径</span><br><span class="line">     &#125;</span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state BACKUP  //都定义backup为非抢占模式</span><br><span class="line">    nopreempt</span><br><span class="line">    interface eth0</span><br><span class="line">    virtual_router_id 100  //此ID号保持一致，同一个局域网最好不要有重复的</span><br><span class="line">    priority 90  //主机器权重为100，这里设置90，一定要比主的小</span><br><span class="line">    advert_int 1</span><br><span class="line">    unicast_src_ip 192.168.10.2  //本机主IP</span><br><span class="line"></span><br><span class="line">    unicast_peer &#123;</span><br><span class="line">        192.168.10.1  //对端从IP</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass haproxy //这里可以自定义一个字符串，但两边要保证一致</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">         172.16.20.20/16  //虚拟IP配置在这里</span><br><span class="line">     &#125;</span><br><span class="line">     #以下是另外一个脚本，在日志里面打印出keepalived服务状态，</span><br><span class="line">    notify_master &quot;/etc/keepalived/notify_action.sh MASTER&quot;  </span><br><span class="line">    notify_backup &quot;/etc/keepalived/notify_action.sh BACKUP&quot;</span><br><span class="line">    notify_fault &quot;/etc/keepalived/notify_action.sh FAULT&quot;</span><br><span class="line">    notify_stop &quot;/etc/keepalived/notify_action.sh STOP&quot;</span><br><span class="line">    garp_master_delay 1</span><br><span class="line">    garp_master_refresh 5</span><br><span class="line"></span><br><span class="line">    track_script &#123;</span><br><span class="line">        check_haproxy  //调用上面定义的脚本</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <br>
 
 
-<h4 id="3-5-验证配置"><a href="#3-5-验证配置" class="headerlink" title="3.5 验证配置"></a>3.5 验证配置</h4><blockquote>
-<ul>
+<h4 id="3-5-验证配置"><a href="#3-5-验证配置" class="headerlink" title="3.5 验证配置"></a>3.5 验证配置</h4><ul>
 <li>杀掉主服务器上的haproxy程序，看看keepalived是否也紧跟着同时被杀掉了，虚ip被漂移到备用服务器上了</li>
 <li>连接虚拟ip的6379端口以及3306端口，看能否正常转发到后端服务器上</li>
-<li>访问haproxy管理页面：<a href="http://172.16.20.20:1080/admin" target="_blank" rel="noopener">http://172.16.20.20:1080/admin</a> (root/123456)</li>
+<li>访问<code>haproxy管理页面</code>：<a href="http://172.16.20.20:1080/admin" target="_blank" rel="noopener">http://172.16.20.20:1080/admin</a> (root/123456)</li>
 </ul>
-</blockquote>
 <br>
 
-<h3 id="四、日志开启及切割"><a href="#四、日志开启及切割" class="headerlink" title="四、日志开启及切割"></a>四、日志开启及切割</h3><blockquote>
-<ul>
+<h3 id="四、日志开启及切割"><a href="#四、日志开启及切割" class="headerlink" title="四、日志开启及切割"></a>四、日志开启及切割</h3><ul>
 <li>keepalivedi日志开启，存储到 <code>/var/log/keepalived.log</code></li>
 <li>haproxy开启日志，存储到<code>/var/log/haproxy/haproxy.log</code></li>
 <li>每日0点切割日志压缩保存</li>
 </ul>
-</blockquote>
 <br>
 
-<h4 id="4-1-开启keepalived日志"><a href="#4-1-开启keepalived日志" class="headerlink" title="4.1 开启keepalived日志"></a>4.1 开启keepalived日志</h4><blockquote>
-<ul>
+<h4 id="4-1-开启keepalived日志"><a href="#4-1-开启keepalived日志" class="headerlink" title="4.1 开启keepalived日志"></a>4.1 开启keepalived日志</h4><ul>
 <li>vim /etc/sysconfig/keepalived</li>
 </ul>
-</blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KEEPALIVED_OPTIONS=&quot;-D -S 0 -d&quot;</span><br></pre></td></tr></table></figure>
 
-<blockquote>
 <ul>
 <li>vim /etc/rsyslog.conf </li>
 </ul>
-</blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">local0.*  /var/log/keepalived.log</span><br></pre></td></tr></table></figure>
 
-<blockquote>
 <ul>
 <li>service rsyslog restart </li>
 </ul>
-</blockquote>
 <br>
 
 
-<h4 id="4-1-开启Haproxy日志"><a href="#4-1-开启Haproxy日志" class="headerlink" title="4.1 开启Haproxy日志"></a>4.1 开启Haproxy日志</h4><blockquote>
-<ul>
+<h4 id="4-1-开启Haproxy日志"><a href="#4-1-开启Haproxy日志" class="headerlink" title="4.1 开启Haproxy日志"></a>4.1 开启Haproxy日志</h4><ul>
 <li>vim /etc/rsyslog.conf</li>
 </ul>
-</blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/rsyslog.conf</span><br><span class="line">$ModLoad imudp</span><br><span class="line">$UDPServerRun 514</span><br><span class="line">local0.*     /var/log/haproxy/haproxy.log</span><br></pre></td></tr></table></figure>
 
-<blockquote>
 <ul>
 <li>vim /etc/rsyslog.conf </li>
 </ul>
-</blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">local0.*  /var/log/keepalived.log</span><br></pre></td></tr></table></figure>
 
-<blockquote>
 <ul>
 <li>service rsyslog restart </li>
 </ul>
-</blockquote>
 <br>
 
-<h4 id="4-3-切割Haproxy日志"><a href="#4-3-切割Haproxy日志" class="headerlink" title="4.3 切割Haproxy日志"></a>4.3 切割Haproxy日志</h4><blockquote>
-<ul>
-<li>如果不设定时间，切割默认是凌晨3点多执行</li>
+<h4 id="4-3-切割Haproxy日志"><a href="#4-3-切割Haproxy日志" class="headerlink" title="4.3 切割Haproxy日志"></a>4.3 切割Haproxy日志</h4><ul>
+<li>如果不设定时间，切割默认是<code>凌晨3点</code>多执行</li>
 <li>vim /etc/logrotate.d/logrotate_haproxy</li>
 </ul>
-</blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/var/log/haproxy/haproxy.log &#123;</span><br><span class="line">        su root root</span><br><span class="line">        daily</span><br><span class="line">        missingok</span><br><span class="line">        rotate 15  //默认我设置的是保留15天</span><br><span class="line">        compress</span><br><span class="line">        notifempty</span><br><span class="line">        create 644 root root</span><br><span class="line">        dateext</span><br><span class="line">        sharedscripts</span><br><span class="line">        postrotate</span><br><span class="line">            systemctl restart rsyslog</span><br><span class="line">        endscript</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
