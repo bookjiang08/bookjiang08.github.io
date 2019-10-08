@@ -68,7 +68,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/09/22/HZSdXCcyQT4s3lb.png">
 <meta property="og:image" content="https://i.loli.net/2019/09/22/k2jXoFs9lBCYMPD.png">
 <meta property="og:image" content="https://i.loli.net/2019/09/22/kxTBHgDIaGywWAu.png">
-<meta property="og:updated_time" content="2019-10-08T16:13:13.763Z">
+<meta property="og:updated_time" content="2019-10-08T16:13:59.951Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cisco switch配置管理">
 <meta name="twitter:description" content="一、准备1.1 准备工具 当拿到一台新的Cisco交换机,开始动手配置，目标实现远程登陆和管理  12硬件：笔记本、Console配置线、交换机Cisco3560一台软件：SecureCRT">
@@ -290,7 +290,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-09 00:13:13" itemprop="dateModified" datetime="2019-10-09T00:13:13+08:00">2019-10-09</time>
+                <time title="修改时间：2019-10-09 00:13:59" itemprop="dateModified" datetime="2019-10-09T00:13:59+08:00">2019-10-09</time>
               </span>
             
           
@@ -422,22 +422,18 @@
 
 <br>
 
-<h4 id="3-2-IP和MAC地址绑定"><a href="#3-2-IP和MAC地址绑定" class="headerlink" title="3.2 IP和MAC地址绑定"></a>3.2 IP和MAC地址绑定</h4><blockquote>
-<ul>
+<h4 id="3-2-IP和MAC地址绑定"><a href="#3-2-IP和MAC地址绑定" class="headerlink" title="3.2 IP和MAC地址绑定"></a>3.2 IP和MAC地址绑定</h4><ul>
 <li>需求：张三想把IP地址<code>192.168.12.80</code>和<code>507b.9dbe.55ea</code>绑定，让客户端只有连接上网络，就会分配这个IP地址，如果更改其它IP则无法上网</li>
 <li>思路：首先 12网段的地址池已经有了，客户端如果想获取特定的ip地址，必须先把这个地址从12网段里排除掉，让这个地址不会分配，然后建立一个自己的99网段地址池</li>
 <li>步骤如下：</li>
 </ul>
-</blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">BOOK(config)#ip dhcp excluded-address 192.168.12.80  //先把这个IP地址排除不分配</span><br><span class="line">BOOK(config)#ip dhcp pool 12_zhangsan  //建立一个张三自己的地址池，名字不能和已有的pool_12重复</span><br><span class="line">BOOK(dhcp-config)# host 192.168.12.80  255.255.255.0 //指定张三的ip地址</span><br><span class="line">BOOK(dhcp-config)# client-identifier 0150.7b9d.be55.ea // MAC地址格式为01xx.xxxx.xxxx.xx</span><br><span class="line">BOOK(dhcp-config)# dns-server 8.8.8.8 202.96.209.5 //指定DNS</span><br><span class="line">BOOK(dhcp-config)# default-router 192.168.12.1 // 指定网关</span><br><span class="line">BOOK(config)#arp 192.168.12.80   7b.9dbe.55ea  ARPA //绑定生效</span><br></pre></td></tr></table></figure>
 
 <br>
 
-<h4 id="3-3-网段访问控制列表"><a href="#3-3-网段访问控制列表" class="headerlink" title="3.3 网段访问控制列表"></a>3.3 网段访问控制列表</h4><blockquote>
-<ul>
+<h4 id="3-3-网段访问控制列表"><a href="#3-3-网段访问控制列表" class="headerlink" title="3.3 网段访问控制列表"></a>3.3 网段访问控制列表</h4><ul>
 <li>需求：要求办公12网段和财务网段33隔离开，只允许特定的主机可以访问33网段，其它拒绝掉</li>
 </ul>
-</blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">BOOK# conf t</span><br><span class="line">BOOK(config)#ip access-list extended 100  //做一个访问控制列表，编号100</span><br><span class="line">BOOK(config-ext-nacl)#permit ip host 192.168.12.80 any //允许张三这台机器可以访问任何网段</span><br><span class="line">BOOK(config-ext-nacl)#permit ip host 192.168.12.80 host 192.168.33.8 //允许张三访问88.8主机</span><br><span class="line">BOOK(config-ext-nacl)#deny  ip any 192.168.22.0 0.0.0.255  //拒绝12网段访问33网段</span><br><span class="line">BOOK(config-ext-nacl)#permit ip any any //允许所有，这条必须加上，否则未放行的无法上网            </span><br><span class="line">BOOK(config-ext-nacl)#exit  //退出到配置模式</span><br><span class="line">BOOK(config)#int vlan 12  //进入12网段下</span><br><span class="line">BOOK(config-if)#ip  access-group  100  in  //应用访问控制列表</span><br></pre></td></tr></table></figure>
 
 <br>
