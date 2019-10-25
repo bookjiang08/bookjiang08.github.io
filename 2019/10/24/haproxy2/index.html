@@ -57,19 +57,19 @@
   };
 </script>
 
-  <meta name="description" content="一、配置远程登录 关于怎么用console线连接防火墙,可以参考我上一篇交换机配置博客：https://www.512book.cn/2019/07/25/cisco-switch/ Cisco asa 版本8.3之前的命令和之后区别很大，此篇博客以新版本命令为参考，版本太旧建议升级ios  1.1 配置主机名及enable密码">
-<meta name="keywords" content="网络,思科防火墙">
+  <meta name="description" content="一、前言1.1 介绍 HAProxy的安装及配置已在前面博客中介绍了，它原生自带的监控管理页面所展示的参数状态，此次我们结合zabbix+Grafana展示出来，帮助我们随时掌握我们服务的各种状态，更准确定位问题，最主要是提高运维效率！  监控原理：HAproxy提供了一种方法——通过socket来显示HAproxy的状态。通过修改配置文件haproxy.cfg开启socket文件并开放权限为66">
+<meta name="keywords" content="负载均衡,haproxy">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Cisco asa防火墙配置管理">
-<meta property="og:url" content="http://512book.cn/2019/07/22/cisco-asa/index.html">
+<meta property="og:title" content="Openvpn服务器搭建">
+<meta property="og:url" content="http://512book.cn/2019/10/24/haproxy2/index.html">
 <meta property="og:site_name" content="Book&#39;s blog">
-<meta property="og:description" content="一、配置远程登录 关于怎么用console线连接防火墙,可以参考我上一篇交换机配置博客：https://www.512book.cn/2019/07/25/cisco-switch/ Cisco asa 版本8.3之前的命令和之后区别很大，此篇博客以新版本命令为参考，版本太旧建议升级ios  1.1 配置主机名及enable密码">
+<meta property="og:description" content="一、前言1.1 介绍 HAProxy的安装及配置已在前面博客中介绍了，它原生自带的监控管理页面所展示的参数状态，此次我们结合zabbix+Grafana展示出来，帮助我们随时掌握我们服务的各种状态，更准确定位问题，最主要是提高运维效率！  监控原理：HAproxy提供了一种方法——通过socket来显示HAproxy的状态。通过修改配置文件haproxy.cfg开启socket文件并开放权限为66">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-08T15:45:18.323Z">
+<meta property="og:updated_time" content="2019-10-25T06:21:39.348Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Cisco asa防火墙配置管理">
-<meta name="twitter:description" content="一、配置远程登录 关于怎么用console线连接防火墙,可以参考我上一篇交换机配置博客：https://www.512book.cn/2019/07/25/cisco-switch/ Cisco asa 版本8.3之前的命令和之后区别很大，此篇博客以新版本命令为参考，版本太旧建议升级ios  1.1 配置主机名及enable密码">
-  <link rel="canonical" href="http://512book.cn/2019/07/22/cisco-asa/">
+<meta name="twitter:title" content="Openvpn服务器搭建">
+<meta name="twitter:description" content="一、前言1.1 介绍 HAProxy的安装及配置已在前面博客中介绍了，它原生自带的监控管理页面所展示的参数状态，此次我们结合zabbix+Grafana展示出来，帮助我们随时掌握我们服务的各种状态，更准确定位问题，最主要是提高运维效率！  监控原理：HAproxy提供了一种方法——通过socket来显示HAproxy的状态。通过修改配置文件haproxy.cfg开启socket文件并开放权限为66">
+  <link rel="canonical" href="http://512book.cn/2019/10/24/haproxy2/">
 
 
 <script id="page-configurations">
@@ -83,7 +83,7 @@
   };
 </script>
 
-  <title>Cisco asa防火墙配置管理 | Book's blog</title>
+  <title>Openvpn服务器搭建 | Book's blog</title>
   
 
 
@@ -247,7 +247,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="http://512book.cn/2019/07/22/cisco-asa/">
+    <link itemprop="mainEntityOfPage" href="http://512book.cn/2019/10/24/haproxy2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Book Jiang">
@@ -259,7 +259,7 @@
       <meta itemprop="name" content="Book's blog">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Cisco asa防火墙配置管理
+        <h1 class="post-title" itemprop="name headline">Openvpn服务器搭建
 
           
         </h1>
@@ -275,7 +275,7 @@
                 
               
 
-              <time title="创建时间：2019-07-22 16:30:00" itemprop="dateCreated datePublished" datetime="2019-07-22T16:30:00+08:00">2019-07-22</time>
+              <time title="创建时间：2019-10-24 19:15:28" itemprop="dateCreated datePublished" datetime="2019-10-24T19:15:28+08:00">2019-10-24</time>
             </span>
           
             
@@ -286,7 +286,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-08 23:45:18" itemprop="dateModified" datetime="2019-10-08T23:45:18+08:00">2019-10-08</time>
+                <time title="修改时间：2019-10-25 14:21:39" itemprop="dateModified" datetime="2019-10-25T14:21:39+08:00">2019-10-25</time>
               </span>
             
           
@@ -296,7 +296,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/负载均衡/" itemprop="url" rel="index"><span itemprop="name">负载均衡</span></a></span>
 
                 
                 
@@ -323,7 +323,7 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/07/22/cisco-asa/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/07/22/cisco-asa/" itemprop="commentCount"></span></a>
+    <a title="valine" href="/2019/10/24/haproxy2/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/10/24/haproxy2/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -335,7 +335,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>3.6k</span>
+              <span>5k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -345,7 +345,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span>3 分钟</span>
+              <span>5 分钟</span>
             </span>
           
 
@@ -358,61 +358,149 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="一、配置远程登录"><a href="#一、配置远程登录" class="headerlink" title="一、配置远程登录"></a>一、配置远程登录</h3><ul>
-<li>关于怎么用<code>console线</code>连接防火墙,可以参考我上一篇交换机配置博客：<a href="https://www.512book.cn/2019/07/25/cisco-switch/" target="_blank" rel="noopener">https://www.512book.cn/2019/07/25/cisco-switch/</a></li>
-<li><code>Cisco asa 版本8.3</code>之前的命令和之后区别很大，此篇博客以新版本命令为参考，版本太旧建议升级ios</li>
+        <h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h3><h4 id="1-1-介绍"><a href="#1-1-介绍" class="headerlink" title="1.1 介绍"></a>1.1 介绍</h4><ul>
+<li><p><code>HAProxy</code>的安装及配置已在前面博客中介绍了，它原生自带的监控管理页面所展示的参数状态，此次我们结合<code>zabbix</code>+<code>Grafana</code>展示出来，帮助我们随时掌握我们服务的各种状态，更准确定位问题，最主要是提高运维效率！</p>
+</li>
+<li><p>监控原理：<code>HAproxy</code>提供了一种方法——通过<code>socket</code>来显示<code>HAproxy的状态</code>。通过修改配置文件<code>haproxy.cfg</code>开启<code>socket文件</code>并开放权限为<code>666</code></p>
+</li>
 </ul>
-<h4 id="1-1-配置主机名及enable密码"><a href="#1-1-配置主机名及enable密码" class="headerlink" title="1.1 配置主机名及enable密码"></a>1.1 配置主机名及enable密码</h4><a id="more"></a>
+<a id="more"></a>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ciscoasa(config)# hostname  BOOK-office</span><br><span class="line">BOOK-office(config)# enable password  xxxxxxx</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h4 id="1-2-配置远程SSH连接"><a href="#1-2-配置远程SSH连接" class="headerlink" title="1.2 配置远程SSH连接"></a>1.2 配置远程SSH连接</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">BOOK-office(config)# crypto  key  generate  rsa  modulus  1024</span><br><span class="line">WARNING: You have a RSA keypair already defined named &lt;Default-RSA-Key&gt;.</span><br><span class="line">Do you really want to replace them? [yes/no]:  y //输入y回车</span><br><span class="line">BOOK-office(config)# write memory //保存配置</span><br><span class="line">BOOK-office(config)# ssh  0.0.0.0  0.0.0.0  inside //允许内网任何ip可以连接</span><br><span class="line">BOOK-office(config)#ssh  timeout  30 //设置超时时间,单位为分钟</span><br><span class="line">BOOK-office(config)# ssh  version 2</span><br><span class="line">BOOK-office(config)# username admin password xxxxx //配置远程登录账户</span><br><span class="line">-------------相关命令--------------</span><br><span class="line">show ssh                                  //参看SSH配置信息</span><br><span class="line">show crypto key mypubkey rsa    //查看产生的rsa密钥值</span><br><span class="line">crypto key zeroize                    //清空所有产生的密钥</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h3 id="二、接口配置"><a href="#二、接口配置" class="headerlink" title="二、接口配置"></a>二、接口配置</h3><h4 id="2-1-内外接口IP配置"><a href="#2-1-内外接口IP配置" class="headerlink" title="2.1 内外接口IP配置"></a>2.1 内外接口IP配置</h4><ul>
-<li>外接口 Gi0/0：100.100.100.100(自己公网IP)</li>
-<li>内接口 Gi0/1:  192.168.1.1</li>
+<h4 id="1-2-重点监控项"><a href="#1-2-重点监控项" class="headerlink" title="1.2 重点监控项"></a>1.2 重点监控项</h4><ul>
+<li><p>Haproxy后端服务的<code>进出流量</code></p>
+</li>
+<li><p>Haproxy后端服务的状态<code>UP</code>或者<code>DOWN</code></p>
+</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">BOOK-office(config)# int gigabitEthernet 0/0   //把gi0/0配置成外接口</span><br><span class="line">BOOK-office(config-if)# no shutdown         //开启端口 </span><br><span class="line">BOOK-office(config-if)# security-level 0       </span><br><span class="line">BOOK-office(config-if)# nameif outside</span><br><span class="line">BOOK-office(config-if)# ip address 100.100.100.100 255.255.255.0 </span><br><span class="line">BOOK-office(config)# int gigabitEthernet 0/0   //把gi0/1配置成内接口</span><br><span class="line">BOOK-office(config-if)# no shutdown         //开启端口 </span><br><span class="line">BOOK-office(config-if)# security-level 100     //流量只允许高往低走      </span><br><span class="line">BOOK-office(config-if)# nameif inside</span><br><span class="line">BOOK-office(config-if)# ip address 192.168.1.1  255.255.255.0</span><br></pre></td></tr></table></figure>
-
 <br>
 
-<h3 id="三、防火墙内外流量打通"><a href="#三、防火墙内外流量打通" class="headerlink" title="三、防火墙内外流量打通"></a>三、防火墙内外流量打通</h3><h4 id="3-1-NAT转换"><a href="#3-1-NAT转换" class="headerlink" title="3.1 NAT转换"></a>3.1 NAT转换</h4><ul>
-<li><code>把内部局域网网段转换流量出去进行上网</code></li>
+<h3 id="二、Haproxy-配置"><a href="#二、Haproxy-配置" class="headerlink" title="二、Haproxy 配置"></a>二、Haproxy 配置</h3><h4 id="2-1-开启socket"><a href="#2-1-开启socket" class="headerlink" title="2.1 开启socket"></a>2.1 开启socket</h4><ul>
+<li>vim /etc/haproxy/haproxy.cfg</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BOOK-office(config)#object network inside  //定义一个地址对象inside 包含所有内网</span><br><span class="line">BOOK-office(config-network-object)# subnet 0.0.0.0  0.0.0.0 </span><br><span class="line">BOOK-office(config-network-object)# nat (inside,outside) dynamic interface  //Nat 转换</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">global</span><br><span class="line">    stats socket /etc/haproxy/info.sock mode 666 level admin</span><br></pre></td></tr></table></figure>
 
-<br>
-
-<h4 id="3-2-访问控制列表"><a href="#3-2-访问控制列表" class="headerlink" title="3.2 访问控制列表"></a>3.2 访问控制列表</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">----------定义一个 ip-mac的组，允许ip、imcp、tcp、udp协议通过---------</span><br><span class="line">BOOK-office(config)# access-list  ip-mac extended permit ip any any </span><br><span class="line">BOOK-office(config)# access-list  ip-mac extended permit imcp any any</span><br><span class="line">BOOK-office(config)# access-list  ip-mac extended permit tcp any any</span><br><span class="line">BOOK-office(config)# access-list  ip-mac extended permit udp any any</span><br><span class="line">BOOK-office(config)# access-group  ip-mac in interface inside //将这个组应用到内接口上</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h4 id="3-3-添加路由"><a href="#3-3-添加路由" class="headerlink" title="3.3 添加路由"></a>3.3 添加路由</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BOOK-office(config)# route outside 0.0.0.0 0.0.0.0 100.100.100.99 1  //出口路由指向出口IP网关</span><br><span class="line">BOOK-office(config)# route inside 192.168.2.0 255.255.255.0 192.168.1.2 1 //内部路由指向下一层连接交换机IP </span><br><span class="line">BOOK-office(config)# route inside 192.168.12.0 255.255.255.0 192.168.1.2 1 //新增网段2和网段12返程路由</span><br></pre></td></tr></table></figure>
-
-<p><code>这样防火墙就可以实现内部局域网上网了，可以进行远程连接和上网测试了！！</code>                       </p>
-<br>
-
-<h3 id="四、NAT端口映射"><a href="#四、NAT端口映射" class="headerlink" title="四、NAT端口映射"></a>四、NAT端口映射</h3><h4 id="4-1-端口映射"><a href="#4-1-端口映射" class="headerlink" title="4.1 端口映射"></a>4.1 端口映射</h4><ul>
-<li>举例将内网一台测试服务器<code>192.168.12.13</code>的内网<code>3389端口</code>映射到外网的3389端口</li>
+<ul>
+<li><p>检测配置：</p>
+<p><code>/etc/haproxy/bin/haproxy -c -f /etc/haproxy/haproxy.cfg</code></p>
+</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BOOK-office(config)#object network  testserver  //定义一个地址对象 testserver</span><br><span class="line">BOOK-office(config-network-object)# host 192.168.12.13</span><br><span class="line">BOOK-office(config-network-object)#nat (inside,outside) static interface service tcp 3389 3389</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h4 id="4-2-访问控制列表及策略应用"><a href="#4-2-访问控制列表及策略应用" class="headerlink" title="4.2 访问控制列表及策略应用"></a>4.2 访问控制列表及策略应用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-------定义控制列表100-------</span><br><span class="line">BOOK-office(config)#access-list 100 extended permit tcp any host 192.168.12.13 eq 3389</span><br><span class="line">-------将列表100应用到外接口上生效------</span><br><span class="line">BOOK-office(config)# access-group  100  in interface inside</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h3 id="五、宽带拨号（可选）"><a href="#五、宽带拨号（可选）" class="headerlink" title="五、宽带拨号（可选）"></a>五、宽带拨号（可选）</h3><h4 id="5-1-宽带PPOE拨号"><a href="#5-1-宽带PPOE拨号" class="headerlink" title="5.1 宽带PPOE拨号"></a>5.1 宽带PPOE拨号</h4><ul>
-<li>应用场景：没有固定IP地址，防火墙连接防火墙直接自身拨号，可以用此方法配置</li>
+<p>Configuration file is valid(配置有效)</p>
+<ul>
+<li>reload </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-------配置宽带账号和密码-------</span><br><span class="line">BOOK-office(config)# vpdn group ads1 request dialout pppoe</span><br><span class="line">BOOK-office(config)# vpdn group ads1 localname adxxxxx   //此处填写宽带账户</span><br><span class="line">BOOK-office(config)# vpdn group ads1 ppp authentication pap</span><br><span class="line">BOOK-office(config)# vpdn username adxxxxx password xxxxxxx  //宽带账户和密码</span><br><span class="line">-------把拨号方式应用到外接口上，替代之前的固定IP地址-------</span><br><span class="line">BOOK-office(config)# int gigabitEthernet 0/0</span><br><span class="line">BOOK-office(config-if)# pppoe client vpdn group ads1</span><br><span class="line">BOOK-office(config-if)# ip address pppoe setroute</span><br></pre></td></tr></table></figure>
+<p><code>systemctl reload haproxy</code></p>
+<br>
 
 
+
+<h3 id="三、监控脚本"><a href="#三、监控脚本" class="headerlink" title="三、监控脚本"></a>三、监控脚本</h3><h4 id="3-1-自动发现监控脚本"><a href="#3-1-自动发现监控脚本" class="headerlink" title="3.1 自动发现监控脚本"></a>3.1 自动发现监控脚本</h4><blockquote>
+<p> 案例配置，这里我只展示了一组redis集群</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">frontend  test_redis</span><br><span class="line">      bind :63799</span><br><span class="line">      log  global</span><br><span class="line">      default_backend test_redis</span><br><span class="line"></span><br><span class="line">backend test_redis</span><br><span class="line">     log 127.0.0.1 local0  notice</span><br><span class="line">     server  172.17.36.143 172.17.36.143:19000 check inter 1000 rise 3 fall 3</span><br><span class="line">     server  172.17.38.47  172.17.38.47:19000 check inter 1000 rise 3 fall 3</span><br><span class="line">     server  172.17.37.238  172.17.37.238:6379  check inter 1000 rise 3 fall 3</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h4 id="3-2-抓取后端server流量、服务状态脚本"><a href="#3-2-抓取后端server流量、服务状态脚本" class="headerlink" title="3.2 抓取后端server流量、服务状态脚本"></a>3.2 抓取后端server流量、服务状态脚本</h4><ul>
+<li><p>创建一个脚本，自动发现所有的haproxy每一个<code>backend</code>组的后端server集群，返回<code>Json</code>格式，以便<code>zabbix</code>读取</p>
+<p><code>vim   haproxy.discovery.sh</code></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">export PATH=/usr/lib64/qt-3.3/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin</span><br><span class="line">printf &apos;&#123;\n&apos;</span><br><span class="line">printf &apos;\t&quot;data&quot;:[\n&apos;</span><br><span class="line">export LINE=$(echo &quot;show stat&quot; |socat /etc/haproxy/info.sock stdio|grep -v &quot;^#&quot;|grep -v &quot;^$&quot; |grep -v &quot;^admin_stats&quot;|grep -v &quot;^FRONTEND&quot;|grep -v &quot;^DB&quot;|grep -v &quot;^BACKEND&quot;|grep -v  BACKEND |grep -v  FRONTEND|awk -F &quot;,&quot; &apos;&#123;print $1,$2&#125;&apos;| wc -l)</span><br><span class="line">export N=0</span><br><span class="line">#printf &apos;\t\t&#123;\n&apos;</span><br><span class="line">echo &quot;show stat&quot; |socat /etc/haproxy/info.sock stdio | grep -v  BACKEND |grep -v  FRONTEND |grep -v &quot;^#&quot;|grep -v &quot;^$&quot;|grep -v &quot;^admin_stats&quot;| grep -v &quot;^DB&quot; |awk -F &quot;,&quot; &apos;&#123;print $1,$2&#125;&apos;|while read  i j</span><br><span class="line">do</span><br><span class="line">  printf &quot;\t\t\t&#123;\&quot;&#123;#SNAME&#125;\&quot;:\&quot;$j\&quot;,\&quot;&#123;#BACKEND&#125;\&quot;:\&quot;$i\&quot;&#125;&quot;</span><br><span class="line">  N=$(($N+1))</span><br><span class="line">  if [ $N -eq $LINE ]</span><br><span class="line">  then</span><br><span class="line">     printf &apos;\n&apos;</span><br><span class="line">  else</span><br><span class="line">     printf &apos;,\n&apos;</span><br><span class="line">  fi</span><br><span class="line">done</span><br><span class="line">printf &apos;]&#125;\n&apos;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">&lt;/br&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">`脚本执行，输出格式`：`后端每个ip` + `backend组名`</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- 创建脚本获取`出流量`</span><br><span class="line"></span><br><span class="line">`vim haproxy.bout.sh`  </span><br><span class="line"></span><br><span class="line">传入的第一个变量$1为自动发现脚本获取的`serverip`，第二个$2为`backend组名`</span><br></pre></td></tr></table></figure>
+
+<p>#!/bin/bash<br>export PATH=/usr/lib64/qt-3.3/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin</p>
+<p>echo “show stat” |socat /etc/haproxy/info.sock stdio  |grep “&lt;$1&gt;“| grep “&lt;$2&gt;“|awk -F ‘,’ ‘{if($2==”‘$1’”) print $0}’| grep -v “^FRONTEND”|grep -v “^BACKEND”|awk -F “,” ‘{print $10}’</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;/br&gt;</span><br><span class="line"></span><br><span class="line">- 创建脚本获取`入流量`</span><br><span class="line"></span><br><span class="line">`vim  haproxy.bin.sh`</span><br></pre></td></tr></table></figure>
+
+<p>#!/bin/bash<br>export PATH=/usr/lib64/qt-3.3/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin<br>#set -x<br>IP=$1</p>
+<p>echo “show stat” |socat /etc/haproxy/info.sock stdio |grep “&lt;$1&gt;“| grep “&lt;$2&gt;“ | awk -F ‘,’ ‘{if($2==”‘$1’”) print $0}’|grep -v “^FRONTEND”|grep -v “^BACKEND” |awk -F “,” ‘{print $9}’</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;/br&gt;</span><br><span class="line"></span><br><span class="line">- 创建脚本获取后端`server状态`，如果是`UP`返回`1`，是`DOWN`返回`0`</span><br><span class="line"></span><br><span class="line">`vim  haproxy.status.sh`</span><br></pre></td></tr></table></figure>
+
+<p>#!/bin/bash<br>export PATH=/usr/lib64/qt-3.3/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin</p>
+<p>N1=<code>echo &quot;show stat&quot; |socat /etc/haproxy/info.sock stdio  |grep &quot;\&lt;$1\&gt;&quot;|grep &quot;\&lt;$2\&gt;&quot;|awk -F &#39;,&#39; &#39;{if($2==&quot;&#39;$1&#39;&quot;) print $0}&#39;|grep -v &quot;^FRONTEND&quot;|grep -v &quot;^BACKEND&quot;|awk -F &quot;,&quot; &#39;{print $18}&#39;</code><br>#echo $N1<br>if [ “$N1” = “UP” ]<br>then<br>   echo “1”<br>else<br>   echo “0”<br>fi</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;/br&gt;</span><br><span class="line"></span><br><span class="line">#### 3.3 新增zabbix配置文件</span><br><span class="line"></span><br><span class="line">`vim /etc/zabbix/zabbix_agentd.d/HaProxy_status.conf`</span><br></pre></td></tr></table></figure>
+
+<p>UserParameter=has.discovery,/etc/zabbix/haproxy.discovery.sh<br>UserParameter=ckey.ha.bin[<em>],/etc/zabbix/haproxy.bin.sh $1  $2<br>UserParameter=ckey.ha.bout[</em>],/etc/zabbix/haproxy.bout.sh $1 $2<br>UserParameter=ckey.ha.status[*],/etc/zabbix/haproxy.status.sh $1 $2</p>
+<pre><code>
+然后 `service zabbix-agent restart` 
+
+&lt;/br&gt;
+
+### 四、 Zabbix监控模板`Template HaProxy Service`
+
+#### 4.1 创建自动发现规则
+
+![image.png](https://i.loli.net/2019/10/25/HLEQsxXvkou9BWg.png)
+
+&lt;/br&gt;
+
+#### 4.2 创建监控项原型
+
+- `入流量`
+
+名称：`haproxy.bps.in $1 $2`
+
+键值：`ckey.ha.bin[{#SNAME},{#BACKEND}]`
+
+![image.png](https://i.loli.net/2019/10/25/8HQNrBCv7VoayYx.png)
+
+
+&lt;/br&gt;
+
+- `出流量`
+
+名称：`haproxy.bps.in $1 $2`
+
+键值：`ckey.ha.bin[{#SNAME},{#BACKEND}]`
+
+![image.png](https://i.loli.net/2019/10/25/i5pjoLOYdvP4RaT.png)
+
+&lt;/br&gt;
+
+
+- `Server状态`
+
+名称：`haproxy.status $1 $2`
+
+键值：`ckey.ha.status[{#SNAME},{#BACKEND}]`
+
+![image.png](https://i.loli.net/2019/10/25/rKopqX74Bd3hUzt.png)
+![image.png](https://i.loli.net/2019/10/25/Ykr21zLOpglRUbJ.png)
+
+&lt;/br&gt;
+
+#### 4.3 创建图形原型
+
+- `入出流量图`
+
+名称：`{#BACKEND}.NetWrok Flow {#SNAME}`
+
+![image.png](https://i.loli.net/2019/10/25/CIzshZo6VyGaNxk.png)
+
+&lt;/br&gt;
+
+
+- `服务状态图`
+
+名称：`{#BACKEND}.Status {#SNAME}`
+
+![image.png](https://i.loli.net/2019/10/25/lXcSt4FKpi6OvCP.png)
+
+
+&lt;/br&gt;
+
+
+- 最后把需要监控的haproxy机器应用到此模板即可，效果如下图：
+
+![image.png](https://i.loli.net/2019/10/25/Lwlz1eUMHbgsv69.png)
+
+![image.png](https://i.loli.net/2019/10/25/KhOI7Q8g3sYEoHd.png)
+
+
+&lt;/br&gt;
+
+
+
+</code></pre>
     </div>
 
     
@@ -445,7 +533,7 @@
     <strong>本文作者： </strong>Book Jiang</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://512book.cn/2019/07/22/cisco-asa/" title="Cisco asa防火墙配置管理">http://512book.cn/2019/07/22/cisco-asa/</a>
+    <a href="http://512book.cn/2019/10/24/haproxy2/" title="Openvpn服务器搭建">http://512book.cn/2019/10/24/haproxy2/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -474,9 +562,9 @@
           
           <div class="post-tags">
             
-              <a href="/tags/网络/" <i class="fa fa-tag"></i>  网络</a>
+              <a href="/tags/负载均衡/" <i class="fa fa-tag"></i>  负载均衡</a>
             
-              <a href="/tags/思科防火墙/" <i class="fa fa-tag"></i>  思科防火墙</a>
+              <a href="/tags/haproxy/" <i class="fa fa-tag"></i>  haproxy</a>
             
           </div>
         
@@ -486,8 +574,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/05/20/Openvpnserver/" rel="next" title="Openvpn服务器搭建">
-                  <i class="fa fa-chevron-left"></i> Openvpn服务器搭建
+                <a href="/2019/10/07/dnsmasq-install/" rel="next" title="Dnsmasq安装及配置">
+                  <i class="fa fa-chevron-left"></i> Dnsmasq安装及配置
                 </a>
               
             </div>
@@ -495,10 +583,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2019/07/25/cisco-switch/" rel="prev" title="Cisco switch配置管理">
-                  Cisco switch配置管理 <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -550,7 +634,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、配置远程登录"><span class="nav-text">一、配置远程登录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-配置主机名及enable密码"><span class="nav-text">1.1 配置主机名及enable密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-配置远程SSH连接"><span class="nav-text">1.2 配置远程SSH连接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、接口配置"><span class="nav-text">二、接口配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-内外接口IP配置"><span class="nav-text">2.1 内外接口IP配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、防火墙内外流量打通"><span class="nav-text">三、防火墙内外流量打通</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-NAT转换"><span class="nav-text">3.1 NAT转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-访问控制列表"><span class="nav-text">3.2 访问控制列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-添加路由"><span class="nav-text">3.3 添加路由</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、NAT端口映射"><span class="nav-text">四、NAT端口映射</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-端口映射"><span class="nav-text">4.1 端口映射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-访问控制列表及策略应用"><span class="nav-text">4.2 访问控制列表及策略应用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、宽带拨号（可选）"><span class="nav-text">五、宽带拨号（可选）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-宽带PPOE拨号"><span class="nav-text">5.1 宽带PPOE拨号</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、前言"><span class="nav-text">一、前言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-介绍"><span class="nav-text">1.1 介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-重点监控项"><span class="nav-text">1.2 重点监控项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、Haproxy-配置"><span class="nav-text">二、Haproxy 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-开启socket"><span class="nav-text">2.1 开启socket</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、监控脚本"><span class="nav-text">三、监控脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-自动发现监控脚本"><span class="nav-text">3.1 自动发现监控脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-抓取后端server流量、服务状态脚本"><span class="nav-text">3.2 抓取后端server流量、服务状态脚本</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
