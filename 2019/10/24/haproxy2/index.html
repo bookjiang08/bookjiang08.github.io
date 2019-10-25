@@ -65,10 +65,12 @@
 <meta property="og:site_name" content="Book&#39;s blog">
 <meta property="og:description" content="一、前言1.1 介绍 HAProxy的安装及配置已在前面博客中介绍了，它原生自带的监控管理页面所展示的参数状态，此次我们结合zabbix+Grafana展示出来，帮助我们随时掌握我们服务的各种状态，更准确定位问题，最主要是提高运维效率！  监控原理：HAproxy提供了一种方法——通过socket来显示HAproxy的状态。通过修改配置文件haproxy.cfg开启socket文件并开放权限为66">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-25T07:34:11.568Z">
+<meta property="og:image" content="https://i.loli.net/2019/10/25/HLEQsxXvkou9BWg.png">
+<meta property="og:updated_time" content="2019-10-25T07:40:53.248Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix监控Haproxy及Grafana展示">
 <meta name="twitter:description" content="一、前言1.1 介绍 HAProxy的安装及配置已在前面博客中介绍了，它原生自带的监控管理页面所展示的参数状态，此次我们结合zabbix+Grafana展示出来，帮助我们随时掌握我们服务的各种状态，更准确定位问题，最主要是提高运维效率！  监控原理：HAproxy提供了一种方法——通过socket来显示HAproxy的状态。通过修改配置文件haproxy.cfg开启socket文件并开放权限为66">
+<meta name="twitter:image" content="https://i.loli.net/2019/10/25/HLEQsxXvkou9BWg.png">
   <link rel="canonical" href="http://512book.cn/2019/10/24/haproxy2/">
 
 
@@ -286,7 +288,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-25 15:34:11" itemprop="dateModified" datetime="2019-10-25T15:34:11+08:00">2019-10-25</time>
+                <time title="修改时间：2019-10-25 15:40:53" itemprop="dateModified" datetime="2019-10-25T15:40:53+08:00">2019-10-25</time>
               </span>
             
           
@@ -342,7 +344,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>4.6k</span>
+              <span>4.7k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -384,7 +386,7 @@
 <h3 id="二、Haproxy-配置"><a href="#二、Haproxy-配置" class="headerlink" title="二、Haproxy 配置"></a>二、Haproxy 配置</h3><h4 id="2-1-开启socket"><a href="#2-1-开启socket" class="headerlink" title="2.1 开启socket"></a>2.1 开启socket</h4><ul>
 <li><code>vim /etc/haproxy/haproxy.cfg</code></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">global</span><br><span class="line">    stats socket /etc/haproxy/info.sock mode 666 level admin</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#在global块中新增</span><br><span class="line">global</span><br><span class="line">    stats socket /etc/haproxy/info.sock mode 666 level admin</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>检测配置：</li>
@@ -417,7 +419,7 @@
 <br>
 
 <ul>
-<li>脚本执行，输出格式：后端每个ip + backend组名</li>
+<li>脚本执行，输出格式：<code>后端每个ip + backend组名</code></li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;data&quot;:[</span><br><span class="line">			&#123;&quot;&#123;#SNAME&#125;&quot;:&quot;172.17.36.143&quot;,&quot;&#123;#BACKEND&#125;&quot;:&quot;test_redis&quot;&#125;,</span><br><span class="line">			&#123;&quot;&#123;#SNAME&#125;&quot;:&quot;172.17.38.47&quot;,&quot;&#123;#BACKEND&#125;&quot;:&quot;test_redis&quot;&#125;,</span><br><span class="line">			&#123;&quot;&#123;#SNAME&#125;&quot;:&quot;172.17.37.238&quot;,&quot;&#123;#BACKEND&#125;&quot;:&quot;test_redis&quot;&#125;</span><br><span class="line">]&#125;</span><br></pre></td></tr></table></figure>
 
@@ -461,7 +463,8 @@
 </ul>
 <br>
 
-<h3 id="四、-Zabbix监控模板Template-HaProxy-Service"><a href="#四、-Zabbix监控模板Template-HaProxy-Service" class="headerlink" title="四、 Zabbix监控模板Template HaProxy Service"></a>四、 Zabbix监控模板<code>Template HaProxy Service</code></h3><h4 id="4-1-创建自动发现规则"><a href="#4-1-创建自动发现规则" class="headerlink" title="4.1 创建自动发现规则"></a>4.1 创建自动发现规则</h4>
+<h3 id="四、-Zabbix监控模板Template-HaProxy-Service"><a href="#四、-Zabbix监控模板Template-HaProxy-Service" class="headerlink" title="四、 Zabbix监控模板Template HaProxy Service"></a>四、 Zabbix监控模板<code>Template HaProxy Service</code></h3><h4 id="4-1-创建自动发现规则"><a href="#4-1-创建自动发现规则" class="headerlink" title="4.1 创建自动发现规则"></a>4.1 创建自动发现规则</h4><p><img src="https://i.loli.net/2019/10/25/HLEQsxXvkou9BWg.png" alt="image.png"></p>
+
     </div>
 
     
