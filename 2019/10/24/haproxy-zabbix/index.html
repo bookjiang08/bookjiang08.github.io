@@ -61,7 +61,7 @@
 <meta name="keywords" content="负载均衡,haproxy,Zabbix监控">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Zabbix监控Haproxy及Grafana展示">
-<meta property="og:url" content="http://512book.cn/2019/10/24/haproxy2/index.html">
+<meta property="og:url" content="http://512book.cn/2019/10/24/haproxy-zabbix/index.html">
 <meta property="og:site_name" content="Book&#39;s blog">
 <meta property="og:description" content="一、前言1.1 介绍 HAProxy的安装及配置已在前面博客中介绍了，它原生自带的监控管理页面所展示的参数状态，此次我们结合zabbix+Grafana展示出来，帮助我们随时掌握我们服务的各种状态，更准确定位问题，最主要是提高运维效率！  监控原理：HAproxy提供了一种方法——通过socket来显示HAproxy的状态。通过修改配置文件haproxy.cfg开启socket文件并开放权限为66">
 <meta property="og:locale" content="zh-CN">
@@ -88,7 +88,7 @@
 <meta name="twitter:title" content="Zabbix监控Haproxy及Grafana展示">
 <meta name="twitter:description" content="一、前言1.1 介绍 HAProxy的安装及配置已在前面博客中介绍了，它原生自带的监控管理页面所展示的参数状态，此次我们结合zabbix+Grafana展示出来，帮助我们随时掌握我们服务的各种状态，更准确定位问题，最主要是提高运维效率！  监控原理：HAproxy提供了一种方法——通过socket来显示HAproxy的状态。通过修改配置文件haproxy.cfg开启socket文件并开放权限为66">
 <meta name="twitter:image" content="https://i.loli.net/2019/10/25/HLEQsxXvkou9BWg.png">
-  <link rel="canonical" href="http://512book.cn/2019/10/24/haproxy2/">
+  <link rel="canonical" href="http://512book.cn/2019/10/24/haproxy-zabbix/">
 
 
 <script id="page-configurations">
@@ -266,7 +266,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="http://512book.cn/2019/10/24/haproxy2/">
+    <link itemprop="mainEntityOfPage" href="http://512book.cn/2019/10/24/haproxy-zabbix/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Book Jiang">
@@ -349,7 +349,7 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/10/24/haproxy2/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/10/24/haproxy2/" itemprop="commentCount"></span></a>
+    <a title="valine" href="/2019/10/24/haproxy-zabbix/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/10/24/haproxy-zabbix/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -593,7 +593,7 @@
     <strong>本文作者： </strong>Book Jiang</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://512book.cn/2019/10/24/haproxy2/" title="Zabbix监控Haproxy及Grafana展示">http://512book.cn/2019/10/24/haproxy2/</a>
+    <a href="http://512book.cn/2019/10/24/haproxy-zabbix/" title="Zabbix监控Haproxy及Grafana展示">http://512book.cn/2019/10/24/haproxy-zabbix/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
