@@ -57,19 +57,19 @@
   };
 </script>
 
-  <meta name="description" content="一、背景 现在要求通过api接口，把腾讯云上所有的主机实例名称和对应内网ip地址抓取下来保存到dnsmasq文件中，供内部解析使用">
-<meta name="keywords" content="linux 运维,脚本">
+  <meta name="description" content="一、前言 IPsec Vpn 能实现总部和分部通过加密隧道进行数据传输，保证数据的安全性，IPsec  vpn有两种方式：主模式和野蛮模式。根据我们现有的使用场景，总部有固定IP地址，分部是ADSL拨号上网，故采用野蛮模式。">
+<meta name="keywords" content="网络,思科防火墙,VPN">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python脚本抓取腾讯云上主机名称及对应IP">
-<meta property="og:url" content="http://512book.cn/2019/10/05/script-gethostip/index.html">
+<meta property="og:title" content="公司总部与分部-Cisco asa防火墙IPsec-VPN之野蛮模式">
+<meta property="og:url" content="http://512book.cn/2019/11/01/cisco-asa-ipsecvpn/index.html">
 <meta property="og:site_name" content="Book&#39;s blog">
-<meta property="og:description" content="一、背景 现在要求通过api接口，把腾讯云上所有的主机实例名称和对应内网ip地址抓取下来保存到dnsmasq文件中，供内部解析使用">
+<meta property="og:description" content="一、前言 IPsec Vpn 能实现总部和分部通过加密隧道进行数据传输，保证数据的安全性，IPsec  vpn有两种方式：主模式和野蛮模式。根据我们现有的使用场景，总部有固定IP地址，分部是ADSL拨号上网，故采用野蛮模式。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-08T15:37:51.929Z">
+<meta property="og:updated_time" content="2019-11-01T12:53:33.160Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python脚本抓取腾讯云上主机名称及对应IP">
-<meta name="twitter:description" content="一、背景 现在要求通过api接口，把腾讯云上所有的主机实例名称和对应内网ip地址抓取下来保存到dnsmasq文件中，供内部解析使用">
-  <link rel="canonical" href="http://512book.cn/2019/10/05/script-gethostip/">
+<meta name="twitter:title" content="公司总部与分部-Cisco asa防火墙IPsec-VPN之野蛮模式">
+<meta name="twitter:description" content="一、前言 IPsec Vpn 能实现总部和分部通过加密隧道进行数据传输，保证数据的安全性，IPsec  vpn有两种方式：主模式和野蛮模式。根据我们现有的使用场景，总部有固定IP地址，分部是ADSL拨号上网，故采用野蛮模式。">
+  <link rel="canonical" href="http://512book.cn/2019/11/01/cisco-asa-ipsecvpn/">
 
 
 <script id="page-configurations">
@@ -83,7 +83,7 @@
   };
 </script>
 
-  <title>Python脚本抓取腾讯云上主机名称及对应IP | Book's blog</title>
+  <title>公司总部与分部-Cisco asa防火墙IPsec-VPN之野蛮模式 | Book's blog</title>
   
 
 
@@ -247,7 +247,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="http://512book.cn/2019/10/05/script-gethostip/">
+    <link itemprop="mainEntityOfPage" href="http://512book.cn/2019/11/01/cisco-asa-ipsecvpn/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Book Jiang">
@@ -259,7 +259,7 @@
       <meta itemprop="name" content="Book's blog">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Python脚本抓取腾讯云上主机名称及对应IP
+        <h1 class="post-title" itemprop="name headline">公司总部与分部-Cisco asa防火墙IPsec-VPN之野蛮模式
 
           
         </h1>
@@ -275,19 +275,11 @@
                 
               
 
-              <time title="创建时间：2019-10-05 22:02:28" itemprop="dateCreated datePublished" datetime="2019-10-05T22:02:28+08:00">2019-10-05</time>
+              <time title="创建时间：2019-11-01 19:56:00 / 修改时间：20:53:33" itemprop="dateCreated datePublished" datetime="2019-11-01T19:56:00+08:00">2019-11-01</time>
             </span>
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-08 23:37:51" itemprop="dateModified" datetime="2019-10-08T23:37:51+08:00">2019-10-08</time>
-              </span>
             
           
             <span class="post-meta-item">
@@ -296,7 +288,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/脚本/" itemprop="url" rel="index"><span itemprop="name">脚本</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
 
                 
                 
@@ -323,7 +315,7 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/10/05/script-gethostip/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/10/05/script-gethostip/" itemprop="commentCount"></span></a>
+    <a title="valine" href="/2019/11/01/cisco-asa-ipsecvpn/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/cisco-asa-ipsecvpn/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -335,7 +327,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>2.3k</span>
+              <span>3.7k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -345,7 +337,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span>2 分钟</span>
+              <span>3 分钟</span>
             </span>
           
 
@@ -358,27 +350,119 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h3><ul>
-<li>现在要求通过api接口，把腾讯云上所有的主机实例名称和对应内网ip地址抓取下来保存到dnsmasq文件中，供内部解析使用</li>
-</ul>
+        <h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h3><blockquote>
+<p>IPsec Vpn 能实现总部和分部通过加密隧道进行数据传输，保证数据的安全性，IPsec  vpn有两种方式：<code>主模式和野蛮模式</code>。根据我们现有的使用场景，总部有固定IP地址，分部是ADSL拨号上网，故采用<code>野蛮模式</code>。</p>
+</blockquote>
 <a id="more"></a>
 
+<br>
+
+<h4 id="1-1-网络架构图"><a href="#1-1-网络架构图" class="headerlink" title="1.1 网络架构图"></a>1.1 网络架构图</h4><h4 id="1-2-设备及IP信息"><a href="#1-2-设备及IP信息" class="headerlink" title="1.2 设备及IP信息"></a>1.2 设备及IP信息</h4><h3 id="服务器清单"><a href="#服务器清单" class="headerlink" title="服务器清单"></a>服务器清单</h3><table>
+<thead>
+<tr>
+<th><strong>公司</strong></th>
+<th><strong>设备</strong></th>
+<th><strong>公网IP</strong></th>
+<th><strong>网段</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><br></td>
+<td></td>
+<td></td>
+<td>192.168.66.0/24</td>
+</tr>
+<tr>
+<td>上海总部</td>
+<td>Cisco asa 5545</td>
+<td>183.222.45.77</td>
+<td>192.168.77.0/24</td>
+</tr>
+<tr>
+<td><br></td>
+<td></td>
+<td></td>
+<td>192.168.88.0/24</td>
+</tr>
+<tr>
+<td>苏州分部</td>
+<td>Cisco asa 5520</td>
+<td>183.222.45.77</td>
+<td>192.168.120.0/24</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<br>
+
+<h3 id="二、配置防火墙"><a href="#二、配置防火墙" class="headerlink" title="二、配置防火墙"></a>二、配置防火墙</h3><h4 id="2-1-公司分部配置"><a href="#2-1-公司分部配置" class="headerlink" title="2.1 公司分部配置"></a>2.1 公司分部配置</h4><blockquote>
+<p>公司分部属于拨上上网，没有固定公网IP，宽带猫后面连接的是asa防火墙</p>
+</blockquote>
 <ul>
-<li>公司内部有自己搭建的DNSMasq集群，用来解析主机名及对应IP。因为几千台机器，管理时大家都是通过主机名来区别什么服务,前提是每台主机命名要符合规范</li>
+<li>第一阶段：8.4（2）版本及以上的ASA支持2个版本的IKE，所以在定义密钥的交互形式的时候我们选择IKEV1：</li>
 </ul>
-<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">crypto ikev1 policy 10</span><br><span class="line">  authentication pre-share</span><br><span class="line"> encryption 3des</span><br><span class="line">  hash md5</span><br><span class="line">  group 2</span><br><span class="line">  lifetime 28800</span><br><span class="line">tunnel-group 183.222.45.77  type ipsec-l2l      //隧道L2L指向总部</span><br><span class="line">tunnel-group 183.222.45.77  ipsec-attributes </span><br><span class="line">ikev1 pre-shared-key  xxxxx     //xxxx为共享秘钥，总部和分部两边保持一致</span><br></pre></td></tr></table></figure>
 
-<h3 id="二、脚本"><a href="#二、脚本" class="headerlink" title="二、脚本"></a>二、脚本</h3><h4 id="2-1-python脚本"><a href="#2-1-python脚本" class="headerlink" title="2.1 python脚本"></a>2.1 python脚本</h4><ul>
-<li>Vim /root/python/GetDNS.py </li>
+<ul>
+<li>第二阶段：主要用于如何安全的交互数据。这里我们采用3des来加密数据，同时哈希算法使用MD5，要想实现L2L的IPSEC-VPN，VPN的模式务必使用tunnel 模式，默认情况下IPSEC-VPN工作在tunnel模式：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">#! /usr/bin/env python3</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"></span><br><span class="line">import os</span><br><span class="line">from tencentcloud.common import credential</span><br><span class="line">from tencentcloud.common.exception.tencent_cloud_sdk_exception import TencentCloudSDKException</span><br><span class="line">from tencentcloud.cvm.v20170312 import cvm_client, models</span><br><span class="line"></span><br><span class="line">#HOST_FILE=&quot;/etc/dnsmasq.hosts&quot;</span><br><span class="line">#if os.path.exists(HOST_FILE):</span><br><span class="line">#    pass</span><br><span class="line">#else:</span><br><span class="line">#    print(&quot;没有发现DNS FILE，将会创建！&quot;)</span><br><span class="line">#    os.system(&quot;touch /etc/dnsmasq.hosts&quot;)</span><br><span class="line">def get_exist():</span><br><span class="line">    exist_ip = []</span><br><span class="line">    if not os.path.exists(&apos;/etc/dnsmasq.hosts&apos;):</span><br><span class="line">        return exist_ip</span><br><span class="line">    with open(&apos;/etc/dnsmasq.hosts&apos;, &apos;r&apos;) as f:</span><br><span class="line">        for data in f.readlines():</span><br><span class="line">            exist_ip.append(data.strip().split(&apos; &apos;)[0])</span><br><span class="line">    return exist_ip</span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">def add_data():</span><br><span class="line">    secretId = &apos;AxxxxxxxxxxxxxxxxA&apos;    </span><br><span class="line">    secretKey = &apos;keyxxxxxxxxxxxxxxxxxxxxKEY&apos;  //此处填写腾讯云账户里面的ID及对应的KEY</span><br><span class="line">    cred = credential.Credential(secretId=secretId, secretKey=secretKey)</span><br><span class="line">    client = cvm_client.CvmClient(cred, &quot;ap-shanghai&quot;)</span><br><span class="line">    req = models.DescribeInstancesRequest()</span><br><span class="line">    resp = client.DescribeInstances(req)</span><br><span class="line">    exist_ip = get_exist()</span><br><span class="line">    for i in range(int(resp.TotalCount / 20) + 1):</span><br><span class="line">        req.Offset = i * 20</span><br><span class="line">        resp = client.DescribeInstances(req)</span><br><span class="line">        for j in resp.InstanceSet:</span><br><span class="line">            if j.PrivateIpAddresses[0] in exist_ip:</span><br><span class="line">                continue</span><br><span class="line">            line = &apos;&#123;&#125; &#123;&#125;.ad.tuhu.cn&apos;.format(j.PrivateIpAddresses[0], j.InstanceName)</span><br><span class="line">            #line = &apos;&#123;&#125; &#123;&#125;&apos;.format(j.PrivateIpAddresses[0], j.InstanceName)</span><br><span class="line">            with open(&apos;/etc/dnsmasq.hosts&apos;, &apos;a+&apos;) as f:</span><br><span class="line">                f.write(line + &apos;\n&apos;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    add_data()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crypto ipsec ikev1 transform-set  officejf  esp-3des  esp-md5-hmac  //自定义名字，后面调用</span><br></pre></td></tr></table></figure>
 
-<br>
-
-<h4 id="2-2-定时任务"><a href="#2-2-定时任务" class="headerlink" title="2.2 定时任务"></a>2.2 定时任务</h4><ul>
-<li>本脚本每一分钟会去云上抓取一次解析记录，保存的记录是增量的，发现腾讯云上新建机器，则会把新纪录保存到本地<code>hosts</code>文件中，如果云上机器名称变更掉，则本地会有两条记录（同一个ip会对应两个主机名，解决方法可以清空本地解析记录，让脚本自动重新跑一次）</li>
+<ul>
+<li>定义感兴趣流：感兴趣流一定要写明细的条目，不能为any字样，否则VPN无法建立。同时两边的感兴趣流务必对称,：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*/1  * * * * echo `date`&gt;&gt;/var/log/dnsmasq/getlist.log &amp;&amp; python /root/python/GetDNS.py  &gt;&gt;/var/log/dnsmasq/getlist.log</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#定义分部的120网段去往总部99和6网段的access list</span><br><span class="line">access-list ipsec_vpn extended permit ip 192.168.120.0 255.255.255.0 192.168.99.0 255.255.255.0</span><br><span class="line">access-list ipsec_vpn extended permit ip 192.168.120.0 255.255.255.0 192.168.6.0 255.255.255.0</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置NAT豁免：主要作用于去往隧道加密的流量不被防火墙NAT转换</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">object network local-vpn-120         //分部办公室120网段</span><br><span class="line"> subnet 192.168.120.0  255.255.255.0</span><br><span class="line">object network remote-vpn-99        //总部99网段</span><br><span class="line"> subnet 192.168.99.0  255.255.255.0</span><br><span class="line">object network remote-vpn-6         //总部6网段</span><br><span class="line"> subnet 192.168.6.0  255.255.255.0</span><br><span class="line"># nat免流：</span><br><span class="line">nat (inside,outside) source static local-vpn-120 local-vpn-120 destination static remote-vpn-99 remote-vpn-99</span><br><span class="line">nat (inside,outside) source static local-vpn-120 local-vpn-120 destination static remote-vpn-6 remote-vpn-6</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建crypto map 调用第一、二阶段：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">crypto map ipsec-map 10 match address  ipsec_vpn   //调用access list</span><br><span class="line">crypto map ipsec-map 10 set pfs group5  //这里必须定义为group1或group5</span><br><span class="line">crypto map ipsec-map 10 set peer  183.222.45.77  //指向总部公网IP</span><br><span class="line">crypto map ipsec-map 10 set ikev1 transform-set  officejf  //此处调用</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>公网outside接口调用crypto map :</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">crypto map ipsec-map interface outside</span><br><span class="line">crypto ikev1 enable outside</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-公司总部配置"><a href="#2-2-公司总部配置" class="headerlink" title="2.2 公司总部配置"></a>2.2 公司总部配置</h4><blockquote>
+<p>（公司总部有固定公网IP）</p>
+</blockquote>
+<ul>
+<li>第一阶段：8.4（2）版本及以上的ASA支持2个版本的IKE，所以在定义密钥的交互形式的时候我们选择IKEV1：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">crypto ikev1 policy 10</span><br><span class="line">  authentication pre-share</span><br><span class="line"> encryption 3des</span><br><span class="line">  hash md5</span><br><span class="line">  group 2</span><br><span class="line">  lifetime 28800</span><br><span class="line">tunnel-group DefaultL2LGroup ipsec-attributes\\这里必须使用系统默认的组来做动态L2L</span><br><span class="line">ikev1 pre-shared-key   xxxxx    //分部定义的共享秘钥，这里保持一致</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第二阶段：主要用于如何安全的交互数据。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crypto ipsec ikev1 transform-set  jf_office  esp-3des  esp-md5-hmac  //自定义名字，后面调用</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>定义感兴趣流：感兴趣流一定要写明细的条目，不能为any字样，否则VPN无法建立。同时两边的感兴趣流务必对称：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">access-list ipsec_vpn extended permit ip 192.168.99.0  255.255.255.0 192.168.120.0  255.255.255.0</span><br><span class="line">access-list ipsec_vpn extended permit ip 192.168.6.0  255.255.255.0 192.168.120.0  255.255.255.0 //定义总部的99和6网段去往分部的120网段的access list</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置NAT豁免：主要作用于去往隧道加密的流量不被防火墙NAT转换</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">object network local-vpn-6            //总部6网段</span><br><span class="line"> subnet 192.168.6.0  255.255.255.0</span><br><span class="line">object network local-vpn-99           //总部99网段</span><br><span class="line">subnet 192.168.99.0  255.255.255.0</span><br><span class="line">object network jx-office-120           //分部办公室120网段</span><br><span class="line">subnet 192.168.120.0  255.255.255.0</span><br><span class="line">#nat免流：</span><br><span class="line">nat (inside,outside) source static local-vpn-6 local-vpn-6 destination static jx-office-120 jx-office-120 </span><br><span class="line">nat (inside,outside) source static local-vpn-99 local-vpn-99 destination static jx-office-120 jx-office-120</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建crypto map 调用第一、二阶段（这里必须使用动态map调用转换集，然后用静态map关联）：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">crypto dynamic-map jfdymap 10 match address ipsec_vpn</span><br><span class="line">crypto dynamic-map jfdymap 10 set pfs group5  </span><br><span class="line">crypto dynamic-map jfdymap 10 set ikev1 transform-set  jf_office</span><br><span class="line">crypto map jfvpnmap 10 ipsec-isakmp dynamic  jfdymap  //静态调用动态</span><br><span class="line">crypto map jfvpnmap interface outside      //在outside口上启用</span><br><span class="line">crypto ikev1 enable outside</span><br><span class="line">（流量触发--自动建立VPN隧道（必须从动态一端触发））</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-测试"><a href="#2-3-测试" class="headerlink" title="2.3 测试"></a>2.3 测试</h4><h4 id="2-4-常用隧道查看命令"><a href="#2-4-常用隧道查看命令" class="headerlink" title="2.4 常用隧道查看命令"></a>2.4 常用隧道查看命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">show crypto isakmp sa  </span><br><span class="line">show crypto ipsec sa</span><br><span class="line">show crypto isakmp stats</span><br><span class="line">show crypto ipsec stats</span><br></pre></td></tr></table></figure>
+
+
     </div>
 
     
@@ -411,7 +495,7 @@
     <strong>本文作者： </strong>Book Jiang</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://512book.cn/2019/10/05/script-gethostip/" title="Python脚本抓取腾讯云上主机名称及对应IP">http://512book.cn/2019/10/05/script-gethostip/</a>
+    <a href="http://512book.cn/2019/11/01/cisco-asa-ipsecvpn/" title="公司总部与分部-Cisco asa防火墙IPsec-VPN之野蛮模式">http://512book.cn/2019/11/01/cisco-asa-ipsecvpn/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -440,9 +524,11 @@
           
           <div class="post-tags">
             
-              <a href="/tags/linux-运维/" <i class="fa fa-tag"></i>  linux 运维</a>
+              <a href="/tags/网络/" <i class="fa fa-tag"></i>  网络</a>
             
-              <a href="/tags/脚本/" <i class="fa fa-tag"></i>  脚本</a>
+              <a href="/tags/思科防火墙/" <i class="fa fa-tag"></i>  思科防火墙</a>
+            
+              <a href="/tags/VPN/" <i class="fa fa-tag"></i>  VPN</a>
             
           </div>
         
@@ -452,8 +538,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/09/28/tenine-operation/" rel="next" title="Tengine日常操作攻略">
-                  <i class="fa fa-chevron-left"></i> Tengine日常操作攻略
+                <a href="/2019/10/24/haproxy-zabbix/" rel="next" title="Zabbix监控Haproxy及Grafana展示">
+                  <i class="fa fa-chevron-left"></i> Zabbix监控Haproxy及Grafana展示
                 </a>
               
             </div>
@@ -461,10 +547,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2019/10/07/dnsmasq-install/" rel="prev" title="Dnsmasq安装及配置">
-                  Dnsmasq安装及配置 <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -516,7 +598,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、背景"><span class="nav-text">一、背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、脚本"><span class="nav-text">二、脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-python脚本"><span class="nav-text">2.1 python脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-定时任务"><span class="nav-text">2.2 定时任务</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、前言"><span class="nav-text">一、前言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-网络架构图"><span class="nav-text">1.1 网络架构图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-设备及IP信息"><span class="nav-text">1.2 设备及IP信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器清单"><span class="nav-text">服务器清单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、配置防火墙"><span class="nav-text">二、配置防火墙</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-公司分部配置"><span class="nav-text">2.1 公司分部配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-公司总部配置"><span class="nav-text">2.2 公司总部配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-测试"><span class="nav-text">2.3 测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-常用隧道查看命令"><span class="nav-text">2.4 常用隧道查看命令</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
